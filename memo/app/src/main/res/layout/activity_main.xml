@@ -14,10 +14,17 @@
         android:layout_margin="16dp"/>
 
     <Spinner
-        android:id="@+id/fromSpinner"
+        android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputEditText"
+        android:layout_margin="16dp"/>
+
+    <Spinner
+        android:id="@+id/fromSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/categorySpinner"
         android:layout_margin="16dp"/>
 
     <Spinner
@@ -44,3 +51,4 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"/>
 </RelativeLayout>
+
