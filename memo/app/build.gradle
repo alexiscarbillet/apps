@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.app.memo'
+    namespace 'com.app.unitconverter'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.app.memo"
+        applicationId "com.app.unitconverter"
         minSdk 24
         targetSdk 33
         versionCode 1
