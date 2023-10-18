@@ -1,4 +1,4 @@
-package com.app.unitconverter;
+package com.app.acunitconverter;
 
 import android.os.Bundle;
 import android.view.View;
