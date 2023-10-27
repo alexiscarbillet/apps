@@ -88,10 +88,6 @@
             android:id="@+id/buttonDivide"
             android:text="/" />
 
-        <Button
-            android:id="@+id/buttonDecimal"
-            android:text="." />
-
     </GridLayout>
 
 </LinearLayout>

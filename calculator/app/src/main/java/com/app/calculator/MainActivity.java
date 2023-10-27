@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private TextView resultTextView;
-    private double operand1 = 0.0;
-    private double operand2 = 0.0;
+    private double operand1 = 0;
+    private double operand2 = 0;
     private String operator = "";
 
     @Override
@@ -36,14 +36,6 @@ public class MainActivity extends AppCompatActivity {
         Button buttonSubtract = findViewById(R.id.buttonSubtract);
         Button buttonMultiply = findViewById(R.id.buttonMultiply);
         Button buttonDivide = findViewById(R.id.buttonDivide);
-        Button buttonDecimal = findViewById(R.id.buttonDecimal);
-
-        buttonDecimal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                handleDecimalClick();
-            }
-        });
 
         buttonMultiply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,20 +176,13 @@ public class MainActivity extends AppCompatActivity {
         updateResultText();
     }
 
-    private void handleDecimalClick() {
-        // If the operator is empty and the current operand doesn't contain a decimal point, add it.
-        if (operator.isEmpty()) {
-            String operand1Str = String.valueOf(operand1);
-            if (!operand1Str.contains(".")) {
-                operand1Str += ".";
-                operand1 = Double.parseDouble(operand1Str);
-            }
+    private void handleBackspaceClick() {
+        if (!operator.isEmpty()) {
+            // If an operator is set, remove the last digit from operand2.
+            operand2 = removeLastDigit(operand2);
         } else {
-            String operand2Str = String.valueOf(operand2);
-            if (!operand2Str.contains(".")) {
-                operand2Str += ".";
-                operand2 = Double.parseDouble(operand2Str);
-            }
+            // If the operator is empty, remove the last digit from operand1.
+            operand1 = removeLastDigit(operand1);
         }
         updateResultText();
     }
