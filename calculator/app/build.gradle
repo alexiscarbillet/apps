@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.app.calculator'
+    namespace 'com.appac.calculator'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.app.calculator"
+        applicationId "com.appac.calculator"
         minSdk 24
         targetSdk 33
         versionCode 1
