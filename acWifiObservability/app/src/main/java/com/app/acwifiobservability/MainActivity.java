@@ -3,16 +3,19 @@ package com.app.acwifiobservability;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Process;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView ssidTextView, bssidTextView, ipAddressTextView, linkSpeedTextView;
+    private TextView cpuUsageTextView, memoryUsageTextView, temperatureTextView;
     private WifiManager wifiManager;
     private Handler handler;
 
@@ -27,13 +30,16 @@ public class MainActivity extends AppCompatActivity {
         ipAddressTextView = findViewById(R.id.ipAddressTextView);
         linkSpeedTextView = findViewById(R.id.linkSpeedTextView);
 
+        cpuUsageTextView = findViewById(R.id.cpuUsageTextView);
+        memoryUsageTextView = findViewById(R.id.memoryUsageTextView);
+        temperatureTextView = findViewById(R.id.temperatureTextView);
+
         // Initialize WifiManager
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
 
         // Initialize Handler for periodic updates
         handler = new Handler();
         startRepeatingTask();
-
     }
 
     @Override
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
             updateWifiInfo();
+            updateResourceInfo();
             handler.postDelayed(this, 20000); // 20 seconds delay
         }
     };
@@ -58,6 +65,23 @@ public class MainActivity extends AppCompatActivity {
         handler.removeCallbacks(runnable);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void updateResourceInfo() {
+        // CPU Usage
+        double cpuUsage = ProcessCpuTracker.getCpuUsage();
+        cpuUsageTextView.setText("Phone CPU Usage: " + cpuUsage + "%");
+
+        // Memory Usage
+        long totalMemory = Runtime.getRuntime().totalMemory();
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        long usedMemory = totalMemory - freeMemory;
+        memoryUsageTextView.setText("Phone Memory Usage: " + usedMemory / (1024 * 1024) + " MB");
+
+        // Temperature (Note: Temperature monitoring may not be available on all devices)
+        float temperature = BatteryTemperature.getBatteryTemperature(getApplicationContext());
+        temperatureTextView.setText("Battery Temperature: " + temperature + " °C");
+    }
+
     private void updateWifiInfo() {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
@@ -67,12 +91,11 @@ public class MainActivity extends AppCompatActivity {
         int linkSpeed = wifiInfo.getLinkSpeed();
 
         // Update TextViews
-        ssidTextView.setText("SSID: " + ssid);
-        bssidTextView.setText("BSSID: " + bssid);
-        ipAddressTextView.setText("IP Address: " + formatIpAddress(ipAddress));
-        linkSpeedTextView.setText("Link Speed: " + linkSpeed + " Mbps");
+        ssidTextView.setText("WIFI SSID: " + ssid);
+        bssidTextView.setText("WIFI BSSID: " + bssid);
+        ipAddressTextView.setText("WIFI IP Address: " + formatIpAddress(ipAddress));
+        linkSpeedTextView.setText("WIFI Link Speed: " + linkSpeed + " Mbps");
     }
-
     private String formatIpAddress(int ipAddress) {
         // Format the IP address obtained from wifiInfo.getIpAddress()
         return String.format("%d.%d.%d.%d",
@@ -81,6 +104,4 @@ public class MainActivity extends AppCompatActivity {
                 (ipAddress >> 16 & 0xff),
                 (ipAddress >> 24 & 0xff));
     }
-
 }
-

@@ -39,4 +39,31 @@
         android:layout_below="@id/ipAddressTextView"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/cpuUsageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPU Usage: "
+        android:layout_below="@id/linkSpeedTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/memoryUsageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memory Usage: "
+        android:layout_below="@id/cpuUsageTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/temperatureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature: "
+        android:layout_below="@id/memoryUsageTextView"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
 </RelativeLayout>
