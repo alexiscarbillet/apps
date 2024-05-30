@@ -1,4 +1,4 @@
-package com.ac.motdujour;
+package com.ac.wordoftheday;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
