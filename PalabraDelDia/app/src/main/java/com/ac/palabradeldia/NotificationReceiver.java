@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
-    private static final String CHANNEL_ID = "word_of_the_day_channel";
+    private static final String CHANNEL_ID = "palabra_del_dia_channel";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -24,7 +24,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         // Create the notification
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.logo) // Replace with your app's icon
-                .setContentTitle("Word of the Day")
+                .setContentTitle("Palabra del dia")
                 .setContentText(randomWord + ": " + definition)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
