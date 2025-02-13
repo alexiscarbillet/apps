@@ -126,7 +126,10 @@ public class MainActivity extends AppCompatActivity {
         questionList.add(new Question("Which Canadian city is famous for the Calgary Stampede?", new String[]{"Calgary", "Vancouver", "Edmonton", "Montreal"}, "Calgary"));
         questionList.add(new Question("What is the national flower of Canada?", new String[]{"The Rose", "The Lily", "The Maple Leaf", "The Orchid"}, "The Lily"));
         questionList.add(new Question("What year was the Canadian Charter of Rights and Freedoms signed?", new String[]{"1967", "1982", "1991", "2001"}, "1982"));
-        questionList.add(new Question("Which animal is on the Canadian 25-cent coin?", new String[]{"Loon", "Beaver", "Maple Leaf", "Whale"}, "Loon"));
+        questionList.add(new Question("Which animal is on the Canadian 25-cent coin?", new String[]{"Loon", "Beaver", "Maple Leaf", "Moose"}, "Moose"));
+        questionList.add(new Question("Which animal is on the Canadian 1 dollar coin?", new String[]{"Loon", "Beaver", "Maple Leaf", "Loon"}, "Moose"));
+        questionList.add(new Question("Which animal is on the Canadian 10-cent coin?", new String[]{"Loon", "Ship", "Maple Leaf", "Loon"}, "Ship"));
+        questionList.add(new Question("Which animal is on the Canadian 2 dollars coin?", new String[]{"Loon", "Ship", "Maple Leaf", "Polar bear"}, "Polar bear"));
         questionList.add(new Question("What is the population of Canada?", new String[]{"10 million", "25 million", "38 million", "50 million"}, "38 million"));
     }
 
