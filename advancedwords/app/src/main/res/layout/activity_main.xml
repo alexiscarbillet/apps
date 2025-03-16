@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@android:color/background_light">
+
+    <!-- Language Display -->
+    <TextView
+        android:id="@+id/languageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a Language"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"/>
+
+    <!-- Word Display -->
+    <TextView
+        android:id="@+id/wordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Word"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/holo_blue_dark" />
+
+    <!-- Definition Display -->
+    <TextView
+        android:id="@+id/definitionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Definition"
+        android:textSize="20sp"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/darker_gray"
+        android:padding="8dp" />
+
+    <!-- Language Selection Buttons -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:layout_marginTop="20dp"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/buttonFrench"
+            style="@style/LanguageButton"
+            android:text="Français" />
+
+        <Button
+            android:id="@+id/buttonEnglish"
+            style="@style/LanguageButton"
+            android:text="English" />
+
+        <Button
+            android:id="@+id/buttonSpanish"
+            style="@style/LanguageButton"
+            android:text="Español" />
+
+        <Button
+            android:id="@+id/buttonRussian"
+            style="@style/LanguageButton"
+            android:text="Русский" />
+
+        <Button
+            android:id="@+id/buttonSwedish"
+            style="@style/LanguageButton"
+            android:text="Svenska" />
+    </GridLayout>
+
+    <!-- Get Random Word Button -->
+    <Button
+        android:id="@+id/buttonRandomWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Random Word"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:textColor="@android:color/white" />
+</LinearLayout>
