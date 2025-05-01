@@ -29,7 +29,7 @@ public class BirdAdapter extends RecyclerView.Adapter<BirdAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View itemView = inflater.inflate(R.layout.item_bird, parent, false);
+        View itemView = inflater.inflate(R.layout.item_animal, parent, false);
 
         // Return a new holder instance
         return new ViewHolder(itemView);
