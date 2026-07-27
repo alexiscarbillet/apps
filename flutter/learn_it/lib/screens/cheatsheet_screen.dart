@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/cheatsheet_data.dart';
 import '../models/cheatsheet.dart';
 import 'quiz_screen.dart';
@@ -21,6 +22,11 @@ class CheatsheetScreen extends StatefulWidget {
 class _CheatsheetScreenState extends State<CheatsheetScreen> {
   late Cheatsheet _cheatsheet;
   String _selectedSectionFilter = 'All';
+  String _searchQuery = '';
+  final TextEditingController _searchController = TextEditingController();
+
+  SharedPreferences? _prefs;
+  Set<String> _readSectionTitles = {};
 
   @override
   void initState() {
@@ -31,6 +37,50 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
       summary: 'Learn key concepts and prepare yourself for the ${widget.category} quiz.',
       sections: [],
     );
+    _loadProgress();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadProgress() async {
+    try {
+      _prefs = await SharedPreferences.getInstance();
+      final keys = _prefs!.getKeys();
+      final prefix = 'cheatsheet_read_${widget.category}_';
+      final readTitles = <String>{};
+      for (final key in keys) {
+        if (key.startsWith(prefix) && _prefs!.getBool(key) == true) {
+          final title = key.substring(prefix.length);
+          readTitles.add(title);
+        }
+      }
+      setState(() {
+        _readSectionTitles = readTitles;
+      });
+    } catch (e) {
+      debugPrint('Error loading progress: $e');
+    }
+  }
+
+  Future<void> _toggleSectionRead(String sectionTitle, bool isRead) async {
+    if (_prefs == null) return;
+    try {
+      final key = 'cheatsheet_read_${widget.category}_$sectionTitle';
+      await _prefs!.setBool(key, isRead);
+      setState(() {
+        if (isRead) {
+          _readSectionTitles.add(sectionTitle);
+        } else {
+          _readSectionTitles.remove(sectionTitle);
+        }
+      });
+    } catch (e) {
+      debugPrint('Error saving progress: $e');
+    }
   }
 
   void _copyToClipboard(BuildContext context, String text) {
@@ -53,12 +103,126 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
     );
   }
 
+  Widget _buildProgressHeader() {
+    if (_cheatsheet.sections.isEmpty) return const SizedBox.shrink();
+
+    final readCount = _readSectionTitles.length;
+    final totalCount = _cheatsheet.sections.length;
+    final percent = totalCount == 0 ? 0.0 : (readCount / totalCount);
+    final percentInt = (percent * 100).toInt();
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.05),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Reading Progress: $percentInt%',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
+              Text(
+                '$readCount of $totalCount read',
+                style: const TextStyle(
+                  color: Color(0xFF94A3B8),
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: percent,
+              minHeight: 6,
+              backgroundColor: const Color(0xFF0F172A),
+              valueColor: AlwaysStoppedAnimation<Color>(widget.gradient.first),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+      child: TextField(
+        controller: _searchController,
+        style: const TextStyle(color: Colors.white, fontSize: 14),
+        onChanged: (val) {
+          setState(() {
+            _searchQuery = val;
+          });
+        },
+        decoration: InputDecoration(
+          hintText: 'Search concepts, code, instructions...',
+          hintStyle: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
+          prefixIcon: const Icon(Icons.search_rounded, color: Color(0xFF64748B)),
+          suffixIcon: _searchQuery.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.clear_rounded, color: Color(0xFF64748B)),
+                  onPressed: () {
+                    _searchController.clear();
+                    setState(() {
+                      _searchQuery = '';
+                    });
+                  },
+                )
+              : null,
+          filled: true,
+          fillColor: const Color(0xFF1E293B),
+          contentPadding: const EdgeInsets.symmetric(vertical: 12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.05)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide(color: widget.gradient.first, width: 1),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Filtered sections
-    final displayedSections = _selectedSectionFilter == 'All'
+    var displayedSections = _selectedSectionFilter == 'All'
         ? _cheatsheet.sections
         : _cheatsheet.sections.where((s) => s.title == _selectedSectionFilter).toList();
+
+    if (_searchQuery.isNotEmpty) {
+      final query = _searchQuery.toLowerCase();
+      displayedSections = displayedSections.where((s) {
+        final matchesTitle = s.title.toLowerCase().contains(query);
+        final matchesContent = s.content.toLowerCase().contains(query);
+        final matchesSnippet = s.codeSnippet != null && s.codeSnippet!.toLowerCase().contains(query);
+        final matchesBullets = s.bulletPoints.any((b) => b.toLowerCase().contains(query));
+        return matchesTitle || matchesContent || matchesSnippet || matchesBullets;
+      }).toList();
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F172A),
@@ -94,11 +258,17 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
                 ),
               ),
             ),
-            
-            const SizedBox(height: 12),
+
+            // Reading Progress Indicator
+            _buildProgressHeader(),
+
+            // Search Bar
+            _buildSearchBar(),
+
+            const SizedBox(height: 8),
 
             // Horizontal Navigation / Filter Pills
-            if (_cheatsheet.sections.isNotEmpty)
+            if (_cheatsheet.sections.isNotEmpty && _searchQuery.isEmpty)
               SizedBox(
                 height: 40,
                 child: ListView.builder(
@@ -151,10 +321,10 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.menu_book_rounded, size: 64, color: Colors.white.withValues(alpha: 0.2)),
+                          Icon(Icons.search_off_rounded, size: 64, color: Colors.white.withValues(alpha: 0.2)),
                           const SizedBox(height: 16),
                           const Text(
-                            'No concepts compiled for this section yet.',
+                            'No concepts match your search criteria.',
                             style: TextStyle(color: Color(0xFF94A3B8)),
                           ),
                         ],
@@ -181,6 +351,8 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
   }
 
   Widget _buildSectionCard(CheatsheetSection section, int index) {
+    final isRead = _readSectionTitles.contains(section.title);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 24.0),
       decoration: BoxDecoration(
@@ -241,6 +413,17 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
                     ),
                   ),
                 ),
+                IconButton(
+                  icon: Icon(
+                    isRead ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
+                    color: isRead ? Colors.greenAccent : const Color(0xFF64748B),
+                    size: 26,
+                  ),
+                  tooltip: isRead ? 'Mark as Unread' : 'Mark as Read',
+                  onPressed: () {
+                    _toggleSectionRead(section.title, !isRead);
+                  },
+                ),
               ],
             ),
           ),
@@ -287,15 +470,15 @@ class _CheatsheetScreenState extends State<CheatsheetScreen> {
                             child: Text(
                               point,
                               style: const TextStyle(
-                                fontSize: 13,
-                                color: Color(0xFF94A3B8),
-                                height: 1.3,
+                                  fontSize: 13,
+                                  color: Color(0xFF94A3B8),
+                                  height: 1.3,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
+                          ],
+                        ),
+                      )),
 
                 // Code Snippet Block
                 if (section.codeSnippet != null) ...[

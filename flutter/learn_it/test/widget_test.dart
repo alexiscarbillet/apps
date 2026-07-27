@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:learn_it/data/quiz_data.dart';
 import 'package:learn_it/main.dart';
 import 'package:learn_it/screens/quiz_screen.dart';
+import 'package:learn_it/screens/flashcard_screen.dart';
+import 'package:learn_it/screens/cheatsheet_screen.dart';
 
 void main() {
   testWidgets('Landing screen loads categories smoke test', (WidgetTester tester) async {
@@ -36,4 +38,47 @@ void main() {
       );
     }
   });
+
+  testWidgets('Flashcard screen displays mode selection options', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: FlashcardScreen(
+          category: 'AWS',
+          gradient: [Colors.orange, Colors.red],
+        ),
+      ),
+    );
+
+    // Verify search deck/mode options are shown
+    expect(find.text('Select Study Deck'), findsOneWidget);
+    expect(find.text('Study Concepts'), findsOneWidget);
+    expect(find.text('Study Quiz Questions'), findsOneWidget);
+    expect(find.text('Mixed Mode'), findsOneWidget);
+  });
+
+  testWidgets('Cheatsheet screen search filters sections', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: CheatsheetScreen(
+          category: 'AWS',
+          gradient: [Colors.orange, Colors.red],
+        ),
+      ),
+    );
+
+    // Initial state: sections are shown.
+    // e.g. EC2 section should be visible (appears in chips AND section cards).
+    expect(find.text('EC2 & Compute Services'), findsAtLeastNWidgets(1));
+    expect(find.text('S3 & Object Storage'), findsAtLeastNWidgets(1));
+
+    // Enter search query
+    await tester.enterText(find.byType(TextField), 'EC2');
+    await tester.pump();
+
+    // Verify that the filtered list contains EC2, but not S3.
+    // Filter chips are hidden during search, so only section cards remain.
+    expect(find.text('EC2 & Compute Services'), findsAtLeastNWidgets(1));
+    expect(find.text('S3 & Object Storage'), findsNothing);
+  });
 }
+

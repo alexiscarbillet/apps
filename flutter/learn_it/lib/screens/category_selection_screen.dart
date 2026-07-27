@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'quiz_screen.dart';
 import 'cheatsheet_screen.dart';
+import 'flashcard_screen.dart';
 
 class CategorySelectionScreen extends StatelessWidget {
   final String category;
@@ -129,6 +130,25 @@ class CategorySelectionScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => CheatsheetScreen(
+                              category: category,
+                              gradient: gradient,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    _buildOptionCard(
+                      context: context,
+                      title: 'Flashcards',
+                      subtitle: 'Study core concepts and questions using interactive flipping cards.',
+                      cardIcon: Icons.style_rounded,
+                      accentColor: Color.lerp(gradient.first, gradient.last, 0.5) ?? gradient.first,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FlashcardScreen(
                               category: category,
                               gradient: gradient,
                             ),
