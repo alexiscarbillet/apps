@@ -1,0 +1,126 @@
+import '../../models/flashcard.dart';
+
+final List<Flashcard> networkFlashcards = [
+  Flashcard(
+    frontTitle: 'What are the OSI model layers?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'OSI Model Layers',
+    backExplanation: 'The OSI model divides networking functions into seven layers, from physical transmission to application services. Each layer provides services to the layer above and abstracts lower-layer details.',
+    bulletPoints: [
+      'Layer 1: Physical — cabling, signaling.',
+      'Layer 2: Data Link — MAC addressing, switches, Ethernet.',
+      'Layer 3: Network — IP addressing, routing.',
+      'Layer 4: Transport — TCP/UDP, reliable delivery, ports.',
+      'Layer 5-7: Session, Presentation, Application — connection management, encryption, application protocols.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is the difference between TCP and UDP?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'TCP vs UDP',
+    backExplanation: 'TCP is connection-oriented and provides reliable, ordered delivery. UDP is connectionless, with lower overhead and no delivery guarantees, making it ideal for real-time streaming and DNS queries.',
+    bulletPoints: [
+      'TCP: error checking, retransmission, flow control, congestion control.',
+      'UDP: no handshake, no retransmission, lower latency.',
+      'Use UDP for video, voice, DNS, and simple request/response protocols.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is NAT used for?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Network Address Translation',
+    backExplanation: 'NAT maps private internal IP addresses to one or more public IP addresses. It allows multiple devices to share a single public address and adds a layer of isolation between internal and external networks.',
+    bulletPoints: [
+      'Common types: static NAT, dynamic NAT, PAT (port address translation).',
+      'Breaks end-to-end host address transparency without port forwarding.',
+      'Used in home routers and many enterprise edge devices.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What does DNS do?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Domain Name System',
+    backExplanation: 'DNS translates human-readable domain names into IP addresses. It is a distributed hierarchical system made up of resolvers, authoritative name servers, and root servers.',
+    bulletPoints: [
+      'A records map hostnames to IPv4 addresses; AAAA records map to IPv6.',
+      'CNAME records alias one name to another name.',
+      'DNS caching improves performance but can delay updates.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is DHCP?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Dynamic Host Configuration Protocol',
+    backExplanation: 'DHCP automatically assigns IP addresses, subnet masks, gateways, and DNS servers to hosts on a network. It simplifies configuration and centralizes address management.',
+    bulletPoints: [
+      'DHCP process: Discover → Offer → Request → Acknowledge (DORA).',
+      'Leases can expire and be renewed to reuse address space.',
+      'DHCP relay forwards requests across subnets when the server is remote.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is a VLAN?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Virtual LAN (VLAN)',
+    backExplanation: 'A VLAN segments a physical LAN into multiple logical networks. It isolates broadcast domains and improves security and traffic management without requiring separate physical switches.',
+    bulletPoints: [
+      'Tagged VLANs use 802.1Q to carry multiple VLANs on one trunk link.',
+      'Access ports carry traffic for a single VLAN only.',
+      'VLANs allow logical separation of departments or services on the same hardware.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is a subnet mask?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Subnet Mask',
+    backExplanation: 'A subnet mask defines which portion of an IP address is the network prefix and which part is the host identifier. It determines the size of the subnet and the valid host range inside it.',
+    bulletPoints: [
+      '255.255.255.0 equals /24, supporting 254 usable host addresses.',
+      'Subnetting divides a larger network into smaller subnets for better routing.',
+      'CIDR notation: 192.168.1.0/24 means 24 bits of network prefix.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is routing vs switching?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Routing vs Switching',
+    backExplanation: 'Switching forwards frames within a local LAN using MAC addresses. Routing forwards packets between different networks using IP addresses and routing tables.',
+    bulletPoints: [
+      'Switches operate at Layer 2; routers operate at Layer 3.',
+      'Switches build MAC tables from observed traffic; routers use routing protocols and static routes.',
+      'Routers connect different IP subnets and can perform NAT, firewalling, and QoS.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is TLS/SSL?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'TLS / SSL',
+    backExplanation: 'TLS provides encrypted, authenticated communication over insecure networks. It uses certificates, asymmetric key exchange, and symmetric session keys to protect data in transit.',
+    bulletPoints: [
+      'Handshake establishes shared session keys, authenticates the server, and optionally the client.',
+      'TLS protects confidentiality, integrity, and authenticity of traffic.',
+      'HTTPS is HTTP over TLS; modern browsers require TLS 1.2 or higher.',
+    ],
+    isConcept: true,
+  ),
+  Flashcard(
+    frontTitle: 'What is BGP used for?',
+    frontSubtitle: 'NETWORK CONCEPT',
+    backTitle: 'Border Gateway Protocol (BGP)',
+    backExplanation: 'BGP is the routing protocol used between autonomous systems on the internet. It advertises network prefixes and selects routes based on path attributes and policies.',
+    bulletPoints: [
+      'Uses TCP port 179 for neighbor sessions.',
+      'Route selection prefers highest local preference, shortest AS path, and lowest MED.',
+      'Not designed for fast convergence; route flaps can propagate globally if not damped.',
+    ],
+    isConcept: true,
+  ),
+];
