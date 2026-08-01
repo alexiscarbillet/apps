@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'quiz_screen.dart';
 import 'cheatsheet_screen.dart';
 import 'flashcard_screen.dart';
+import 'decision_tree_screen.dart';
 
 class CategorySelectionScreen extends StatefulWidget {
   final String category;
@@ -22,28 +23,50 @@ class CategorySelectionScreen extends StatefulWidget {
 }
 
 class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
-  String? selectedLearningPath;
+  void _navigateToCheatsheet(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CheatsheetScreen(
+          category: widget.category,
+          gradient: widget.gradient,
+        ),
+      ),
+    );
+  }
 
-  final List<Map<String, dynamic>> learningPaths = [
-    {
-      'key': 'concept',
-      'title': 'Concept Explorer',
-      'subtitle': 'Learn through summaries, notes, and examples.',
-      'icon': Icons.menu_book_rounded,
-    },
-    {
-      'key': 'recall',
-      'title': 'Recall Booster',
-      'subtitle': 'Practice with flashcards and memory prompts.',
-      'icon': Icons.style_rounded,
-    },
-    {
-      'key': 'quiz',
-      'title': 'Quiz Challenge',
-      'subtitle': 'Test your knowledge with a short quiz.',
-      'icon': Icons.quiz_rounded,
-    },
-  ];
+  void _navigateToFlashcards(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FlashcardScreen(
+          category: widget.category,
+          gradient: widget.gradient,
+        ),
+      ),
+    );
+  }
+
+  void _navigateToQuiz(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizScreen(category: widget.category),
+      ),
+    );
+  }
+
+  void _navigateToDecisionTree(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DecisionTreeScreen(
+          category: widget.category,
+          gradient: widget.gradient,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,12 +154,9 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
               
               const SizedBox(height: 40),
               
-              // Question / Prompt
-              Text(
-                selectedLearningPath == null
-                    ? 'Choose your learning path'
-                    : 'Choose how to apply the ${selectedLearningPath == 'concept' ? 'concepts' : selectedLearningPath == 'recall' ? 'recall practice' : 'quiz challenge'}',
-                style: const TextStyle(
+              const Text(
+                'How do you want to learn?',
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
@@ -147,9 +167,61 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
               
               Expanded(
                 child: ListView(
-                  children: selectedLearningPath == null
-                      ? _buildLearningPathCards(context)
-                      : _buildFollowUpOptions(context),
+                  children: [
+                    _buildOptionCard(
+                      context: context,
+                      title: 'Cheatsheet',
+                      subtitle: 'Review summaries and key concepts.',
+                      cardIcon: Icons.menu_book_rounded,
+                      accentColor: widget.gradient.first,
+                      onTap: () => _navigateToCheatsheet(context),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildOptionCard(
+                      context: context,
+                      title: 'Flashcards',
+                      subtitle: 'Practice with active recall cards.',
+                      cardIcon: Icons.style_rounded,
+                      accentColor: Color.lerp(widget.gradient.first, widget.gradient.last, 0.5) ?? widget.gradient.first,
+                      onTap: () => _navigateToFlashcards(context),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildOptionCard(
+                      context: context,
+                      title: 'Quiz',
+                      subtitle: 'Test your knowledge with a short quiz.',
+                      cardIcon: Icons.quiz_rounded,
+                      accentColor: widget.gradient.last,
+                      onTap: () => _navigateToQuiz(context),
+                    ),
+                    if (widget.category == 'GCP') ...[
+                      const SizedBox(height: 16),
+                      _buildOptionCard(
+                        context: context,
+                        title: 'Certification Prep',
+                        subtitle: 'Practice the GCP Generative AI Leader certification questions.',
+                        cardIcon: Icons.verified_user_rounded,
+                        accentColor: const Color(0xFF8B5CF6),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizScreen(category: 'GCP GenAI Leader'),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                    const SizedBox(height: 16),
+                    _buildOptionCard(
+                      context: context,
+                      title: 'Decision Tree',
+                      subtitle: 'Choose the best learning path for this category.',
+                      cardIcon: Icons.account_tree_rounded,
+                      accentColor: Colors.greenAccent,
+                      onTap: () => _navigateToDecisionTree(context),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -157,184 +229,6 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
         ),
       ),
     );
-  }
-
-  List<Widget> _buildLearningPathCards(BuildContext context) {
-    return learningPaths.map((path) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
-        child: _buildOptionCard(
-          context: context,
-          title: path['title'] as String,
-          subtitle: path['subtitle'] as String,
-          cardIcon: path['icon'] as IconData,
-          accentColor: widget.gradient.first,
-          onTap: () {
-            setState(() {
-              selectedLearningPath = path['key'] as String;
-            });
-          },
-        ),
-      );
-    }).toList();
-  }
-
-  List<Widget> _buildFollowUpOptions(BuildContext context) {
-    final List<Widget> options = [];
-
-    if (selectedLearningPath == 'concept') {
-      options.addAll([
-        _buildOptionCard(
-          context: context,
-          title: 'Read Cheatsheet',
-          subtitle: 'Study summaries, bullets, and code examples.',
-          cardIcon: Icons.menu_book_rounded,
-          accentColor: widget.gradient.first,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CheatsheetScreen(
-                  category: widget.category,
-                  gradient: widget.gradient,
-                ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        _buildOptionCard(
-          context: context,
-          title: 'Review Flashcards',
-          subtitle: 'Reinforce concepts with quick flashcard review.',
-          cardIcon: Icons.style_rounded,
-          accentColor: Color.lerp(widget.gradient.first, widget.gradient.last, 0.5) ?? widget.gradient.first,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FlashcardScreen(
-                  category: widget.category,
-                  gradient: widget.gradient,
-                ),
-              ),
-            );
-          },
-        ),
-      ]);
-    } else if (selectedLearningPath == 'recall') {
-      options.addAll([
-        _buildOptionCard(
-          context: context,
-          title: 'Flashcards',
-          subtitle: 'Practice memory recall with interactive cards.',
-          cardIcon: Icons.style_rounded,
-          accentColor: Color.lerp(widget.gradient.first, widget.gradient.last, 0.5) ?? widget.gradient.first,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FlashcardScreen(
-                  category: widget.category,
-                  gradient: widget.gradient,
-                ),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        _buildOptionCard(
-          context: context,
-          title: 'Quick Quiz',
-          subtitle: 'Check retention with a short quiz.',
-          cardIcon: Icons.quiz_rounded,
-          accentColor: widget.gradient.last,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => QuizScreen(category: widget.category),
-              ),
-            );
-          },
-        ),
-      ]);
-    } else if (selectedLearningPath == 'quiz') {
-      options.addAll([
-        _buildOptionCard(
-          context: context,
-          title: 'Practice Quiz',
-          subtitle: 'Answer a randomized set of questions.',
-          cardIcon: Icons.quiz_rounded,
-          accentColor: widget.gradient.last,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => QuizScreen(category: widget.category),
-              ),
-            );
-          },
-        ),
-        const SizedBox(height: 16),
-        _buildOptionCard(
-          context: context,
-          title: 'Flashcards',
-          subtitle: 'Warm up with quick concept review before the quiz.',
-          cardIcon: Icons.style_rounded,
-          accentColor: Color.lerp(widget.gradient.first, widget.gradient.last, 0.5) ?? widget.gradient.first,
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FlashcardScreen(
-                  category: widget.category,
-                  gradient: widget.gradient,
-                ),
-              ),
-            );
-          },
-        ),
-      ]);
-      if (widget.category == 'GCP') {
-        options.add(const SizedBox(height: 16));
-        options.add(
-          _buildOptionCard(
-            context: context,
-            title: 'GenAI Leader Certification',
-            subtitle: 'Specialized questions for the GCP Generative AI Leader exam.',
-            cardIcon: Icons.verified_user_rounded,
-            accentColor: const Color(0xFF8B5CF6),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuizScreen(category: 'GCP GenAI Leader'),
-                ),
-              );
-            },
-          ),
-        );
-      }
-    }
-
-    options.add(const SizedBox(height: 24));
-    options.add(
-      _buildOptionCard(
-        context: context,
-        title: 'Choose a different path',
-        subtitle: 'Go back and try another learning style.',
-        cardIcon: Icons.swap_horiz_rounded,
-        accentColor: Colors.white,
-        onTap: () {
-          setState(() {
-            selectedLearningPath = null;
-          });
-        },
-      ),
-    );
-
-    return options;
   }
 
   Widget _buildOptionCard({
