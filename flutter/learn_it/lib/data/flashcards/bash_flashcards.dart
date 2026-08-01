@@ -23,7 +23,7 @@ final List<Flashcard> bashFlashcards = [
       'Pipes connect processes directly through kernel buffers.',
       'Each command in the pipeline executes concurrently.',
     ],
-    codeSnippet: 'ps aux | grep nginx | awk \'{print $2, $11}\' | head -n 5',
+    codeSnippet: r'''ps aux | grep nginx | awk '{print $2, $11}' | head -n 5''',
     isConcept: true,
   ),
   Flashcard(
@@ -36,23 +36,23 @@ final List<Flashcard> bashFlashcards = [
       'Redirect stdout: command > output.txt',
       'Redirect stderr: command 2> error.txt',
     ],
-    codeSnippet: 'ls /tmp > files.txt 2> errors.txt
+    codeSnippet: r'''ls /tmp > files.txt 2> errors.txt
 # Combine stdout and stderr
-ls /tmp > all.txt 2>&1',
+ls /tmp > all.txt 2>&1''',
     isConcept: true,
   ),
   Flashcard(
     frontTitle: 'What is command substitution?',
     frontSubtitle: 'BASH CONCEPT',
     backTitle: 'Command Substitution',
-    backExplanation: 'Command substitution runs a command and substitutes its output into another command. Use $(...) for modern syntax or backticks for legacy compatibility.',
+    backExplanation: r'Command substitution runs a command and substitutes its output into another command. Use $(...) for modern syntax or backticks for legacy compatibility.',
     bulletPoints: [
-      'Example: files=$(ls /tmp)',
+      r'Example: files=$(ls /tmp)',
       'Substitution removes trailing newlines from command output.',
       'Useful for dynamic values in scripts and loops.',
     ],
-    codeSnippet: 'today=$(date +%F)
-echo "Backup file: backup-$today.tar.gz"',
+    codeSnippet: r'''today=$(date +%F)
+echo "Backup file: backup-$today.tar.gz"''',
     isConcept: true,
   ),
   Flashcard(
@@ -65,10 +65,10 @@ echo "Backup file: backup-$today.tar.gz"',
       'Use <<\'EOF\' to prevent variable expansion inside the block.',
       'Common with cat, sql clients, or configuration generators.',
     ],
-    codeSnippet: 'cat <<EOF > config.txt
+    codeSnippet: r'''cat <<EOF > config.txt
 name=LearnIt
 env=production
-EOF',
+EOF''',
     isConcept: true,
   ),
   Flashcard(
@@ -78,12 +78,12 @@ EOF',
     backExplanation: 'Quotes control how the shell interprets spaces, variables, and special characters. Single quotes prevent expansion entirely, while double quotes allow variable and command substitution.',
     bulletPoints: [
       'Single quotes: literal strings, no expansion.',
-      'Double quotes: preserve spaces but expand $, ``, and \!.',
+      r'Double quotes: preserve spaces but expand $, ``, and !.',
       'Unquoted words are split on whitespace and can be glob-expanded.',
     ],
-    codeSnippet: 'name="Alice"
+    codeSnippet: r'''name="Alice"
 echo "Hello, $name"
-echo \"Literal $name\"',
+echo "Literal $name"''',
     isConcept: true,
   ),
   Flashcard(
@@ -94,10 +94,10 @@ echo \"Literal $name\"',
     bulletPoints: [
       'Use export VAR=value to make a variable available to child processes.',
       'Common variables: PATH, HOME, SHELL, LANG.',
-      'Access a variable with $VAR or ${VAR}.',
+      'Access a variable with \$VAR or \${VAR}.',
     ],
-    codeSnippet: 'export PATH="$HOME/bin:$PATH"
-echo "Current shell: $SHELL"',
+    codeSnippet: r'''export PATH="$HOME/bin:$PATH"
+echo "Current shell: $SHELL"''',
     isConcept: true,
   ),
   Flashcard(
@@ -122,8 +122,8 @@ echo "Current shell: $SHELL"',
       'Symbolic mode: chmod u+x script adds execute for owner.',
       'Execute permission is required to run shell scripts directly.',
     ],
-    codeSnippet: 'chmod 644 document.txt
-chmod u+x deploy.sh',
+    codeSnippet: r'''chmod 644 document.txt
+chmod u+x deploy.sh''',
     isConcept: true,
   ),
   Flashcard(
@@ -133,12 +133,12 @@ chmod u+x deploy.sh',
     backExplanation: 'Globbing is shell expansion of wildcard patterns to match filenames. Common patterns include *, ?, and [ ] for sets and ranges.',
     bulletPoints: [
       '* matches any string, ? matches one character.',
-      '[a-z]' matches any lowercase letter in the set.',
+      r'[a-z] matches any lowercase letter in the set.',
       'Use quotes to prevent globbing when literal characters are needed.',
     ],
-    codeSnippet: 'ls *.sh
+    codeSnippet: r'''ls *.sh
 cp file?.txt backup/
-rm report_[0-9][0-9].log',
+rm report_[0-9][0-9].log''',
     isConcept: true,
   ),
 ];

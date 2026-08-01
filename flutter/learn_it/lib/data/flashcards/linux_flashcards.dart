@@ -24,7 +24,13 @@ final List<Flashcard> linuxFlashcards = [
       'Threads: created with clone() in Linux (pthreads library at user level).',
       'IPC between processes: pipes, sockets, shared memory, signals.',
     ],
-    codeSnippet: '# List processes with threads\nps -eLf                    # all threads\nls /proc/$(pgrep nginx)/task/  # thread dirs for nginx PID\n\n# Process tree\npstree -p                  # show PIDs in tree\nhtop  # Press H to show/hide threads',
+    codeSnippet: r'''# List processes with threads
+ps -eLf                    # all threads
+ls /proc/$(pgrep nginx)/task/  # thread dirs for nginx PID
+
+# Process tree
+pstree -p                  # show PIDs in tree
+htop  # Press H to show/hide threads''',
     isConcept: true,
   ),
   Flashcard(
@@ -38,7 +44,13 @@ final List<Flashcard> linuxFlashcards = [
       'SIGHUP (1): terminal hangup; convention to reload config (nginx, sshd).',
       'SIGINT (2): sent by Ctrl+C — interrupts foreground process.',
     ],
-    codeSnippet: '# Send signals to processes\nkill -15 1234         # SIGTERM: polite shutdown\nkill -9 1234          # SIGKILL: force kill\nkill -HUP $(pgrep nginx)  # reload nginx config\n\n# List all signals\nkill -l',
+    codeSnippet: r'''# Send signals to processes
+kill -15 1234         # SIGTERM: polite shutdown
+kill -9 1234          # SIGKILL: force kill
+kill -HUP $(pgrep nginx)  # reload nginx config
+
+# List all signals
+kill -l''',
     isConcept: true,
   ),
   Flashcard(
@@ -52,7 +64,14 @@ final List<Flashcard> linuxFlashcards = [
       '/proc/meminfo: memory usage breakdown.',
       '/proc/sys/: kernel tuning parameters (readable and writable).',
     ],
-    codeSnippet: '# Explore /proc\ncat /proc/cpuinfo          # CPU details\ncat /proc/meminfo          # memory stats\ncat /proc/$$/status        # current shell process\nls -la /proc/$$/fd         # open file descriptors\n\n# Tune kernel parameter at runtime\necho 1 > /proc/sys/net/ipv4/ip_forward',
+    codeSnippet: r'''# Explore /proc
+cat /proc/cpuinfo          # CPU details
+cat /proc/meminfo          # memory stats
+cat /proc/$$/status        # current shell process
+ls -la /proc/$$/fd         # open file descriptors
+
+# Tune kernel parameter at runtime
+echo 1 > /proc/sys/net/ipv4/ip_forward''',
     isConcept: true,
   ),
   Flashcard(
@@ -158,7 +177,9 @@ final List<Flashcard> linuxFlashcards = [
       'oom_score_adj: set -1000 to protect a process; 1000 to make it first target.',
       'OOM kills appear in kernel logs: dmesg | grep -i "killed process".',
     ],
-    codeSnippet: '# View OOM scores for running processes\nfor pid in /proc/[0-9]*/; do\n  printf "%5d %s\\n" \\\n    $(cat ${pid}oom_score 2>/dev/null) \\\n    $(cat ${pid}comm 2>/dev/null)\ndone | sort -rn | head -20\n\n# Protect critical process from OOM killer\necho -1000 > /proc/$(pgrep postgres)/oom_score_adj',
+    codeSnippet: r'''# View OOM scores for running processes\nfor pid in /proc/[0-9]*/; do\n  printf "%5d %s\\n" \\\n    $(cat ${pid}oom_score 2>/dev/null) \\\n    $(cat ${pid}comm 2>/dev/null)\ndone | sort -rn | head -20\n\n# Protect critical process from OOM killer\necho -1000 > /proc/$(pgrep postgres)/oom_score_adj''',
     isConcept: true,
   ),
 ];
+
+

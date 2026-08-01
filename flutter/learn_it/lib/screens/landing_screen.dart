@@ -20,8 +20,7 @@ class LandingScreen extends StatelessWidget {
         'icon': Icons.cloud_circle_outlined,
         'gradient': [const Color(0xFF4285F4), const Color(0xFF34A853)],
       },
-      {
-        'name': 'Azure',
+      {        'name': 'Azure',
         'description': 'Enterprise services, Cosmos DB, Entra ID, and VNets.',
         'icon': Icons.lan_outlined,
         'gradient': [const Color(0xFF0078D4), const Color(0xFF00BFFF)],
