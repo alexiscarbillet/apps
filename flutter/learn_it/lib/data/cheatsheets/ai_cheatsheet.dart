@@ -6,7 +6,7 @@ final Cheatsheet aiCheatsheet = Cheatsheet(
   sections: [
     CheatsheetSection(
       title: 'Supervised vs. Unsupervised Learning',
-      content: 'Machine learning is broadly categorized into systems that learn from labeled datasets (Supervised) and systems that find hidden structures in raw data (Unsupervised).',
+      content: 'Machine learning is broadly categorized into systems that learn from labeled datasets (Supervised) and systems that find hidden structures in raw data (Unsupervised). These paradigms define how much human supervision is required during training.',
       bulletPoints: [
         'Supervised Learning: Regression (continuous output — house prices) and Classification (discrete labels — spam/ham, image classes).',
         'Unsupervised Learning: Clustering (K-Means, DBSCAN) and Dimensionality Reduction (PCA, t-SNE, UMAP).',
@@ -14,6 +14,8 @@ final Cheatsheet aiCheatsheet = Cheatsheet(
         'Reinforcement Learning: An agent learns by interacting with an environment to maximize cumulative reward (Q-Learning, PPO, RLHF).',
         'Self-Supervised Learning: Model generates its own labels from input data. Foundation of modern LLMs (predict next token).',
         'Few-Shot / Zero-Shot Learning: Model generalizes to new tasks with very few (or no) labeled examples at inference time.',
+        'Bias-Variance Tradeoff: Simpler models may underfit; highly flexible models may overfit if not regularized.',
+        'Train/Validation/Test Split: Essential for estimating generalization rather than memorizing training data.',
       ],
       codeSnippet: '# Supervised learning pipeline with scikit-learn\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import classification_report\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)\nmodel = RandomForestClassifier(n_estimators=100)\nmodel.fit(X_train, y_train)\nprint(classification_report(y_test, model.predict(X_test)))',
     ),

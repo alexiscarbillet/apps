@@ -3,10 +3,10 @@ import '../../models/decision_tree.dart';
 final pythonDecisionTree = <DecisionTreeNode>[
   DecisionTreeNode(
     id: 'start',
-    prompt: 'How do you want to learn Python?',
+    prompt: 'Which Python concept or coding topic do you want to learn?',
     branches: [
       DecisionTreeBranch(label: 'Language fundamentals', nextNodeId: 'fundamentals'),
-      DecisionTreeBranch(label: 'Code patterns', nextNodeId: 'patterns'),
+      DecisionTreeBranch(label: 'Code patterns and data structures', nextNodeId: 'patterns'),
       DecisionTreeBranch(label: 'Problem solving', nextNodeId: 'problems'),
     ],
   ),
@@ -14,24 +14,24 @@ final pythonDecisionTree = <DecisionTreeNode>[
     id: 'fundamentals',
     prompt: 'Review syntax, data types, and structures?',
     branches: [
-      DecisionTreeBranch(label: 'Study notes', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Practice recall', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Study Python notes', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Practice Python recall', nextNodeId: 'end_flashcards', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
     id: 'patterns',
     prompt: 'Learn through common Python idioms and examples?',
     branches: [
-      DecisionTreeBranch(label: 'Open cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Try quiz questions', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Open the Python cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Try Python quiz questions', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(
     id: 'problems',
     prompt: 'Ready to solve problems and test your skills?',
     branches: [
-      DecisionTreeBranch(label: 'Take a quiz', nextNodeId: 'end_quiz', action: 'quiz'),
-      DecisionTreeBranch(label: 'Review concepts first', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Take a Python quiz', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Review Python concepts first', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
     ],
   ),
   DecisionTreeNode(

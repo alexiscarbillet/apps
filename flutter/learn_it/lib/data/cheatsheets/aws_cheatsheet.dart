@@ -6,7 +6,7 @@ final Cheatsheet awsCheatsheet = Cheatsheet(
   sections: [
     CheatsheetSection(
       title: 'EC2 & Compute Services',
-      content: 'Elastic Compute Cloud (EC2) provides resizable virtual server instances in the cloud, forming the backbone of AWS compute infrastructure.',
+      content: 'Elastic Compute Cloud (EC2) provides resizable virtual server instances in the cloud, forming the backbone of AWS compute infrastructure. It is commonly used for application servers, batch jobs, and custom workloads.',
       bulletPoints: [
         'Instance Types: t (general), c (compute), m (memory), r (memory-optimized), p/g (GPU), i (storage-optimized).',
         'AMIs: Amazon Machine Images represent pre-configured OS and application templates used to launch instances.',
@@ -14,6 +14,8 @@ final Cheatsheet awsCheatsheet = Cheatsheet(
         'Key Pairs: RSA/ED25519 public-private keys used for secure SSH/RDP access. AWS stores only the public key.',
         'Placement Groups: Cluster (low latency), Spread (fault isolation), or Partition (large distributed workloads like Hadoop).',
         'Spot Instances: Up to 90% cheaper than On-Demand but can be interrupted by AWS. Ideal for fault-tolerant batch jobs.',
+        'Elastic IPs: Static public IP addresses for dynamic cloud environments, helpful for stable ingress endpoints.',
+        'Auto Scaling Groups: Automatically adjust instance count to maintain availability and meet demand.',
       ],
       codeSnippet: '# Launch an EC2 instance with the CLI\naws ec2 run-instances \\\n  --image-id ami-0c55b159cbfafe1f0 \\\n  --instance-type t3.micro \\\n  --key-name MyKeyPair \\\n  --security-group-ids sg-903004f8 \\\n  --count 1',
     ),
@@ -32,7 +34,7 @@ final Cheatsheet awsCheatsheet = Cheatsheet(
     ),
     CheatsheetSection(
       title: 'VPC & Networking',
-      content: 'Virtual Private Cloud (VPC) lets you provision a logically isolated section of the AWS cloud where you launch resources in a virtual network you define.',
+      content: 'Virtual Private Cloud (VPC) lets you provision a logically isolated section of the AWS cloud where you launch resources in a virtual network you define. It is the foundation of private networking in AWS.',
       bulletPoints: [
         'Subnets: IP address sub-ranges within a VPC. Public subnets route to an Internet Gateway; private subnets do not.',
         'Internet Gateway (IGW): Enables bidirectional internet access for resources in public subnets.',
@@ -40,6 +42,8 @@ final Cheatsheet awsCheatsheet = Cheatsheet(
         'Route Tables: Control where network traffic is directed. Each subnet is associated with exactly one route table.',
         'VPC Peering: Direct network connection between two VPCs using private IPs. Non-transitive — peering A-B and B-C does not connect A-C.',
         'Security Groups vs NACLs: Security Groups are stateful and instance-level; NACLs are stateless and subnet-level.',
+        'Endpoints: Private connectivity to AWS services without traversing the public internet (Gateway or Interface endpoints).',
+        'VPN/Direct Connect: Secure hybrid connectivity between on-premises networks and AWS.',
       ],
       codeSnippet: '# Create a VPC and public subnet\naws ec2 create-vpc --cidr-block 10.0.0.0/16\naws ec2 create-subnet \\\n  --vpc-id vpc-0abc1234 \\\n  --cidr-block 10.0.1.0/24 \\\n  --availability-zone us-east-1a',
     ),

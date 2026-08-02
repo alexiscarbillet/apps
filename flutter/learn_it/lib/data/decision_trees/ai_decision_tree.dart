@@ -3,45 +3,45 @@ import '../../models/decision_tree.dart';
 final aiDecisionTree = <DecisionTreeNode>[
   DecisionTreeNode(
     id: 'start',
-    prompt: 'What AI learning route do you want?',
+    prompt: 'Which AI concept or model topic do you want to learn?',
     branches: [
-      DecisionTreeBranch(label: 'Concepts & theory', nextNodeId: 'concepts'),
-      DecisionTreeBranch(label: 'Model practice', nextNodeId: 'practice'),
-      DecisionTreeBranch(label: 'Quick quiz', nextNodeId: 'quiz'),
+      DecisionTreeBranch(label: 'Core AI concepts', nextNodeId: 'concepts'),
+      DecisionTreeBranch(label: 'Model and training ideas', nextNodeId: 'practice'),
+      DecisionTreeBranch(label: 'Prompt and reasoning topics', nextNodeId: 'quiz'),
     ],
   ),
   DecisionTreeNode(
     id: 'concepts',
-    prompt: 'Study attention, transformers, and model building concepts?',
+    prompt: 'Study transformers, embeddings, or generative AI concepts?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, review concepts', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Then test my recall', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Review the AI concept cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Test your AI recall', nextNodeId: 'end_flashcards', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
     id: 'practice',
-    prompt: 'Learn by solving model and architecture questions?',
+    prompt: 'Learn through model behavior, training, and architecture questions?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, use flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
-      DecisionTreeBranch(label: 'Yes, take a quiz', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Use AI flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Take an AI quiz', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(
     id: 'quiz',
-    prompt: 'Ready for a knowledge check?',
+    prompt: 'Ready for a practical AI knowledge check?',
     branches: [
       DecisionTreeBranch(label: 'Take the quiz', nextNodeId: 'end_quiz', action: 'quiz'),
-      DecisionTreeBranch(label: 'Review concepts first', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Review AI concepts first', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
     ],
   ),
   DecisionTreeNode(
     id: 'end_cheatsheet',
-    prompt: 'Open the AI cheatsheet and learn the underlying theories.',
+    prompt: 'Open the AI cheatsheet to learn the underlying theories and terminology.',
     branches: [],
   ),
   DecisionTreeNode(
     id: 'end_flashcards',
-    prompt: 'Open AI flashcards for active recall and definitions.',
+    prompt: 'Open AI flashcards for active recall and model definitions.',
     branches: [],
   ),
   DecisionTreeNode(

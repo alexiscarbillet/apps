@@ -3,10 +3,10 @@ import '../../models/decision_tree.dart';
 final bashDecisionTree = <DecisionTreeNode>[
   DecisionTreeNode(
     id: 'start',
-    prompt: 'How do you want to learn Bash?',
+    prompt: 'Which Bash command or scripting topic do you want to learn?',
     branches: [
       DecisionTreeBranch(label: 'Shell basics', nextNodeId: 'basics'),
-      DecisionTreeBranch(label: 'Scripting practice', nextNodeId: 'scripting'),
+      DecisionTreeBranch(label: 'Scripting and pipelines', nextNodeId: 'scripting'),
       DecisionTreeBranch(label: 'Command recall', nextNodeId: 'recall'),
     ],
   ),
@@ -14,24 +14,24 @@ final bashDecisionTree = <DecisionTreeNode>[
     id: 'basics',
     prompt: 'Review command syntax, variables, and I/O in Bash?',
     branches: [
-      DecisionTreeBranch(label: 'Study the cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Practice flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Study the Bash cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Practice Bash flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
     id: 'scripting',
-    prompt: 'Learn scripting patterns and command substitution?',
+    prompt: 'Learn scripting patterns, loops, and command substitution?',
     branches: [
-      DecisionTreeBranch(label: 'Review scripts and examples', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Try quiz questions', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Review shell script examples', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Try Bash quiz questions', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(
     id: 'recall',
     prompt: 'Want quick memory practice with Bash commands?',
     branches: [
-      DecisionTreeBranch(label: 'Flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
-      DecisionTreeBranch(label: 'Quiz', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Flashcards for commands', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Quiz for command recall', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(

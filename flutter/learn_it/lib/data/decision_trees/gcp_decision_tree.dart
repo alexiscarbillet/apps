@@ -3,45 +3,45 @@ import '../../models/decision_tree.dart';
 final gcpDecisionTree = <DecisionTreeNode>[
   DecisionTreeNode(
     id: 'start',
-    prompt: 'Which GCP learning path fits your goal?',
+    prompt: 'Which GCP product or concept do you want to explore?',
     branches: [
-      DecisionTreeBranch(label: 'Platform concepts', nextNodeId: 'concepts'),
-      DecisionTreeBranch(label: 'Cloud tools and services', nextNodeId: 'tools'),
-      DecisionTreeBranch(label: 'Certification prep', nextNodeId: 'cert'),
+      DecisionTreeBranch(label: 'Product and service basics', nextNodeId: 'products'),
+      DecisionTreeBranch(label: 'Data and AI services', nextNodeId: 'data'),
+      DecisionTreeBranch(label: 'Networking and security', nextNodeId: 'networking'),
     ],
   ),
   DecisionTreeNode(
-    id: 'concepts',
-    prompt: 'Study GCP services and architecture at a conceptual level?',
+    id: 'products',
+    prompt: 'Want to learn about Compute Engine, App Engine, or Kubernetes Engine products?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, review concepts', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Build recall with examples', nextNodeId: 'end_flashcards', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Review the GCP product cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Test your recall with GCP flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
-    id: 'tools',
-    prompt: 'Want hands-on practice with GCP features and commands?',
+    id: 'data',
+    prompt: 'Want to study BigQuery, Pub/Sub, or data analytics services?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, flashcard practice', nextNodeId: 'end_flashcards', action: 'flashcards'),
-      DecisionTreeBranch(label: 'Yes, try quiz questions', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Use the GCP service cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Try a GCP knowledge quiz', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(
-    id: 'cert',
-    prompt: 'Prepare specifically for GCP certification style questions?',
+    id: 'networking',
+    prompt: 'Review IAM, VPCs, and networking concepts for GCP?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, take a quiz', nextNodeId: 'end_quiz', action: 'quiz'),
-      DecisionTreeBranch(label: 'Review the cheatsheet first', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Open the networking cheatsheet', nextNodeId: 'end_cheatsheet', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Practice GCP security flashcards', nextNodeId: 'end_flashcards', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
     id: 'end_cheatsheet',
-    prompt: 'Open the GCP cheatsheet for structured concept review.',
+    prompt: 'Open the GCP cheatsheet for structured product and service review.',
     branches: [],
   ),
   DecisionTreeNode(
     id: 'end_flashcards',
-    prompt: 'Open the GCP flashcards for active recall.',
+    prompt: 'Open the GCP flashcards to reinforce product knowledge.',
     branches: [],
   ),
   DecisionTreeNode(

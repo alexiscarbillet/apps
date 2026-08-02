@@ -6,7 +6,7 @@ final Cheatsheet gcpCheatsheet = Cheatsheet(
   sections: [
     CheatsheetSection(
       title: 'Compute Engine & Cloud Run',
-      content: 'GCP offers versatile compute options. Compute Engine provides managed Virtual Machines while Cloud Run hosts containerized serverless applications.',
+      content: 'GCP offers versatile compute options. Compute Engine provides managed Virtual Machines while Cloud Run hosts containerized serverless applications, making it easier to choose between long-running infrastructure and event-driven scaling.',
       bulletPoints: [
         'Compute Engine (GCE): Flexible VMs running in Google infrastructure. Highly customizable vCPUs and memory configurations.',
         'Machine Types: Predefined (e2-medium, n2-standard-4) or custom. E2 (cost-optimized), N2 (balanced), C2 (compute-optimized), M2 (memory-optimized).',
@@ -14,12 +14,14 @@ final Cheatsheet gcpCheatsheet = Cheatsheet(
         'Cloud Run: Fully managed serverless platform to run stateless containers. Auto-scales to zero — pay per request.',
         'Persistent Disks: Network-attached block storage (HDD or SSD) that can be attached to VMs and resized live.',
         'Managed Instance Groups (MIGs): Group of identical VMs managed as a single entity, supporting auto-scaling and rolling updates.',
+        'Load Balancing: GCP supports global HTTP(S), TCP/UDP, and internal load balancers to distribute traffic efficiently.',
+        'Autoscaling: Both GCE and Cloud Run can scale based on workload demand, reducing manual operations.',
       ],
       codeSnippet: '# Create a Compute Engine VM instance\ngcloud compute instances create study-vm \\\n  --zone=us-central1-a \\\n  --machine-type=e2-medium \\\n  --image-family=ubuntu-2204-lts \\\n  --image-project=ubuntu-os-cloud \\\n  --boot-disk-size=20GB',
     ),
     CheatsheetSection(
       title: 'Cloud Storage (GCS)',
-      content: 'Cloud Storage is a flat, unified object storage service providing global access and high throughput for diverse data at any scale.',
+      content: 'Cloud Storage is a flat, unified object storage service providing global access and high throughput for diverse data at any scale. It is the default choice for backups, media assets, and data lakes.',
       bulletPoints: [
         'Buckets: Global namespaced containers for objects. Located in single-region, dual-region, or multi-region.',
         'Storage Classes: Standard (frequent), Nearline (once/month), Coldline (once/quarter), Archive (once/year, lowest cost).',
@@ -27,12 +29,14 @@ final Cheatsheet gcpCheatsheet = Cheatsheet(
         'Uniform Bucket-Level Access: Disables per-object ACLs, enforcing IAM-only access control for simpler security management.',
         'Signed URLs: Time-limited URLs for temporary access to private objects without requiring a GCP account.',
         'Requester Pays: Bucket option where the request-maker pays egress costs rather than the bucket owner.',
+        'Versioning: Retains multiple versions of an object, helping recover from accidental deletion or overwrite.',
+        'Retention Policies: Prevent deletion or changes for a defined period, useful for compliance and audit requirements.',
       ],
       codeSnippet: '# Upload a directory of images to Cloud Storage\ngsutil -m cp -r ./images gs://my-assets-bucket/\n\n# Set retention policy on a bucket\ngsutil retention set 90d gs://my-archive-bucket/',
     ),
     CheatsheetSection(
       title: 'Google Kubernetes Engine (GKE)',
-      content: 'GKE is Google\'s managed environment for deploying, managing, and scaling containerized applications using Kubernetes.',
+      content: 'GKE is Google\'s managed environment for deploying, managing, and scaling containerized applications using Kubernetes. It helps teams focus on workload design while Google handles much of the cluster operations.',
       bulletPoints: [
         'Autopilot Mode: Google manages cluster infrastructure, scaling, and security. You only define workloads.',
         'Standard Mode: Full control over node configuration, machine types, and cluster administration.',
@@ -40,6 +44,8 @@ final Cheatsheet gcpCheatsheet = Cheatsheet(
         'Workload Identity: Allows Kubernetes service accounts to impersonate GCP IAM service accounts securely without key files.',
         'Cluster Autoscaler: Automatically adds or removes nodes based on Pod scheduling demands.',
         'Binary Authorization: Policy enforcement to ensure only trusted container images are deployed to GKE.',
+        'Namespaces: Logical partitions inside a cluster to isolate applications, teams, or environments.',
+        'Ingress: External traffic routing into services running in the cluster, often via HTTP(S) Load Balancing.',
       ],
       codeSnippet: '# Create an Autopilot GKE cluster\ngcloud container clusters create-auto prod-cluster \\\n  --region=us-central1\n\n# Get credentials to use kubectl\ngcloud container clusters get-credentials prod-cluster \\\n  --region=us-central1',
     ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:learn_it/data/decision_trees/decision_tree_data.dart';
 import 'package:learn_it/data/quiz_data.dart';
 import 'package:learn_it/main.dart';
 import 'package:learn_it/screens/quiz_screen.dart';
 import 'package:learn_it/screens/flashcard_screen.dart';
 import 'package:learn_it/screens/cheatsheet_screen.dart';
+import 'package:learn_it/screens/decision_tree_screen.dart';
 
 void main() {
   testWidgets('Landing screen loads categories smoke test', (WidgetTester tester) async {
@@ -37,6 +39,36 @@ void main() {
         reason: '${entry.key} should have at least 50 questions',
       );
     }
+  });
+
+  test('Decision trees use category-specific knowledge branches', () {
+    final gcpStartNode = decisionTreeData['GCP']!.firstWhere((node) => node.id == 'start');
+    expect(gcpStartNode.prompt.toLowerCase(), contains('product'));
+    expect(
+      gcpStartNode.branches.any((branch) => branch.label.toLowerCase().contains('product')),
+      isTrue,
+    );
+
+    final electricityStartNode = decisionTreeData['Electricity']!.firstWhere((node) => node.id == 'start');
+    expect(electricityStartNode.prompt.toLowerCase(), contains('circuit'));
+    expect(
+      electricityStartNode.branches.any((branch) => branch.label.toLowerCase().contains('circuit')),
+      isTrue,
+    );
+  });
+
+  testWidgets('Decision tree screen renders a tree view', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: DecisionTreeScreen(
+          category: 'GCP',
+          gradient: [Colors.blue, Colors.teal],
+        ),
+      ),
+    );
+
+    expect(find.text('Tree view'), findsOneWidget);
+    expect(find.text('Product and service basics'), findsOneWidget);
   });
 
   testWidgets('Flashcard screen displays mode selection options', (WidgetTester tester) async {

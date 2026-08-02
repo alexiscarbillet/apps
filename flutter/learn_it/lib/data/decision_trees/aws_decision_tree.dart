@@ -3,55 +3,55 @@ import '../../models/decision_tree.dart';
 final awsDecisionTree = <DecisionTreeNode>[
   DecisionTreeNode(
     id: 'start',
-    prompt: 'What kind of AWS learning path do you want?',
+    prompt: 'Which AWS service or concept do you want to learn?',
     branches: [
-      DecisionTreeBranch(label: 'Core AWS Concepts', nextNodeId: 'core'),
-      DecisionTreeBranch(label: 'Hands-on Tools', nextNodeId: 'tools'),
-      DecisionTreeBranch(label: 'Exam Practice', nextNodeId: 'exam'),
+      DecisionTreeBranch(label: 'Core AWS services', nextNodeId: 'core'),
+      DecisionTreeBranch(label: 'Hands-on AWS tools', nextNodeId: 'tools'),
+      DecisionTreeBranch(label: 'Exam-style knowledge', nextNodeId: 'exam'),
     ],
   ),
   DecisionTreeNode(
     id: 'core',
-    prompt: 'Focus on core AWS services and architecture?',
+    prompt: 'Focus on EC2, S3, IAM, or broader cloud architecture?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, learn concepts', nextNodeId: 'end_concepts', action: 'cheatsheet'),
-      DecisionTreeBranch(label: 'Try memory recall', nextNodeId: 'end_recall', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Review the AWS service cheatsheet', nextNodeId: 'end_concepts', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Reinforce it with AWS flashcards', nextNodeId: 'end_recall', action: 'flashcards'),
     ],
   ),
   DecisionTreeNode(
     id: 'tools',
-    prompt: 'Want to learn through practical CLI and service examples?',
+    prompt: 'Want to learn through CLI commands and practical AWS examples?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, practice commands', nextNodeId: 'end_practice', action: 'flashcards'),
-      DecisionTreeBranch(label: 'Test with questions', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Practice AWS command recall', nextNodeId: 'end_practice', action: 'flashcards'),
+      DecisionTreeBranch(label: 'Test your AWS knowledge', nextNodeId: 'end_quiz', action: 'quiz'),
     ],
   ),
   DecisionTreeNode(
     id: 'exam',
-    prompt: 'Prep for AWS certification style questions?',
+    prompt: 'Preparing for AWS certification-style questions?',
     branches: [
-      DecisionTreeBranch(label: 'Yes, take a quiz', nextNodeId: 'end_quiz', action: 'quiz'),
-      DecisionTreeBranch(label: 'Review fundamentals first', nextNodeId: 'end_concepts', action: 'cheatsheet'),
+      DecisionTreeBranch(label: 'Take an AWS quiz', nextNodeId: 'end_quiz', action: 'quiz'),
+      DecisionTreeBranch(label: 'Review AWS fundamentals first', nextNodeId: 'end_concepts', action: 'cheatsheet'),
     ],
   ),
   DecisionTreeNode(
     id: 'end_concepts',
-    prompt: 'Open the cheatsheet to review the selected AWS path.',
+    prompt: 'Open the AWS cheatsheet to review the selected services and concepts.',
     branches: [],
   ),
   DecisionTreeNode(
     id: 'end_recall',
-    prompt: 'Open flashcards to reinforce AWS concepts by recall.',
+    prompt: 'Open AWS flashcards to reinforce service concepts by recall.',
     branches: [],
   ),
   DecisionTreeNode(
     id: 'end_practice',
-    prompt: 'Use a practical review path with AWS examples and flashcards.',
+    prompt: 'Use AWS flashcards for practical service and CLI review.',
     branches: [],
   ),
   DecisionTreeNode(
     id: 'end_quiz',
-    prompt: 'Take a quiz to test your AWS knowledge.',
+    prompt: 'Take an AWS quiz to test your service and architecture knowledge.',
     branches: [],
   ),
 ];

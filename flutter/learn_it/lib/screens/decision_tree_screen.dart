@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/decision_trees/decision_tree_data.dart';
 import '../models/decision_tree.dart';
-import 'cheatsheet_screen.dart';
-import 'flashcard_screen.dart';
-import 'quiz_screen.dart';
 
 class DecisionTreeScreen extends StatefulWidget {
   final String category;
@@ -38,36 +35,18 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
   }
 
   void _selectBranch(DecisionTreeBranch branch) {
-    if (branch.action != null) {
-      _launchAction(branch.action!);
-      return;
-    }
-
     setState(() {
       _currentNodeId = branch.nextNodeId;
     });
   }
 
-  void _launchAction(String action) {
-    Widget screen;
-
-    switch (action) {
-      case 'cheatsheet':
-        screen = CheatsheetScreen(category: widget.category, gradient: widget.gradient);
-        break;
-      case 'flashcards':
-        screen = FlashcardScreen(category: widget.category, gradient: widget.gradient);
-        break;
-      case 'quiz':
-      default:
-        screen = QuizScreen(category: widget.category);
-        break;
+  DecisionTreeNode? _findNode(String nodeId) {
+    for (final node in _nodes) {
+      if (node.id == nodeId) {
+        return node;
+      }
     }
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => screen),
-    );
+    return null;
   }
 
   @override
@@ -109,14 +88,14 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Decision Tree',
+                      'Tree view',
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
                         color: widget.gradient.first,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 10),
                     Text(
                       node.prompt,
                       style: const TextStyle(
@@ -128,15 +107,31 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 20),
               Expanded(
-                child: ListView.separated(
-                  itemCount: node.branches.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 16),
-                  itemBuilder: (context, index) {
-                    final branch = node.branches[index];
-                    return _buildBranchCard(branch);
-                  },
+                child: ListView(
+                  children: [
+                    _buildNodeCard(node, isCurrent: true),
+                    if (node.branches.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0, top: 10.0),
+                        child: Text(
+                          'This branch ends here.',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.7),
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      )
+                    else
+                      ...node.branches.map((branch) {
+                        final childNode = _findNode(branch.nextNodeId);
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20.0, top: 12.0),
+                          child: _buildBranchCard(branch, childNode),
+                        );
+                      }),
+                  ],
                 ),
               ),
             ],
@@ -146,30 +141,87 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
     );
   }
 
-  Widget _buildBranchCard(DecisionTreeBranch branch) {
+  Widget _buildNodeCard(DecisionTreeNode node, {required bool isCurrent}) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isCurrent ? const Color(0xFF1E293B) : const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.white.withValues(alpha: isCurrent ? 0.12 : 0.06)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                isCurrent ? Icons.account_tree_rounded : Icons.subdirectory_arrow_right_rounded,
+                color: isCurrent ? widget.gradient.first : const Color(0xFF94A3B8),
+                size: 18,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                isCurrent ? 'Current node' : 'Next node',
+                style: TextStyle(
+                  color: isCurrent ? widget.gradient.first : const Color(0xFF94A3B8),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.4,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            node.prompt,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBranchCard(DecisionTreeBranch branch, DecisionTreeNode? childNode) {
     return InkWell(
       onTap: () => _selectBranch(branch),
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFF1E293B),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
         ),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Text(
-                branch.label,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+            Row(
+              children: [
+                const Icon(Icons.turn_right_rounded, color: Color(0xFF94A3B8), size: 18),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    branch.label,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            const Icon(Icons.chevron_right_rounded, color: Color(0xFF94A3B8)),
+            if (childNode != null) ...[
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(left: 26.0),
+                child: _buildNodeCard(childNode, isCurrent: false),
+              ),
+            ],
           ],
         ),
       ),
