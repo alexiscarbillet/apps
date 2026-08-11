@@ -212,6 +212,24 @@ class _CategorySelectionScreenState extends State<CategorySelectionScreen> {
                         },
                       ),
                     ],
+                    if (widget.category == 'Azure') ...[
+                      const SizedBox(height: 16),
+                      _buildOptionCard(
+                        context: context,
+                        title: 'AZ-104 Prep Quiz',
+                        subtitle: 'Practice Azure Administrator questions tailored to AZ-104 objectives.',
+                        cardIcon: Icons.fact_check_rounded,
+                        accentColor: const Color(0xFF00BFFF),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => QuizScreen(category: 'AZ-104 Prep Quiz'),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                     const SizedBox(height: 16),
                     _buildOptionCard(
                       context: context,

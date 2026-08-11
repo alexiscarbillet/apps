@@ -2,6 +2,7 @@ import '../models/question.dart';
 import 'questions/ai_questions.dart';
 import 'questions/aws_questions.dart';
 import 'questions/azure_questions.dart';
+import 'questions/azure_certifs/az104_questions.dart';
 import 'questions/electricity_questions.dart';
 import 'questions/gcp_questions.dart';
 import 'questions/gcp_certifs/genai_leader_questions.dart';
@@ -18,6 +19,7 @@ final Map<String, List<Question>> quizData = {
   'GCP': gcpQuestions,
   'GCP GenAI Leader': gcpGenaiLeaderQuestions,
   'Azure': azureQuestions,
+  'AZ-104 Prep Quiz': az104Questions,
   'AI': aiQuestions,
   'Kubernetes': kubernetesQuestions,
   'Hardware': hardwareQuestions,

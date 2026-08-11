@@ -7,6 +7,8 @@ import 'package:learn_it/screens/quiz_screen.dart';
 import 'package:learn_it/screens/flashcard_screen.dart';
 import 'package:learn_it/screens/cheatsheet_screen.dart';
 import 'package:learn_it/screens/decision_tree_screen.dart';
+import 'package:learn_it/screens/category_selection_screen.dart';
+import 'package:learn_it/screens/landing_screen.dart';
 
 void main() {
   testWidgets('Landing screen loads categories smoke test', (WidgetTester tester) async {
@@ -27,6 +29,23 @@ void main() {
         home: QuizScreen(category: 'AWS'),
       ),
     );
+
+    expect(find.text('1/10'), findsOneWidget);
+  });
+
+  testWidgets('Azure home tile opens the AZ-104 prep quiz', (WidgetTester tester) async {
+    await tester.pumpWidget(const QuizApp());
+    await tester.pumpAndSettle();
+
+    await tester.dragUntilVisible(
+      find.text('Azure'),
+      find.byType(CustomScrollView),
+      const Offset(0, -300),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Azure'));
+    await tester.pumpAndSettle();
 
     expect(find.text('1/10'), findsOneWidget);
   });
