@@ -33,7 +33,7 @@ void main() {
     expect(find.text('1/10'), findsOneWidget);
   });
 
-  testWidgets('Azure home tile opens the AZ-104 prep quiz', (WidgetTester tester) async {
+  testWidgets('Azure home tile opens the Azure submenu', (WidgetTester tester) async {
     await tester.pumpWidget(const QuizApp());
     await tester.pumpAndSettle();
 
@@ -47,7 +47,9 @@ void main() {
     await tester.tap(find.text('Azure'));
     await tester.pumpAndSettle();
 
-    expect(find.text('1/10'), findsOneWidget);
+    expect(find.text('Azure'), findsWidgets);
+    expect(find.text('How do you want to learn?'), findsOneWidget);
+    expect(find.text('Quiz'), findsOneWidget);
   });
 
   test('Each quiz category has at least 50 questions', () {

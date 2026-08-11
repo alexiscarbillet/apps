@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'category_selection_screen.dart';
-import 'quiz_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -160,26 +159,17 @@ class LandingScreen extends StatelessWidget {
 
                     return InkWell(
                       onTap: () {
-                        if (categoryName == 'Azure') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const QuizScreen(category: 'AZ-104 Prep Quiz'),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategorySelectionScreen(
+                              category: categoryName,
+                              description: config['description'] as String,
+                              icon: config['icon'] as IconData,
+                              gradient: gradient,
                             ),
-                          );
-                        } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CategorySelectionScreen(
-                                category: categoryName,
-                                description: config['description'] as String,
-                                icon: config['icon'] as IconData,
-                                gradient: gradient,
-                              ),
-                            ),
-                          );
-                        }
+                          ),
+                        );
                       },
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
