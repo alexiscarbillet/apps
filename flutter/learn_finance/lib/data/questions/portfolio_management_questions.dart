@@ -159,7 +159,7 @@ final List<Question> portfolioManagementQuestions = [
     questionText: 'What three factors are analyzed in the classic Fama-French Three-Factor Model?',
     options: [
       'Market Risk (Beta), Size factor (SMB: Small Minus Big), and Value factor (HML: High Minus Low book-to-market).',
-      'Inflation Rate, Unemployment Rate, and Federal Reserve Policy Rate.',
+      'Inflation Rate, Unemployment Rate, and Bank of Canada Policy Rate.',
       'Gross Profit Margin, Operating Margin, and Net Profit Margin.',
       'Gold Price, Oil Price, and US Dollar Index.',
     ],
@@ -257,7 +257,7 @@ final List<Question> portfolioManagementQuestions = [
   Question(
     questionText: 'What is "Asset Location" strategy in tax-efficient portfolio management?',
     options: [
-      'Placing tax-inefficient assets (high-yield bonds, REITs) inside tax-advantaged accounts (IRAs/401ks), while holding tax-efficient assets (index equities, munis) in taxable accounts.',
+      'Placing tax-inefficient assets (high-yield bonds, REITs) inside tax-advantaged accounts (RRSPs), while considering TFSA room and taxable accounts for other investments.',
       'Hiding physical cash in multiple real estate properties.',
       'Investing only in companies located in tax-free states like Florida or Texas.',
       'Transferring brokerage accounts to foreign offshore islands.',
@@ -358,7 +358,7 @@ final List<Question> portfolioManagementQuestions = [
     options: [
       'Decomposing total portfolio risk into specific risk factor budgets and allocating risk units across asset classes rather than purely allocating nominal dollar weights.',
       'Setting a strict monetary limit on how much money can be lost on brokerage commissions.',
-      'Holding 100% of all capital in FDIC-insured bank accounts.',
+      'Holding 100% of all capital in CDIC-protected eligible deposits.',
       'Purchasing catastrophic fire insurance on corporate headquarters.',
     ],
     correctAnswerIndex: 0,
@@ -367,7 +367,7 @@ final List<Question> portfolioManagementQuestions = [
   Question(
     questionText: 'What is a "Benchmark Index" in investment performance attribution?',
     options: [
-      'An unmanaged standard or reference index (e.g. S&P 500, Russell 2000, Bloomberg US Aggregate) against which a portfolio\'s performance and risk are compared.',
+      'An unmanaged standard or reference index (e.g. S&P/TSX Composite, S&P/TSX SmallCap, or FTSE Canada Universe Bond) against which a portfolio\'s performance and risk are compared.',
       'A legal contract signed by broker-dealers.',
       'A hardware speed test for quantitative trading servers.',
       'The highest historical price ever recorded for an asset.',

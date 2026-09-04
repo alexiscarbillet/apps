@@ -260,7 +260,7 @@ final List<Question> financialCodingQuestions = [
       'The optimal percentage fraction of bankroll (f*) to allocate to each trade based on win probability (p), loss probability (q = 1-p), and win/loss payoff ratio (b).',
       'The annual tax liability of a hedge fund.',
       'The speed of fiber-optic communication between Chicago and New York.',
-      'The percentage of employee salary to invest in 401(k) plans.',
+      'The percentage of employee salary to invest in an RRSP plan.',
     ],
     correctAnswerIndex: 0,
     explanation: 'Kelly sizing mathematically maximizes the expected compound growth rate of capital; quantitative traders often use "Half-Kelly" to buffer against parameter estimation errors.',

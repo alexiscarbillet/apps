@@ -332,15 +332,15 @@ final List<Question> macroeconomicsQuestions = [
     explanation: 'Insuring banks against downside catastrophe while letting them keep upside profits incentivizes reckless leverage and systemic instability.',
   ),
   Question(
-    questionText: 'What is the "Reverse Repo Facility" (ON RRP) used for by the Federal Reserve?',
+    questionText: 'What is the Bank of Canada\'s Standing Term Liquidity Facility used for?',
     options: [
-      'An overnight operation where eligible institutions lend cash to the Fed in exchange for Treasury collateral, setting a hard floor under overnight short-term money market interest rates.',
+      'A facility that provides eligible financial institutions with term funding against eligible collateral during periods of market stress.',
       'A facility that sells repossessed automobiles to the public.',
       'A program providing zero-interest loans to retail consumers.',
       'An office that audits commercial bank checking accounts.',
     ],
     correctAnswerIndex: 0,
-    explanation: 'The overnight reverse repo facility acts as a liquidity sponge, paying interest to money market funds to prevent short-term money market rates from falling below the Fed\'s target range.',
+    explanation: 'The facility supports financial-system liquidity when institutions face funding pressure, complementing the Bank of Canada\'s broader monetary-policy operations.',
   ),
   Question(
     questionText: 'What does the "Baltic Dry Index" (BDI) track and why is it a leading trade barometer?',

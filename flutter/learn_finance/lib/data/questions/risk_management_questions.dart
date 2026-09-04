@@ -117,7 +117,7 @@ final List<Question> riskManagementQuestions = [
       'The inability to buy or sell an asset quickly at fair market value due to a lack of willing market participants, causing bid-ask spreads to blow out.',
       'Running out of ink when printing quarterly earnings reports.',
       'A company paying dividends in foreign currencies.',
-      'Holding more than 50% of your net worth in US Treasury bills.',
+      'Holding more than 50% of your net worth in Government of Canada treasury bills.',
     ],
     correctAnswerIndex: 0,
     explanation: 'When liquidity dries up during panic selling, market makers widen spreads or withdraw bids, forcing sellers to accept severe price discounts to exit.',
@@ -391,7 +391,7 @@ final List<Question> riskManagementQuestions = [
     options: [
       'The risk that an issuer will be unable to replace maturing debt with new borrowing at reasonable interest rates during a credit freeze, risking insolvency.',
       'The risk that a corporate vehicle rolls over in an accident.',
-      'The risk that an employee refuses to roll over a 401(k) account.',
+      'The risk that an employee refuses to transfer an RRSP account.',
       'The risk that a bank rejects a check deposit.',
     ],
     correctAnswerIndex: 0,
