@@ -38,22 +38,10 @@ class LandingScreen extends StatelessWidget {
         'gradient': [const Color(0xFF326CE5), const Color(0xFF00F5FF)],
       },
       {
-        'name': 'Hardware',
-        'description': 'CPU cache, memory, SSD architectures, and chipsets.',
-        'icon': Icons.memory_outlined,
-        'gradient': [const Color(0xFF64748B), const Color(0xFF334155)],
-      },
-      {
         'name': 'Network',
         'description': 'OSI model layers, DNS, routing protocols, and NAT.',
         'icon': Icons.router_outlined,
         'gradient': [const Color(0xFF0D9488), const Color(0xFF10B981)],
-      },
-      {
-        'name': 'Electricity',
-        'description': 'Circuits, Ohm\'s law, AC/DC, diodes, and voltage.',
-        'icon': Icons.bolt_outlined,
-        'gradient': [const Color(0xFFF59E0B), const Color(0xFFEF4444)],
       },
       {
         'name': 'Python',

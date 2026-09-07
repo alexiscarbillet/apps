@@ -3,10 +3,8 @@ import 'questions/ai_questions.dart';
 import 'questions/aws_questions.dart';
 import 'questions/azure_questions.dart';
 import 'questions/azure_certifs/az104_questions.dart';
-import 'questions/electricity_questions.dart';
 import 'questions/gcp_questions.dart';
 import 'questions/gcp_certifs/genai_leader_questions.dart';
-import 'questions/hardware_questions.dart';
 import 'questions/kubernetes_questions.dart';
 import 'questions/network_questions.dart';
 import 'questions/python_questions.dart';
@@ -22,9 +20,7 @@ final Map<String, List<Question>> quizData = {
   'AZ-104 Prep Quiz': az104Questions,
   'AI': aiQuestions,
   'Kubernetes': kubernetesQuestions,
-  'Hardware': hardwareQuestions,
   'Network': networkQuestions,
-  'Electricity': electricityQuestions,
   'Python': pythonQuestions,
   'Bash': bashQuestions,
   'Linux': linuxQuestions,

@@ -7,8 +7,6 @@ import 'package:learn_it/screens/quiz_screen.dart';
 import 'package:learn_it/screens/flashcard_screen.dart';
 import 'package:learn_it/screens/cheatsheet_screen.dart';
 import 'package:learn_it/screens/decision_tree_screen.dart';
-import 'package:learn_it/screens/category_selection_screen.dart';
-import 'package:learn_it/screens/landing_screen.dart';
 
 void main() {
   testWidgets('Landing screen loads categories smoke test', (WidgetTester tester) async {
@@ -70,10 +68,10 @@ void main() {
       isTrue,
     );
 
-    final electricityStartNode = decisionTreeData['Electricity']!.firstWhere((node) => node.id == 'start');
-    expect(electricityStartNode.prompt.toLowerCase(), contains('circuit'));
+    final networkStartNode = decisionTreeData['Network']!.firstWhere((node) => node.id == 'start');
+    expect(networkStartNode.prompt.toLowerCase(), contains('networking'));
     expect(
-      electricityStartNode.branches.any((branch) => branch.label.toLowerCase().contains('circuit')),
+      networkStartNode.branches.any((branch) => branch.label.toLowerCase().contains('routing')),
       isTrue,
     );
   });
