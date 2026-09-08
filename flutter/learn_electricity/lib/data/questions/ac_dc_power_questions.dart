@@ -1,17 +1,17 @@
-﻿import '../../models/question.dart';
+import '../../models/question.dart';
 
 final List<Question> acDcPowerQuestions = [
   Question(
     questionText: 'What does Ohm\'s law state?',
-    options: ['V = I / R', 'V = I Ã— R', 'P = V Ã— I', 'R = V Ã— I'],
+    options: ['V = I / R', 'V = I × R', 'P = V × I', 'R = V × I'],
     correctAnswerIndex: 1,
-    explanation: 'Ohm\'s law states that voltage equals current multiplied by resistance (V = IR). "V = I / R" reverses the relationship â€” this would give the wrong formula; V increases with more resistance, not decreases. "P = V Ã— I" is the formula for power, not Ohm\'s law. "R = V Ã— I" incorrectly multiplies voltage by current to get resistance â€” resistance is R = V / I.',
+    explanation: 'Ohm\'s law states that voltage equals current multiplied by resistance (V = IR). "V = I / R" reverses the relationship — this would give the wrong formula; V increases with more resistance, not decreases. "P = V × I" is the formula for power, not Ohm\'s law. "R = V × I" incorrectly multiplies voltage by current to get resistance — resistance is R = V / I.',
   ),
   Question(
     questionText: 'What is the formula for electrical power?',
-    options: ['P = V / I', 'P = I / V', 'P = V Ã— I', 'P = VÂ² Ã— I'],
+    options: ['P = V / I', 'P = I / V', 'P = V × I', 'P = V² × I'],
     correctAnswerIndex: 2,
-    explanation: 'Electrical power is calculated as the product of voltage and current (P = VI). "P = V / I" is dimensionally incorrect â€” dividing volts by amps gives Ohms (resistance), not Watts. "P = I / V" is also dimensionally incorrect â€” this gives Siemens (conductance). "P = VÂ² Ã— I" adds an extra factor of V, giving the wrong result.',
+    explanation: 'Electrical power is calculated as the product of voltage and current (P = VI). "P = V / I" is dimensionally incorrect — dividing volts by amps gives Ohms (resistance), not Watts. "P = I / V" is also dimensionally incorrect — this gives Siemens (conductance). "P = V² × I" adds an extra factor of V, giving the wrong result.',
   ),
   Question(
     questionText: 'What is the primary difference between AC and DC?',
@@ -22,7 +22,7 @@ final List<Question> acDcPowerQuestions = [
       'AC is safe to touch; DC is always dangerous.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'AC (alternating current) changes direction periodically; DC (direct current) flows in one direction. The first option reverses the definitions â€” it describes DC as AC and AC as DC. Batteries store and produce DC, not AC; turbines and generators produce AC, not DC. Neither AC nor DC is universally "safe" â€” danger depends on voltage, current, and exposure duration.',
+    explanation: 'AC (alternating current) changes direction periodically; DC (direct current) flows in one direction. The first option reverses the definitions — it describes DC as AC and AC as DC. Batteries store and produce DC, not AC; turbines and generators produce AC, not DC. Neither AC nor DC is universally "safe" — danger depends on voltage, current, and exposure duration.',
   ),
   Question(
     questionText: 'In a series circuit, what is true about current?',
@@ -33,7 +33,7 @@ final List<Question> acDcPowerQuestions = [
       'Current doubles at each junction.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'In a series circuit, there is only one path for current, so it is the same throughout. "Current differs across each component" is true for parallel circuits where branches split the total current. "Current is zero at each resistor" â€” if current were zero, no energy would be consumed and nothing would function. "Current doubles at each junction" â€” in a series circuit there are no junctions; current is constant throughout.',
+    explanation: 'In a series circuit, there is only one path for current, so it is the same throughout. "Current differs across each component" is true for parallel circuits where branches split the total current. "Current is zero at each resistor" — if current were zero, no energy would be consumed and nothing would function. "Current doubles at each junction" — in a series circuit there are no junctions; current is constant throughout.',
   ),
   Question(
     questionText: 'In a parallel circuit, what is true about voltage?',
@@ -44,19 +44,19 @@ final List<Question> acDcPowerQuestions = [
       'Voltage is zero across all branches.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'In a parallel circuit, all branches share the same voltage as the source. "Voltage is different across each branch" is true in series circuits where voltage divides across components. "Voltage divides proportionally with resistance" describes a voltage divider in series â€” not parallel branches. "Voltage is zero across all branches" â€” zero voltage would mean no current and no function.',
+    explanation: 'In a parallel circuit, all branches share the same voltage as the source. "Voltage is different across each branch" is true in series circuits where voltage divides across components. "Voltage divides proportionally with resistance" describes a voltage divider in series — not parallel branches. "Voltage is zero across all branches" — zero voltage would mean no current and no function.',
   ),
   Question(
     questionText: 'Which component stores electrical energy in an electric field?',
     options: ['Resistor', 'Inductor', 'Capacitor', 'Diode'],
     correctAnswerIndex: 2,
-    explanation: 'Capacitors store energy in an electric field between two conductive plates. "Resistor" dissipates electrical energy as heat â€” it does not store energy. "Inductor" stores energy in a magnetic field created by current flow, not an electric field. "Diode" allows current in one direction â€” it is a rectifying device, not an energy storage device.',
+    explanation: 'Capacitors store energy in an electric field between two conductive plates. "Resistor" dissipates electrical energy as heat — it does not store energy. "Inductor" stores energy in a magnetic field created by current flow, not an electric field. "Diode" allows current in one direction — it is a rectifying device, not an energy storage device.',
   ),
   Question(
     questionText: 'Which component stores energy in a magnetic field when current flows through it?',
     options: ['Capacitor', 'Resistor', 'Inductor', 'Diode'],
     correctAnswerIndex: 2,
-    explanation: 'Inductors store energy in a magnetic field created by the flowing current. "Capacitor" stores energy in an electric field between its plates â€” not a magnetic field. "Resistor" dissipates energy as heat â€” it does not store energy in any field. "Diode" allows current in one direction â€” it is a switching device, not an energy storage component.',
+    explanation: 'Inductors store energy in a magnetic field created by the flowing current. "Capacitor" stores energy in an electric field between its plates — not a magnetic field. "Resistor" dissipates energy as heat — it does not store energy in any field. "Diode" allows current in one direction — it is a switching device, not an energy storage component.',
   ),
   Question(
     questionText: 'What is the primary function of a diode?',
@@ -67,13 +67,13 @@ final List<Question> acDcPowerQuestions = [
       'To increase circuit resistance.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Diodes act as one-way valves for electrical current. "To store voltage for backup power" describes a capacitor or battery â€” diodes do not store energy. "To step up voltage" describes a transformer or boost converter â€” diodes rectify current direction. "To increase circuit resistance" describes a resistor â€” diodes have very low forward resistance and high reverse resistance.',
+    explanation: 'Diodes act as one-way valves for electrical current. "To store voltage for backup power" describes a capacitor or battery — diodes do not store energy. "To step up voltage" describes a transformer or boost converter — diodes rectify current direction. "To increase circuit resistance" describes a resistor — diodes have very low forward resistance and high reverse resistance.',
   ),
   Question(
     questionText: 'Which device uses electromagnetic induction to change AC voltage levels?',
     options: ['Generator', 'Transformer', 'Alternator', 'Inverter'],
     correctAnswerIndex: 1,
-    explanation: 'Transformers transfer energy between circuits and step voltage up or down using induction. "Generator" converts mechanical energy to electrical energy using electromagnetic induction â€” it generates AC but does not change voltage levels. "Alternator" is a type of AC generator found in vehicles â€” it produces AC but does not step voltage. "Inverter" converts DC to AC â€” it does not use electromagnetic induction to change voltage levels.',
+    explanation: 'Transformers transfer energy between circuits and step voltage up or down using induction. "Generator" converts mechanical energy to electrical energy using electromagnetic induction — it generates AC but does not change voltage levels. "Alternator" is a type of AC generator found in vehicles — it produces AC but does not step voltage. "Inverter" converts DC to AC — it does not use electromagnetic induction to change voltage levels.',
   ),
   Question(
     questionText: 'What is the purpose of a fuse or circuit breaker?',
@@ -95,7 +95,7 @@ final List<Question> acDcPowerQuestions = [
       'Shorter wires have greater resistance.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Resistance increases proportionally with wire length (R = ÏL/A). "Longer wires have less resistance" reverses the relationship â€” more length means more material for electrons to collide with. "Length has no effect on resistance" is false â€” wire length is a direct factor in the resistance formula. "Shorter wires have greater resistance" reverses the truth â€” shorter wires have less resistance.',
+    explanation: 'Resistance increases proportionally with wire length (R = ρL/A). "Longer wires have less resistance" reverses the relationship — more length means more material for electrons to collide with. "Length has no effect on resistance" is false — wire length is a direct factor in the resistance formula. "Shorter wires have greater resistance" reverses the truth — shorter wires have less resistance.',
   ),
   Question(
     questionText: 'How does wire cross-sectional area affect resistance?',
@@ -106,7 +106,7 @@ final List<Question> acDcPowerQuestions = [
       'Thinner wires always have lower resistance.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'A larger cross-sectional area provides more paths for current, decreasing resistance. "Larger cross-section increases resistance" reverses the relationship â€” wider wires are better conductors. "Cross-section has no effect on resistance" is false â€” area is in the denominator of R = ÏL/A, directly affecting resistance. "Thinner wires always have lower resistance" reverses the truth â€” thinner wires have higher resistance.',
+    explanation: 'A larger cross-sectional area provides more paths for current, decreasing resistance. "Larger cross-section increases resistance" reverses the relationship — wider wires are better conductors. "Cross-section has no effect on resistance" is false — area is in the denominator of R = ρL/A, directly affecting resistance. "Thinner wires always have lower resistance" reverses the truth — thinner wires have higher resistance.',
   ),
   Question(
     questionText: 'What is the SI unit of electrical resistance?',
@@ -118,13 +118,13 @@ final List<Question> acDcPowerQuestions = [
     questionText: 'What is the SI unit of electrical capacitance?',
     options: ['Henry', 'Farad', 'Ohm', 'Coulomb'],
     correctAnswerIndex: 1,
-    explanation: 'Capacitance is measured in Farads (F), named after Michael Faraday. "Henry" is the unit of inductance, not capacitance. "Ohm" is the unit of electrical resistance. "Coulomb" is the unit of electric charge â€” while capacitance is defined as charge per volt (C/V = F), the Coulomb itself is not the unit of capacitance.',
+    explanation: 'Capacitance is measured in Farads (F), named after Michael Faraday. "Henry" is the unit of inductance, not capacitance. "Ohm" is the unit of electrical resistance. "Coulomb" is the unit of electric charge — while capacitance is defined as charge per volt (C/V = F), the Coulomb itself is not the unit of capacitance.',
   ),
   Question(
     questionText: 'What is the SI unit of electrical inductance?',
     options: ['Farad', 'Ohm', 'Henry', 'Tesla'],
     correctAnswerIndex: 2,
-    explanation: 'Inductance is measured in Henrys (H), named after Joseph Henry. "Farad" is the unit of capacitance. "Ohm" is the unit of electrical resistance. "Tesla" is the unit of magnetic flux density (magnetic field strength) â€” related to inductors but not the unit of inductance.',
+    explanation: 'Inductance is measured in Henrys (H), named after Joseph Henry. "Farad" is the unit of capacitance. "Ohm" is the unit of electrical resistance. "Tesla" is the unit of magnetic flux density (magnetic field strength) — related to inductors but not the unit of inductance.',
   ),
   Question(
     questionText: 'What is Kirchhoff\'s Current Law (KCL)?',
@@ -135,7 +135,7 @@ final List<Question> acDcPowerQuestions = [
       'Power equals voltage times frequency.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'KCL states that the algebraic sum of currents at any node is zero (conservation of charge). "The sum of voltages in any closed loop equals zero" is Kirchhoff\'s Voltage Law (KVL), not KCL. "Current is proportional to resistance" is the inverse of Ohm\'s law â€” current is proportional to voltage and inversely proportional to resistance. "Power equals voltage times frequency" is not a standard electrical law.',
+    explanation: 'KCL states that the algebraic sum of currents at any node is zero (conservation of charge). "The sum of voltages in any closed loop equals zero" is Kirchhoff\'s Voltage Law (KVL), not KCL. "Current is proportional to resistance" is the inverse of Ohm\'s law — current is proportional to voltage and inversely proportional to resistance. "Power equals voltage times frequency" is not a standard electrical law.',
   ),
   Question(
     questionText: 'What is Kirchhoff\'s Voltage Law (KVL)?',
@@ -146,7 +146,7 @@ final List<Question> acDcPowerQuestions = [
       'Power is equal to resistance squared.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'KVL states that the sum of EMFs and voltage drops around any closed loop equals zero. "The sum of currents in any node equals zero" is Kirchhoff\'s Current Law (KCL), not KVL. "Voltage is proportional to frequency" is not a general law â€” in AC circuits, inductive/capacitive reactance is frequency-dependent, but voltage is not simply proportional to frequency. "Power is equal to resistance squared" is not a standard formula â€” P = IÂ²R or P = VÂ²/R are correct forms.',
+    explanation: 'KVL states that the sum of EMFs and voltage drops around any closed loop equals zero. "The sum of currents in any node equals zero" is Kirchhoff\'s Current Law (KCL), not KVL. "Voltage is proportional to frequency" is not a general law — in AC circuits, inductive/capacitive reactance is frequency-dependent, but voltage is not simply proportional to frequency. "Power is equal to resistance squared" is not a standard formula — P = I²R or P = V²/R are correct forms.',
   ),
   Question(
     questionText: 'What does a transistor primarily do in a circuit?',
@@ -157,7 +157,7 @@ final List<Question> acDcPowerQuestions = [
       'Reduces voltage to safe levels.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Transistors can switch or amplify electrical signals and are the building blocks of digital logic. "Stores electrical charge" is the role of a capacitor. "Converts AC to DC" describes a rectifier (using diodes). "Reduces voltage to safe levels" describes a voltage divider, zener diode, or voltage regulator â€” not a transistor\'s primary function.',
+    explanation: 'Transistors can switch or amplify electrical signals and are the building blocks of digital logic. "Stores electrical charge" is the role of a capacitor. "Converts AC to DC" describes a rectifier (using diodes). "Reduces voltage to safe levels" describes a voltage divider, zener diode, or voltage regulator — not a transistor\'s primary function.',
   ),
   Question(
     questionText: 'What is an LED?',
@@ -168,29 +168,29 @@ final List<Question> acDcPowerQuestions = [
       'A low-energy display screen.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'An LED (Light-Emitting Diode) emits light when forward-biased current passes through the semiconductor junction. "A light-sensitive resistor" describes a photoresistor (LDR â€” Light Dependent Resistor), which changes resistance with light. "A large energy-storing device" describes a capacitor or battery â€” LEDs do not store energy. "A low-energy display screen" describes an LCD or OLED display â€” an LED is a single light-emitting component.',
+    explanation: 'An LED (Light-Emitting Diode) emits light when forward-biased current passes through the semiconductor junction. "A light-sensitive resistor" describes a photoresistor (LDR — Light Dependent Resistor), which changes resistance with light. "A large energy-storing device" describes a capacitor or battery — LEDs do not store energy. "A low-energy display screen" describes an LCD or OLED display — an LED is a single light-emitting component.',
   ),
   Question(
     questionText: 'Which formula correctly calculates total resistance for resistors in series?',
     options: [
       'R_total = 1/R1 + 1/R2',
       'R_total = R1 + R2',
-      'R_total = R1 Ã— R2',
+      'R_total = R1 × R2',
       'R_total = R1 / R2',
     ],
     correctAnswerIndex: 1,
-    explanation: 'In series, resistances simply add: R_total = R1 + R2 + ... "R_total = 1/R1 + 1/R2" is the incorrect form â€” the reciprocal formula applies to parallel resistors, not series. "R_total = R1 Ã— R2" is not a standard resistance formula for any combination. "R_total = R1 / R2" has no physical meaning for combined series resistances.',
+    explanation: 'In series, resistances simply add: R_total = R1 + R2 + ... "R_total = 1/R1 + 1/R2" is the incorrect form — the reciprocal formula applies to parallel resistors, not series. "R_total = R1 × R2" is not a standard resistance formula for any combination. "R_total = R1 / R2" has no physical meaning for combined series resistances.',
   ),
   Question(
     questionText: 'Which formula correctly calculates total resistance for two resistors in parallel?',
     options: [
       'R_total = R1 + R2',
-      'R_total = (R1 Ã— R2) / (R1 + R2)',
+      'R_total = (R1 × R2) / (R1 + R2)',
       'R_total = R1 / R2',
       'R_total = 1/(R1 + R2)',
     ],
     correctAnswerIndex: 1,
-    explanation: 'For parallel resistors: R_total = (R1 Ã— R2) / (R1 + R2). "R_total = R1 + R2" is the formula for series resistors â€” parallel total resistance is always less than any individual resistor. "R_total = R1 / R2" has no physical meaning for parallel combinations. "R_total = 1/(R1 + R2)" is a common error â€” the correct form is 1/R_total = 1/R1 + 1/R2, which simplifies to (R1Ã—R2)/(R1+R2).',
+    explanation: 'For parallel resistors: R_total = (R1 × R2) / (R1 + R2). "R_total = R1 + R2" is the formula for series resistors — parallel total resistance is always less than any individual resistor. "R_total = R1 / R2" has no physical meaning for parallel combinations. "R_total = 1/(R1 + R2)" is a common error — the correct form is 1/R_total = 1/R1 + 1/R2, which simplifies to (R1×R2)/(R1+R2).',
   ),
   Question(
     questionText: 'What is electrical frequency, and what is the standard in Europe?',
@@ -201,7 +201,7 @@ final List<Question> acDcPowerQuestions = [
       'Number of electrons per second; 100 Hz in Europe.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Frequency (Hz) is cycles per second. Europe uses 50 Hz; North America uses 60 Hz. "Number of volts per second" is not the correct definition â€” that would be the rate of voltage change. Europe uses 230V at 50 Hz (not 120V at 60 Hz, which is North America). "Number of watts per second" is the rate of energy change (joules/secondÂ²), not frequency. "Number of electrons per second" is current (amperes), not frequency.',
+    explanation: 'Frequency (Hz) is cycles per second. Europe uses 50 Hz; North America uses 60 Hz. "Number of volts per second" is not the correct definition — that would be the rate of voltage change. Europe uses 230V at 50 Hz (not 120V at 60 Hz, which is North America). "Number of watts per second" is the rate of energy change (joules/second²), not frequency. "Number of electrons per second" is current (amperes), not frequency.',
   ),
   Question(
     questionText: 'What is a rectifier circuit used for?',
@@ -212,7 +212,7 @@ final List<Question> acDcPowerQuestions = [
       'To regulate current in parallel circuits.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Rectifiers convert AC (alternating current) to DC (direct current) using diodes. "To convert DC power to AC power" describes an inverter â€” the opposite of a rectifier. "To amplify voltage levels" describes a transformer (step-up) or an amplifier circuit. "To regulate current in parallel circuits" describes a current limiting resistor or current regulator â€” not a rectifier.',
+    explanation: 'Rectifiers convert AC (alternating current) to DC (direct current) using diodes. "To convert DC power to AC power" describes an inverter — the opposite of a rectifier. "To amplify voltage levels" describes a transformer (step-up) or an amplifier circuit. "To regulate current in parallel circuits" describes a current limiting resistor or current regulator — not a rectifier.',
   ),
   Question(
     questionText: 'What is the purpose of a voltage regulator?',
@@ -234,7 +234,7 @@ final List<Question> acDcPowerQuestions = [
       'Capacitance is unaffected by series connection.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Capacitors in series reduce total capacitance: 1/C_total = 1/C1 + 1/C2 + ... "Total capacitance increases" â€” this is true for parallel capacitors, not series. "Total capacitance equals the sum" also describes parallel capacitors. "Capacitance is unaffected" is false â€” connecting capacitors in series always reduces the total capacitance.',
+    explanation: 'Capacitors in series reduce total capacitance: 1/C_total = 1/C1 + 1/C2 + ... "Total capacitance increases" — this is true for parallel capacitors, not series. "Total capacitance equals the sum" also describes parallel capacitors. "Capacitance is unaffected" is false — connecting capacitors in series always reduces the total capacitance.',
   ),
   Question(
     questionText: 'What happens to total capacitance when capacitors are connected in parallel?',
@@ -245,7 +245,7 @@ final List<Question> acDcPowerQuestions = [
       'Capacitance is unaffected by parallel connection.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Capacitors in parallel add directly: C_total = C1 + C2 + ... "Total capacitance decreases" â€” this is true for series capacitors, not parallel. "Total capacitance is the harmonic mean" â€” the harmonic mean formula applies to parallel resistors, not capacitors. "Capacitance is unaffected" is false â€” parallel capacitors always increase total capacitance.',
+    explanation: 'Capacitors in parallel add directly: C_total = C1 + C2 + ... "Total capacitance decreases" — this is true for series capacitors, not parallel. "Total capacitance is the harmonic mean" — the harmonic mean formula applies to parallel resistors, not capacitors. "Capacitance is unaffected" is false — parallel capacitors always increase total capacitance.',
   ),
   Question(
     questionText: 'What is impedance in an AC circuit?',
@@ -256,7 +256,7 @@ final List<Question> acDcPowerQuestions = [
       'The maximum current the circuit can carry.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Impedance (Z) combines resistance (R) and reactance (X) and is measured in Ohms. "The same as resistance" is incorrect â€” resistance only applies to DC; impedance includes reactive components (inductors and capacitors) for AC. "The ratio of voltage to frequency" has no standard name in circuit analysis. "The maximum current the circuit can carry" describes current capacity or ampacity â€” not impedance.',
+    explanation: 'Impedance (Z) combines resistance (R) and reactance (X) and is measured in Ohms. "The same as resistance" is incorrect — resistance only applies to DC; impedance includes reactive components (inductors and capacitors) for AC. "The ratio of voltage to frequency" has no standard name in circuit analysis. "The maximum current the circuit can carry" describes current capacity or ampacity — not impedance.',
   ),
   Question(
     questionText: 'What is the power factor in an AC circuit?',
@@ -267,7 +267,7 @@ final List<Question> acDcPowerQuestions = [
       'The phase angle between current and voltage.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Power factor (PF = cos Ï†) measures how effectively electrical power is converted into useful work. "The ratio of reactive power to apparent power" â€” reactive power is the non-working component; power factor measures the real (working) power ratio. "The product of voltage and current" is apparent power (VA), not power factor (which is dimensionless). "The phase angle between current and voltage" is Ï† (phi) â€” power factor is the cosine of this angle, not the angle itself.',
+    explanation: 'Power factor (PF = cos φ) measures how effectively electrical power is converted into useful work. "The ratio of reactive power to apparent power" — reactive power is the non-working component; power factor measures the real (working) power ratio. "The product of voltage and current" is apparent power (VA), not power factor (which is dimensionless). "The phase angle between current and voltage" is φ (phi) — power factor is the cosine of this angle, not the angle itself.',
   ),
   Question(
     questionText: 'What is the difference between real power and reactive power?',
@@ -278,7 +278,7 @@ final List<Question> acDcPowerQuestions = [
       'Reactive power increases efficiency; real power reduces it.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Real power (W) performs actual work; reactive power (VAR) is exchanged with inductors/capacitors and does no net work. The first option reverses the units â€” real power is in Watts, reactive power is in VAR. They are not the same â€” real power drives useful work; reactive power is a circulating energy that lowers power factor. Reactive power decreases efficiency (poor power factor), not increases it.',
+    explanation: 'Real power (W) performs actual work; reactive power (VAR) is exchanged with inductors/capacitors and does no net work. The first option reverses the units — real power is in Watts, reactive power is in VAR. They are not the same — real power drives useful work; reactive power is a circulating energy that lowers power factor. Reactive power decreases efficiency (poor power factor), not increases it.',
   ),
   Question(
     questionText: 'What is the function of a relay in an electrical circuit?',
@@ -300,7 +300,7 @@ final List<Question> acDcPowerQuestions = [
       'Isolating the circuit from the power source.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Grounding provides a low-resistance path to Earth for fault currents, protecting people and equipment. "Connecting the neutral wire to the live wire" would create a short circuit â€” extremely dangerous. "Reducing voltage to safe levels" describes a step-down transformer or voltage regulator. "Isolating the circuit from the power source" describes electrical isolation using transformers or disconnectors â€” the opposite of grounding.',
+    explanation: 'Grounding provides a low-resistance path to Earth for fault currents, protecting people and equipment. "Connecting the neutral wire to the live wire" would create a short circuit — extremely dangerous. "Reducing voltage to safe levels" describes a step-down transformer or voltage regulator. "Isolating the circuit from the power source" describes electrical isolation using transformers or disconnectors — the opposite of grounding.',
   ),
   Question(
     questionText: 'What does RMS (Root Mean Square) voltage represent for AC?',
@@ -311,7 +311,7 @@ final List<Question> acDcPowerQuestions = [
       'The minimum voltage during the negative half-cycle.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'RMS voltage is the effective DC-equivalent value of an AC signal in terms of power delivery. "The peak voltage of the AC signal" is V_peak â€” RMS = V_peak / âˆš2 for a sinusoidal signal. "The average voltage over one full cycle" is zero for a symmetrical AC sinusoid â€” RMS is not the average but the root mean square. "The minimum voltage during the negative half-cycle" is the negative peak voltage â€” unrelated to RMS.',
+    explanation: 'RMS voltage is the effective DC-equivalent value of an AC signal in terms of power delivery. "The peak voltage of the AC signal" is V_peak — RMS = V_peak / √2 for a sinusoidal signal. "The average voltage over one full cycle" is zero for a symmetrical AC sinusoid — RMS is not the average but the root mean square. "The minimum voltage during the negative half-cycle" is the negative peak voltage — unrelated to RMS.',
   ),
   Question(
     questionText: 'What is Faraday\'s law of electromagnetic induction?',
@@ -322,7 +322,7 @@ final List<Question> acDcPowerQuestions = [
       'Electric field strength is proportional to charge density.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Faraday\'s law states that the induced EMF equals the rate of change of magnetic flux. "Force on a charge in a magnetic field is proportional to velocity" describes the Lorentz force law. "Parallel conductors carrying current in the same direction repel each other" is false â€” parallel conductors with current in the same direction attract each other (AmpÃ¨re\'s force law). "Electric field strength is proportional to charge density" is related to Gauss\'s law, not Faraday\'s law.',
+    explanation: 'Faraday\'s law states that the induced EMF equals the rate of change of magnetic flux. "Force on a charge in a magnetic field is proportional to velocity" describes the Lorentz force law. "Parallel conductors carrying current in the same direction repel each other" is false — parallel conductors with current in the same direction attract each other (Ampère\'s force law). "Electric field strength is proportional to charge density" is related to Gauss\'s law, not Faraday\'s law.',
   ),
   Question(
     questionText: 'What is the purpose of a capacitor in a DC power supply filter?',
@@ -333,7 +333,7 @@ final List<Question> acDcPowerQuestions = [
       'To limit current through the load.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'In a power supply, a filter capacitor charges during voltage peaks and discharges during troughs, reducing ripple. "To boost the rectified voltage to a higher level" describes a boost converter or charge pump â€” filter capacitors do not boost voltage. "To convert residual AC into DC more efficiently" â€” conversion to DC is done by the rectifier diodes; the capacitor smooths the already-rectified waveform. "To limit current through the load" describes a series resistor or current limiter â€” not a filter capacitor.',
+    explanation: 'In a power supply, a filter capacitor charges during voltage peaks and discharges during troughs, reducing ripple. "To boost the rectified voltage to a higher level" describes a boost converter or charge pump — filter capacitors do not boost voltage. "To convert residual AC into DC more efficiently" — conversion to DC is done by the rectifier diodes; the capacitor smooths the already-rectified waveform. "To limit current through the load" describes a series resistor or current limiter — not a filter capacitor.',
   ),
   Question(
     questionText: 'What is a short circuit?',
@@ -344,7 +344,7 @@ final List<Question> acDcPowerQuestions = [
       'A circuit using only DC power.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'A short circuit bypasses normal load resistance, causing dangerously high current and potentially fire or damage. "A circuit with very high resistance limiting current" is an open circuit tendency â€” high resistance limits current, not causes excessive flow. "A circuit using fewer components than normal" is a simplification in a schematic â€” not a short circuit. "A circuit using only DC power" describes any DC circuit â€” unrelated to a short circuit.',
+    explanation: 'A short circuit bypasses normal load resistance, causing dangerously high current and potentially fire or damage. "A circuit with very high resistance limiting current" is an open circuit tendency — high resistance limits current, not causes excessive flow. "A circuit using fewer components than normal" is a simplification in a schematic — not a short circuit. "A circuit using only DC power" describes any DC circuit — unrelated to a short circuit.',
   ),
   Question(
     questionText: 'What is the difference between a conductor and an insulator?',
@@ -355,7 +355,7 @@ final List<Question> acDcPowerQuestions = [
       'Conductors store charge; insulators dissipate it.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Conductors (e.g., copper) have low resistance; insulators (e.g., rubber) have very high resistance. The first option completely reverses the definitions of conductors and insulators. Under extremely high voltages, insulators can break down and conduct â€” but this is not normal operation and they are not equal conductors. Conductors allow charge to flow, not store it; capacitors store charge. Insulators do not dissipate â€” resistors do.',
+    explanation: 'Conductors (e.g., copper) have low resistance; insulators (e.g., rubber) have very high resistance. The first option completely reverses the definitions of conductors and insulators. Under extremely high voltages, insulators can break down and conduct — but this is not normal operation and they are not equal conductors. Conductors allow charge to flow, not store it; capacitors store charge. Insulators do not dissipate — resistors do.',
   ),
   Question(
     questionText: 'What is a semiconductor?',
@@ -366,7 +366,7 @@ final List<Question> acDcPowerQuestions = [
       'A material that stores charge without conducting.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Semiconductors (e.g., silicon) have intermediate conductivity and are the foundation of modern electronics. "A material that always blocks electrical current" describes an insulator. "A material that only conducts at very high temperatures" â€” semiconductors conduct at room temperature when doped; some conductivity does improve with temperature but this is not their defining characteristic. "A material that stores charge without conducting" describes a dielectric or insulator used in capacitors.',
+    explanation: 'Semiconductors (e.g., silicon) have intermediate conductivity and are the foundation of modern electronics. "A material that always blocks electrical current" describes an insulator. "A material that only conducts at very high temperatures" — semiconductors conduct at room temperature when doped; some conductivity does improve with temperature but this is not their defining characteristic. "A material that stores charge without conducting" describes a dielectric or insulator used in capacitors.',
   ),
   Question(
     questionText: 'What does a multimeter measure?',
@@ -377,7 +377,7 @@ final List<Question> acDcPowerQuestions = [
       'Only capacitance and inductance.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'A multimeter is a versatile instrument for measuring voltage (V), current (A), and resistance (Î©). "Only current in AC circuits" describes an AC ammeter â€” a multimeter measures DC and AC quantities. "Only the power factor of AC loads" describes a power factor meter â€” multimeters generally do not measure power factor. "Only capacitance and inductance" describes an LCR meter â€” some advanced multimeters add these features but the core function covers V, I, and R.',
+    explanation: 'A multimeter is a versatile instrument for measuring voltage (V), current (A), and resistance (Î©). "Only current in AC circuits" describes an AC ammeter — a multimeter measures DC and AC quantities. "Only the power factor of AC loads" describes a power factor meter — multimeters generally do not measure power factor. "Only capacitance and inductance" describes an LCR meter — some advanced multimeters add these features but the core function covers V, I, and R.',
   ),
   Question(
     questionText: 'What is the effect of temperature on the resistance of most metallic conductors?',
@@ -388,7 +388,7 @@ final List<Question> acDcPowerQuestions = [
       'Resistance drops to zero at high temperatures.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'For most metals, higher temperatures cause more atomic vibrations, increasing resistance. "Resistance decreases as temperature increases" is true for semiconductors and thermistors (NTC type) â€” not for metals. "Temperature has no effect on resistance" is false â€” temperature is one of the key factors affecting resistance. "Resistance drops to zero at high temperatures" â€” resistance dropping to zero occurs in superconductors at extremely LOW temperatures, not high ones.',
+    explanation: 'For most metals, higher temperatures cause more atomic vibrations, increasing resistance. "Resistance decreases as temperature increases" is true for semiconductors and thermistors (NTC type) — not for metals. "Temperature has no effect on resistance" is false — temperature is one of the key factors affecting resistance. "Resistance drops to zero at high temperatures" — resistance dropping to zero occurs in superconductors at extremely LOW temperatures, not high ones.',
   ),
   Question(
     questionText: 'What is a photovoltaic (PV) cell?',
@@ -399,7 +399,7 @@ final List<Question> acDcPowerQuestions = [
       'A sensor that detects infrared radiation.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'PV cells (solar cells) use the photovoltaic effect to convert sunlight directly into DC electricity. "A device that converts electrical energy into light" describes an LED â€” the reverse of a PV cell. "A device that stores solar energy as heat" describes a solar thermal collector â€” it heats water, not generates electricity. "A sensor that detects infrared radiation" describes a photodiode or IR sensor â€” PV cells are optimized for energy generation, not detection.',
+    explanation: 'PV cells (solar cells) use the photovoltaic effect to convert sunlight directly into DC electricity. "A device that converts electrical energy into light" describes an LED — the reverse of a PV cell. "A device that stores solar energy as heat" describes a solar thermal collector — it heats water, not generates electricity. "A sensor that detects infrared radiation" describes a photodiode or IR sensor — PV cells are optimized for energy generation, not detection.',
   ),
   Question(
     questionText: 'What is electrical energy, and what is its SI unit?',
@@ -410,7 +410,7 @@ final List<Question> acDcPowerQuestions = [
       'The opposition to current flow; measured in Ohms.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Electrical energy = Power Ã— Time. It is measured in Joules (J) or kilowatt-hours (kWh) for practical use. "The rate of doing work" is power (Watts = Joules/second), not energy itself. "The product of voltage and frequency" has no standard meaning in electrical theory. "The opposition to current flow" describes impedance or resistance, measured in Ohms.',
+    explanation: 'Electrical energy = Power × Time. It is measured in Joules (J) or kilowatt-hours (kWh) for practical use. "The rate of doing work" is power (Watts = Joules/second), not energy itself. "The product of voltage and frequency" has no standard meaning in electrical theory. "The opposition to current flow" describes impedance or resistance, measured in Ohms.',
   ),
   Question(
     questionText: 'What is an oscilloscope used for?',
@@ -432,7 +432,7 @@ final List<Question> acDcPowerQuestions = [
       'Emitting light in LED circuits.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Zener diodes operate in reverse breakdown to provide a stable reference voltage for regulation. "Amplifying high-frequency signals" describes a transistor or RF amplifier â€” zener diodes cannot amplify. "Rectifying AC to DC" describes standard diodes in a rectifier circuit â€” zener diodes are not typically used for rectification. "Emitting light in LED circuits" describes LEDs (Light-Emitting Diodes) â€” zener diodes emit no light.',
+    explanation: 'Zener diodes operate in reverse breakdown to provide a stable reference voltage for regulation. "Amplifying high-frequency signals" describes a transistor or RF amplifier — zener diodes cannot amplify. "Rectifying AC to DC" describes standard diodes in a rectifier circuit — zener diodes are not typically used for rectification. "Emitting light in LED circuits" describes LEDs (Light-Emitting Diodes) — zener diodes emit no light.',
   ),
   Question(
     questionText: 'What is the purpose of a bypass capacitor (decoupling capacitor) in digital circuits?',
@@ -443,7 +443,7 @@ final List<Question> acDcPowerQuestions = [
       'To convert AC to DC near the processor.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Bypass capacitors placed near ICs suppress power supply noise and stabilize voltage during switching transients. "To amplify the supply voltage" describes a boost converter or charge pump â€” capacitors do not amplify voltage passively. "To store energy for use during power outages" describes a UPS battery or supercapacitor â€” bypass capacitors are too small for backup power. "To convert AC to DC near the processor" describes a rectifier â€” digital circuits already operate on DC; bypass caps filter noise on that DC supply.',
+    explanation: 'Bypass capacitors placed near ICs suppress power supply noise and stabilize voltage during switching transients. "To amplify the supply voltage" describes a boost converter or charge pump — capacitors do not amplify voltage passively. "To store energy for use during power outages" describes a UPS battery or supercapacitor — bypass capacitors are too small for backup power. "To convert AC to DC near the processor" describes a rectifier — digital circuits already operate on DC; bypass caps filter noise on that DC supply.',
   ),
   Question(
     questionText: 'What is the purpose of GFCI (Ground Fault Circuit Interrupter) outlets?',
@@ -454,7 +454,7 @@ final List<Question> acDcPowerQuestions = [
       'To prevent power surges from entering appliances.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'GFCIs monitor current imbalance between live and neutral, tripping quickly to prevent electric shock. "To protect against overloads by blowing a fuse" describes a fuse or circuit breaker â€” GFCIs protect against ground faults, not overloads. "To boost voltage near wet areas" â€” GFCIs do not alter voltage; they monitor current balance. "To prevent power surges from entering appliances" describes a surge protector â€” GFCIs protect against shock, not surges.',
+    explanation: 'GFCIs monitor current imbalance between live and neutral, tripping quickly to prevent electric shock. "To protect against overloads by blowing a fuse" describes a fuse or circuit breaker — GFCIs protect against ground faults, not overloads. "To boost voltage near wet areas" — GFCIs do not alter voltage; they monitor current balance. "To prevent power surges from entering appliances" describes a surge protector — GFCIs protect against shock, not surges.',
   ),
   Question(
     questionText: 'What is mutual inductance?',
@@ -465,18 +465,18 @@ final List<Question> acDcPowerQuestions = [
       'The opposition to AC caused by an inductor.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Mutual inductance is the basis for transformers: changing flux in one coil induces voltage in an adjacent coil. "The inductance of a single coil in isolation" describes self-inductance, not mutual inductance. "The total inductance when coils are connected in series" is combined series inductance â€” mutual inductance is about coupling between two separate coils. "The opposition to AC caused by an inductor" describes inductive reactance (XL = 2Ï€fL), not mutual inductance.',
+    explanation: 'Mutual inductance is the basis for transformers: changing flux in one coil induces voltage in an adjacent coil. "The inductance of a single coil in isolation" describes self-inductance, not mutual inductance. "The total inductance when coils are connected in series" is combined series inductance — mutual inductance is about coupling between two separate coils. "The opposition to AC caused by an inductor" describes inductive reactance (XL = 2πfL), not mutual inductance.',
   ),
   Question(
     questionText: 'What does AWG (American Wire Gauge) measure?',
     options: [
       'Insulation thickness of electrical cables.',
-      'The diameter of electrical wire â€” smaller AWG number means thicker wire.',
+      'The diameter of electrical wire — smaller AWG number means thicker wire.',
       'The current capacity of a circuit breaker.',
       'The voltage rating of a conductor.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'AWG specifies wire diameter; lower AWG numbers indicate thicker wire with higher current-carrying capacity. "Insulation thickness" â€” AWG is about the conductor diameter, not insulation thickness (which is specified separately). "The current capacity of a circuit breaker" â€” ampacity is related to AWG but is a derived property; AWG itself measures wire diameter. "The voltage rating of a conductor" â€” voltage rating depends on insulation type and thickness, not AWG.',
+    explanation: 'AWG specifies wire diameter; lower AWG numbers indicate thicker wire with higher current-carrying capacity. "Insulation thickness" — AWG is about the conductor diameter, not insulation thickness (which is specified separately). "The current capacity of a circuit breaker" — ampacity is related to AWG but is a derived property; AWG itself measures wire diameter. "The voltage rating of a conductor" — voltage rating depends on insulation type and thickness, not AWG.',
   ),
   Question(
     questionText: 'What is a surge protector designed to do?',
@@ -487,7 +487,7 @@ final List<Question> acDcPowerQuestions = [
       'Regulate frequency of the power supply.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Surge protectors use components like MOVs (metal oxide varistors) to absorb and divert voltage spikes. "Increase voltage during brownouts" describes a UPS or AVR (Automatic Voltage Regulator) â€” surge protectors cannot boost voltage. "Convert AC power to DC for sensitive electronics" describes a power adapter or rectifier. "Regulate frequency of the power supply" describes a UPS or inverter â€” surge protectors have no frequency regulation capability.',
+    explanation: 'Surge protectors use components like MOVs (metal oxide varistors) to absorb and divert voltage spikes. "Increase voltage during brownouts" describes a UPS or AVR (Automatic Voltage Regulator) — surge protectors cannot boost voltage. "Convert AC power to DC for sensitive electronics" describes a power adapter or rectifier. "Regulate frequency of the power supply" describes a UPS or inverter — surge protectors have no frequency regulation capability.',
   ),
   Question(
     questionText: 'What is the Thevenin equivalent circuit?',
@@ -498,7 +498,7 @@ final List<Question> acDcPowerQuestions = [
       'A circuit using only capacitors and inductors.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Thevenin\'s theorem simplifies any linear network to Vth (open-circuit voltage) and Rth (equivalent resistance). "A complex circuit with multiple voltage sources and resistors" is the original circuit before applying Thevenin â€” the theorem simplifies this. "A circuit with only current sources and parallel resistors" describes a Norton equivalent circuit â€” the current-source dual of Thevenin. "A circuit using only capacitors and inductors" describes a reactive network â€” Thevenin applies to linear networks generally but the equivalent is a voltage source and series resistance.',
+    explanation: 'Thevenin\'s theorem simplifies any linear network to Vth (open-circuit voltage) and Rth (equivalent resistance). "A complex circuit with multiple voltage sources and resistors" is the original circuit before applying Thevenin — the theorem simplifies this. "A circuit with only current sources and parallel resistors" describes a Norton equivalent circuit — the current-source dual of Thevenin. "A circuit using only capacitors and inductors" describes a reactive network — Thevenin applies to linear networks generally but the equivalent is a voltage source and series resistance.',
   ),
   Question(
     questionText: 'What is the purpose of a motor starter in industrial electrical systems?',
@@ -509,18 +509,18 @@ final List<Question> acDcPowerQuestions = [
       'To reverse motor direction automatically.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'Motor starters limit the large inrush current during motor startup, preventing tripping of protection devices. "To permanently limit motor speed" describes a variable frequency drive (VFD) or mechanical governor â€” motor starters handle startup, not speed control. "To convert AC to DC for motor operation" describes a rectifier for DC motors â€” most large industrial motors are AC. "To reverse motor direction automatically" describes a reversing contactor â€” motor starters typically do not reverse direction.',
+    explanation: 'Motor starters limit the large inrush current during motor startup, preventing tripping of protection devices. "To permanently limit motor speed" describes a variable frequency drive (VFD) or mechanical governor — motor starters handle startup, not speed control. "To convert AC to DC for motor operation" describes a rectifier for DC motors — most large industrial motors are AC. "To reverse motor direction automatically" describes a reversing contactor — motor starters typically do not reverse direction.',
   ),
   Question(
     questionText: 'What is resonance in an LC circuit?',
     options: [
       'When inductance and capacitance values become equal.',
       'When inductive reactance equals capacitive reactance, resulting in minimum impedance.',
-      'When current and voltage are exactly 90Â° out of phase.',
+      'When current and voltage are exactly 90° out of phase.',
       'When power factor reaches zero.',
     ],
     correctAnswerIndex: 1,
-    explanation: 'At resonance (XL = XC), impedance is purely resistive and current is maximized for a series LC circuit. "When inductance and capacitance values become equal" confuses component values with their reactances â€” L and C have different units and are never "equal"; it is the reactances (XL and XC) that become equal at resonance. "When current and voltage are exactly 90Â° out of phase" describes a purely reactive circuit (no resistance) â€” at resonance, they are in phase (0Â°). "When power factor reaches zero" â€” at resonance, power factor reaches its maximum (1) in a series LC circuit, not zero.',
+    explanation: 'At resonance (XL = XC), impedance is purely resistive and current is maximized for a series LC circuit. "When inductance and capacitance values become equal" confuses component values with their reactances — L and C have different units and are never "equal"; it is the reactances (XL and XC) that become equal at resonance. "When current and voltage are exactly 90° out of phase" describes a purely reactive circuit (no resistance) — at resonance, they are in phase (0°). "When power factor reaches zero" — at resonance, power factor reaches its maximum (1) in a series LC circuit, not zero.',
   ),
 ];
 

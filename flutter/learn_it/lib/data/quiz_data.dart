@@ -11,6 +11,8 @@ import 'questions/python_questions.dart';
 import 'questions/bash_questions.dart';
 import 'questions/linux_questions.dart';
 import 'questions/sql_questions.dart';
+import 'questions/docker_questions.dart';
+import 'questions/cybersecurity_questions.dart';
 
 final Map<String, List<Question>> quizData = {
   'AWS': awsQuestions,
@@ -25,4 +27,6 @@ final Map<String, List<Question>> quizData = {
   'Bash': bashQuestions,
   'Linux': linuxQuestions,
   'SQL': sqlQuestions,
+  'Docker': dockerQuestions,
+  'Cybersecurity': cybersecurityQuestions,
 };

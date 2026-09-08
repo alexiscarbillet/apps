@@ -9,6 +9,8 @@ import 'cheatsheets/python_cheatsheet.dart';
 import 'cheatsheets/bash_cheatsheet.dart';
 import 'cheatsheets/linux_cheatsheet.dart';
 import 'cheatsheets/sql_cheatsheet.dart';
+import 'cheatsheets/docker_cheatsheet.dart';
+import 'cheatsheets/cybersecurity_cheatsheet.dart';
 
 final Map<String, Cheatsheet> cheatsheetData = {
   'AWS': awsCheatsheet,
@@ -21,4 +23,6 @@ final Map<String, Cheatsheet> cheatsheetData = {
   'Bash': bashCheatsheet,
   'Linux': linuxCheatsheet,
   'SQL': sqlCheatsheet,
+  'Docker': dockerCheatsheet,
+  'Cybersecurity': cybersecurityCheatsheet,
 };

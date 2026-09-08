@@ -9,6 +9,8 @@ import 'bash_decision_tree.dart';
 import 'linux_decision_tree.dart';
 import 'python_decision_tree.dart';
 import 'sql_decision_tree.dart';
+import 'docker_decision_tree.dart';
+import 'cybersecurity_decision_tree.dart';
 
 final Map<String, List<DecisionTreeNode>> decisionTreeData = {
   'AWS': awsDecisionTree,
@@ -21,4 +23,6 @@ final Map<String, List<DecisionTreeNode>> decisionTreeData = {
   'Linux': linuxDecisionTree,
   'Python': pythonDecisionTree,
   'SQL': sqlDecisionTree,
+  'Docker': dockerDecisionTree,
+  'Cybersecurity': cybersecurityDecisionTree,
 };

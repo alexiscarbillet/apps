@@ -19,6 +19,20 @@ void main() {
     // Verify that some of the key categories are visible on the dashboard.
     expect(find.text('AWS'), findsOneWidget);
     expect(find.text('GCP'), findsOneWidget);
+
+    await tester.dragUntilVisible(
+      find.text('Docker'),
+      find.byType(CustomScrollView),
+      const Offset(0, -300),
+    );
+    await tester.dragUntilVisible(
+      find.text('Cybersecurity'),
+      find.byType(CustomScrollView),
+      const Offset(0, -300),
+    );
+
+    expect(find.text('Docker'), findsOneWidget);
+    expect(find.text('Cybersecurity'), findsOneWidget);
   });
 
   testWidgets('Quiz screen uses a 10-question quiz session', (WidgetTester tester) async {
@@ -51,6 +65,14 @@ void main() {
   });
 
   test('Each quiz category has at least 50 questions', () {
+    final dockerQuestions = quizData['Docker'];
+    final cybersecurityQuestions = quizData['Cybersecurity'];
+
+    expect(dockerQuestions, isNotNull);
+    expect(cybersecurityQuestions, isNotNull);
+    expect(dockerQuestions!.length, greaterThanOrEqualTo(50));
+    expect(cybersecurityQuestions!.length, greaterThanOrEqualTo(50));
+
     for (final entry in quizData.entries) {
       expect(
         entry.value.length,

@@ -67,6 +67,18 @@ class LandingScreen extends StatelessWidget {
         'icon': Icons.storage_outlined,
         'gradient': [const Color(0xFF336791), const Color(0xFF475569)],
       },
+      {
+        'name': 'Docker',
+        'description': 'Container images, Dockerfiles, Compose, networking, and runtime workflows.',
+        'icon': Icons.widgets_outlined,
+        'gradient': [const Color(0xFF0EA5E9), const Color(0xFF2563EB)],
+      },
+      {
+        'name': 'Cybersecurity',
+        'description': 'Zero trust, IAM, incident response, threat models, and secure operations.',
+        'icon': Icons.security_outlined,
+        'gradient': [const Color(0xFF8B5CF6), const Color(0xFFEC4899)],
+      },
     ];
 
     return Scaffold(
