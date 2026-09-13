@@ -2,575 +2,344 @@ import '../../models/question.dart';
 
 final List<Question> memorySystemsQuestions = [
   Question(
-    questionText: 'Which hardware concept is most closely associated with SRAM?',
+    questionText: 'What is the key difference between SRAM and DRAM?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'SRAM uses magnetic storage while DRAM uses electrical storage',
+      'SRAM is faster and doesn\'t need refreshing but is more expensive; DRAM is slower, needs periodic refreshing, but is cheaper and denser',
+      'SRAM is non-volatile while DRAM is volatile',
+      'DRAM is used in caches while SRAM is used for main memory',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SRAM is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'SRAM (Static RAM) uses flip-flops to store data — it\'s fast and doesn\'t need refreshing, but uses 6 transistors per bit, making it expensive. DRAM (Dynamic RAM) uses one transistor and one capacitor per bit — it\'s dense and cheap, but requires constant refreshing as capacitors leak charge.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DRAM?',
+    questionText: 'Why does DRAM need to be periodically refreshed?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To cool down the memory chips',
+      'Because the capacitors storing each bit gradually lose their charge and must be recharged to retain data',
+      'To update the data to match changes in the CPU cache',
+      'To defragment the memory addresses for faster access',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DRAM is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DRAM stores each bit as a charge in a tiny capacitor. These capacitors leak charge over time (microseconds), so the memory controller must periodically read and rewrite every cell to prevent data loss — this process is called refreshing.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DDR4?',
+    questionText: 'What does "DDR" in DDR4 and DDR5 stand for?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Direct Data Relay',
+      'Double Data Rate — data is transferred on both the rising and falling edges of the clock signal',
+      'Dual Drive Redundancy',
+      'Dynamic Data Routing',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DDR4 is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DDR stands for Double Data Rate. Unlike SDR (Single Data Rate) memory that transfers data once per clock cycle, DDR transfers data on both the rising and falling edges of the clock signal, effectively doubling the data transfer rate.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DDR5?',
+    questionText: 'What is a major improvement DDR5 brings over DDR4?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'DDR5 is non-volatile, so data survives power loss',
+      'DDR5 doubles the number of memory banks per chip and moves the voltage regulator onto the DIMM, enabling higher speeds and improved efficiency',
+      'DDR5 eliminates the need for a memory controller',
+      'DDR5 uses analog signals instead of digital for higher fidelity',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DDR5 is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DDR5 doubles the bank count (from 16 to 32 bank groups), includes an on-DIMM power management IC (PMIC) for cleaner power, doubles the burst length, and supports higher frequencies starting at 4800 MT/s, compared to DDR4\'s 2133 MT/s base.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with ECC memory?',
+    questionText: 'What does ECC memory do that standard memory does not?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It runs at higher clock speeds than standard memory',
+      'It detects and corrects single-bit errors in data, improving reliability',
+      'It compresses data to fit more in less space',
+      'It uses less power than standard memory modules',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'ECC memory is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'ECC (Error-Correcting Code) memory includes extra bits that allow the memory controller to detect and correct single-bit errors, and detect (but not correct) double-bit errors. This is critical for servers and workstations where data integrity is essential.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with dual-channel mode?',
+    questionText: 'What is dual-channel memory mode?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Using two different brands of RAM simultaneously',
+      'A configuration where two memory modules are accessed simultaneously through separate channels, doubling the available memory bandwidth',
+      'Running RAM at twice its rated speed',
+      'A backup mode that mirrors data across two sticks of RAM',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'dual-channel mode is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Dual-channel mode uses two separate 64-bit memory channels simultaneously, providing 128 bits of total bandwidth. This requires matching pairs of DIMMs installed in the correct slots (usually alternating colors), effectively doubling throughput compared to single-channel.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with rank?',
+    questionText: 'In DRAM terminology, what is a "rank"?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A quality rating from the manufacturer (like a star rating)',
+      'A set of DRAM chips on a module that are activated together to provide a 64-bit data width',
+      'The priority level of a memory access request',
+      'The physical position of the DIMM slot on the motherboard',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'rank is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A rank is a group of DRAM chips that are selected and accessed simultaneously to fill the memory bus width (64 bits). A single-rank DIMM has one such group; a dual-rank DIMM has two groups that share the same data bus but are addressed independently.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with bank?',
+    questionText: 'What is a memory bank in DRAM?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A financial institution that stores backup data',
+      'An independently accessible subdivision of a DRAM chip that can process a read or write while other banks handle different requests',
+      'The physical PCB that holds the memory chips',
+      'A reserved section of memory for the BIOS only',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'bank is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A bank is a sub-array within a DRAM chip that can independently activate rows and process read/write operations. Multiple banks allow the memory to overlap operations — while one bank refreshes or precharges, another can serve a request, improving overall throughput.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with page hit?',
+    questionText: 'What is a "page hit" in DRAM access?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'When a web page loads correctly from memory',
+      'When the requested data is in the currently open (activated) row of a DRAM bank, allowing the fastest possible access',
+      'When the page file on disk is accessed successfully',
+      'When a memory page is found in the L1 cache',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'page hit is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A page hit occurs when consecutive memory accesses target the same row (page) already activated in a DRAM bank. Since the row is already open, only a column access is needed — taking about 10–15 ns compared to 25–40 ns for a page miss that requires opening a new row.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with page miss?',
+    questionText: 'What is CAS latency (CL)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The time it takes for the memory controller to start up',
+      'The number of clock cycles between sending a column address to the memory and receiving the data',
+      'The maximum amount of data the memory can store',
+      'The latency between the CPU and the GPU when sharing memory',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'page miss is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'CAS Latency (CL) is the delay in clock cycles between the memory controller sending a column address strobe (CAS) and the data being available on the data bus. Lower CL is better — DDR4 CL16 at 3200 MT/s has ~10 ns latency; DDR5 CL30 at 6000 MT/s has ~10 ns as well due to higher clocks.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with refresh cycle?',
+    questionText: 'How do you calculate the real-world latency of RAM in nanoseconds?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Multiply the frequency by the CAS latency',
+      'Divide CAS latency by the memory clock (in GHz), then multiply by 2 — or use: (CL / frequency in MHz) × 2000',
+      'Subtract the CAS latency from the frequency',
+      'Add all timing numbers together (CL + tRCD + tRP + tRAS)',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'refresh cycle is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Real latency in nanoseconds = (CAS Latency × 2000) / Transfer Rate in MT/s. For example: DDR4-3200 CL16 = (16 × 2000) / 3200 = 10 ns. This formula accounts for DDR\'s double data rate.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with CAS latency?',
+    questionText: 'What is memory bandwidth?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The physical width of the memory module in millimeters',
+      'The maximum rate at which data can be read from or written to memory, measured in GB/s',
+      'The maximum number of memory modules a motherboard supports',
+      'The frequency range over which the memory operates',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'CAS latency is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Memory bandwidth is the maximum theoretical data transfer rate between the memory and the CPU. For DDR4-3200 in dual-channel: 3200 MT/s × 8 bytes × 2 channels = 51.2 GB/s. Real-world bandwidth is typically 80–95% of theoretical.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with memory bandwidth?',
+    questionText: 'What is volatile memory?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Memory that is physically unstable and prone to failure',
+      'Memory that retains data only while power is supplied and loses it when power is removed',
+      'Memory that changes speed depending on temperature',
+      'Memory that can only be read, never written to',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'memory bandwidth is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Volatile memory (like DRAM and SRAM) requires continuous power to maintain stored data. When the power is cut, all data is lost. This is in contrast to non-volatile storage (like SSDs and flash memory) which retains data without power.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with latency?',
+    questionText: 'What is the primary advantage of non-volatile memory?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It is always faster than volatile memory',
+      'It retains data even when power is removed',
+      'It has unlimited write endurance',
+      'It is cheaper per gigabyte than all other types of memory',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'latency is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Non-volatile memory (flash, SSD NAND, ROM) retains its stored data without a continuous power supply. This makes it essential for long-term storage — your files survive reboots and power outages because they\'re stored in non-volatile memory.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with capacity?',
+    questionText: 'What is virtual memory?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Memory that only exists in cloud computing environments',
+      'A memory management technique that uses disk space to extend the apparent size of RAM, giving each process its own address space',
+      'RAM that runs inside a virtual machine',
+      'Memory that stores virtual reality rendering data',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'capacity is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Virtual memory is an OS technique that creates an abstraction layer between programs and physical RAM. Each process gets its own virtual address space, and the OS maps these virtual addresses to physical RAM or disk (swap/page file), allowing systems to run programs whose total memory needs exceed physical RAM.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with volatile memory?',
+    questionText: 'What is a page fault?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'An error in a web browser when a page fails to load',
+      'An event where the CPU requests a memory page that isn\'t currently in physical RAM, requiring it to be loaded from disk',
+      'A manufacturing defect in a RAM chip',
+      'A page of documentation missing from a manual',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'volatile memory is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A page fault occurs when a program accesses a virtual memory address whose page isn\'t in physical RAM. The OS must then load the page from the swap file/page file on disk — a process that takes milliseconds, vastly slower than the nanosecond access time of RAM.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with non-volatile memory?',
+    questionText: 'What is NUMA (Non-Uniform Memory Access)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A type of memory error that occurs randomly',
+      'A memory architecture in multi-socket systems where memory access time depends on which CPU socket the memory is attached to',
+      'A memory compression technique that reduces RAM usage',
+      'A brand of high-performance RAM modules',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'non-volatile memory is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'In NUMA systems (common in multi-socket servers), each CPU has its own local memory that it can access quickly. Accessing another CPU\'s memory ("remote" memory) takes longer. NUMA-aware software and OS scheduling tries to keep a process\'s data in its local memory for best performance.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with virtual memory?',
+    questionText: 'What is a cache line?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A physical line of cache chips on the motherboard',
+      'The smallest unit of data that can be transferred between the main memory and the CPU cache, typically 64 bytes',
+      'A line of code in the cache management software',
+      'A queue of cache requests waiting to be processed',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'virtual memory is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A cache line (or cache block) is the fundamental unit of data transfer between memory and cache, typically 64 bytes on modern x86 CPUs. Even if you only need 1 byte, the entire 64-byte cache line is fetched, exploiting spatial locality.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with page fault?',
+    questionText: 'What is the benefit of memory interleaving?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It encrypts data by mixing it across memory chips',
+      'It distributes consecutive memory addresses across multiple banks, channels, or ranks to allow parallel access and increase throughput',
+      'It reduces the physical size of memory modules',
+      'It automatically backs up data across multiple DIMMs',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'page fault is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Interleaving spreads consecutive memory addresses across different banks, ranks, or channels. This allows multiple memory requests to be serviced in parallel — while one bank completes a read, another can start precharging, significantly increasing effective bandwidth.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with NUMA?',
+    questionText: 'What is the purpose of the XMP (Extreme Memory Profile) setting in BIOS?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To reduce memory speed for power saving',
+      'To enable a pre-configured overclocking profile that runs RAM at its advertised speed beyond the default JEDEC specification',
+      'To format the RAM for a fresh start',
+      'To test memory for errors',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'NUMA is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'XMP (Intel) or EXPO (AMD) profiles are stored on the RAM\'s SPD chip and contain tested overclocking settings. DDR4-3600 RAM, for example, defaults to 2133 MT/s per JEDEC spec — enabling XMP sets the advertised 3600 MT/s speed with tuned timings and voltage.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with memory controller?',
+    questionText: 'What is the TLB (Translation Lookaside Buffer)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A temporary file on the hard drive used for swap memory',
+      'A small, fast cache that stores recent virtual-to-physical address translations to speed up memory access',
+      'A buffer that stores recently translated text for language applications',
+      'A log buffer that tracks all memory transactions',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'memory controller is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The TLB is a specialized cache inside the CPU that stores recently used virtual-to-physical address mappings. Without it, every memory access would require a slow page table walk. TLB hits resolve addresses in 1–2 cycles; TLB misses incur 10–100+ cycle penalties.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with cache line?',
+    questionText: 'What is the purpose of the memory controller\'s command queue?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To store a list of user commands typed at the terminal',
+      'To buffer and reorder memory access requests to optimize bank and row utilization, improving throughput',
+      'To queue programs waiting to be loaded into memory',
+      'To store error messages generated by faulty RAM',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'cache line is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The memory controller\'s command queue holds pending read/write requests and reorders them to maximize page hits, minimize bank conflicts, and efficiently interleave operations across banks and ranks, significantly improving real-world memory throughput.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with memory channel?',
+    questionText: 'What happens if you install RAM modules in single-channel instead of dual-channel configuration?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The RAM will not work at all',
+      'The system will function but with approximately half the memory bandwidth, reducing performance in memory-intensive tasks',
+      'The RAM speed will automatically double to compensate',
+      'The system will crash intermittently',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'memory channel is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Running in single-channel mode means only one 64-bit memory channel is active instead of two. This halves available memory bandwidth. The impact varies by workload — integrated GPUs and memory-bound applications can see 20–40% performance drops; CPU-bound tasks may barely notice.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DIMM slot?',
+    questionText: 'What is memory-mapped I/O?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A map showing the physical location of memory chips on the motherboard',
+      'A technique where hardware device registers are assigned memory addresses so the CPU can communicate with devices using normal read/write instructions',
+      'A method of storing maps and images in memory',
+      'A diagnostic tool that maps memory errors',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DIMM slot is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Memory-mapped I/O assigns addresses in the system\'s memory address space to hardware device registers. The CPU can then interact with hardware (like a GPU or network card) using the same load/store instructions it uses for regular memory, simplifying programming.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with memory module?',
+    questionText: 'What is the typical access time for modern DDR5 RAM?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '1–2 nanoseconds',
+      '10–15 nanoseconds',
+      '60–100 nanoseconds',
+      '1–5 milliseconds',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'memory module is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 2,
+    explanation: 'Modern DDR5 RAM has a total access latency of roughly 60–100 nanoseconds from the CPU\'s perspective (including memory controller overhead). This is hundreds of times slower than L1 cache (~1 ns) but millions of times faster than SSD storage (~50,000–100,000 ns).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with row buffer?',
+    questionText: 'What does "memory timing" refer to in RAM specifications like 16-18-18-38?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The time of day the memory was manufactured',
+      'The key latency parameters: CAS Latency (CL), tRCD, tRP, and tRAS, measured in clock cycles',
+      'The number of memory channels, banks, ranks, and chips',
+      'The maximum temperature ratings in Celsius at different loads',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'row buffer is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Memory timings describe key latency parameters in clock cycles: CL (CAS Latency), tRCD (RAS to CAS Delay), tRP (Row Precharge time), and tRAS (Row Active time). Lower numbers mean lower latency. Tighter timings at the same frequency improve performance.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with address bus?',
+    questionText: 'What is the difference between memory frequency and transfer rate?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They are identical measurements',
+      'Frequency is the actual clock speed in MHz; transfer rate (MT/s) is double the frequency due to DDR\'s double data rate',
+      'Transfer rate is always half of the frequency',
+      'Frequency measures bandwidth; transfer rate measures latency',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'address bus is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DDR memory transfers data on both clock edges, so "DDR5-6000" means 6000 mega-transfers per second (MT/s) but the actual clock frequency is 3000 MHz. The distinction matters for calculating real latency and understanding specifications.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with data bus?',
+    questionText: 'Why might using four DIMMs sometimes reduce maximum memory speed compared to two DIMMs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Four DIMMs generate too much heat for the memory controller',
+      'The memory controller has more electrical load and signal integrity challenges with four DIMMs, often requiring lower speeds',
+      'The motherboard can only supply power to two DIMMs at full speed',
+      'Four DIMMs always run faster due to more parallelism',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'data bus is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'More DIMMs per channel increase electrical loading on the memory bus, degrading signal integrity. The memory controller must often reduce frequency to maintain stable operation. This is why motherboard QVL lists sometimes show lower maximum speeds for four-DIMM configurations.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with read burst?',
+    questionText: 'What is the memory hierarchy from fastest to slowest?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Hard Drive → RAM → L3 Cache → L2 Cache → L1 Cache → Registers',
+      'Registers → L1 Cache → L2 Cache → L3 Cache → RAM → SSD → HDD',
+      'RAM → Registers → L1 Cache → SSD → L2 Cache → HDD',
+      'L3 Cache → L2 Cache → L1 Cache → RAM → Registers → SSD',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'read burst is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The memory hierarchy from fastest (smallest) to slowest (largest): CPU Registers (~0.3 ns) → L1 Cache (~1 ns) → L2 Cache (~3–5 ns) → L3 Cache (~10–20 ns) → RAM (~60–100 ns) → SSD (~50–100 μs) → HDD (~5–10 ms).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with write burst?',
+    questionText: 'What does "on-die" memory controller mean?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The memory controller is on a separate chip that dies (fails) frequently',
+      'The memory controller is integrated directly onto the CPU die, rather than being on a separate chipset',
+      'The memory controller is embedded in the DRAM chips themselves',
+      'The memory controller is on the motherboard\'s south bridge',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'write burst is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'An on-die or integrated memory controller (IMC) is built directly into the CPU silicon. This dramatically reduces the distance (and therefore latency) between the CPU cores and the memory controller, compared to the older approach of placing it in a separate northbridge chip.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with sustained throughput?',
+    questionText: 'What is a memory page in the context of virtual memory?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A document stored in the computer\'s memory',
+      'A fixed-size block (typically 4 KB) of virtual memory that maps to a frame of physical memory',
+      'One side of a RAM chip containing memory cells',
+      'A page in the BIOS settings related to memory configuration',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'sustained throughput is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory timing?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory timing is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory clock?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory clock is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with transfer rate?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'transfer rate is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with single-rank DIMM?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'single-rank DIMM is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with dual-rank DIMM?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'dual-rank DIMM is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with address decoding?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'address decoding is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with row access?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'row access is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with column access?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'column access is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with zero page?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'zero page is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory interleaving?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory interleaving is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with prefetch?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'prefetch is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with error correction?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'error correction is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory mapping?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory mapping is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with RAM speed?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'RAM speed is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory health?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory health is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory overclocking?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory overclocking is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with reliability?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'reliability is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with memory slot?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'memory slot is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with command bus?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'command bus is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with command latency?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'command latency is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with read queue?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'read queue is a core part of the Memory Systems subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A memory page is the smallest unit of memory allocation in a virtual memory system, typically 4 KB. The OS maps virtual pages to physical page frames. Using larger pages (2 MB "huge pages") can reduce TLB misses for memory-intensive applications.',
   ),
 ];

@@ -88,13 +88,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? _FlashcardFace(
                             key: const ValueKey('back'),
                             title: card.backTitle,
-                            subtitle: _selectedLanguage == LanguageSection.russian
-                                ? 'Russian'
-                                : 'Spanish',
+                            subtitle: _selectedLanguage!.label,
                             description: card.backExplanation,
-                            accent: _selectedLanguage == LanguageSection.russian
-                                ? const Color(0xFF7C3AED)
-                                : const Color(0xFF0EA5E9),
+                            accent: switch (_selectedLanguage!) {
+                              LanguageSection.russian => const Color(0xFF7C3AED),
+                              LanguageSection.spanish => const Color(0xFF0EA5E9),
+                              LanguageSection.italian => const Color(0xFF10B981),
+                            },
                           )
                         : _FlashcardFace(
                             key: const ValueKey('front'),
@@ -173,6 +173,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 subtitle: 'English → Spanish',
                 color: const Color(0xFF0EA5E9),
                 onTap: () => _startDeck(LanguageSection.spanish),
+              ),
+              const SizedBox(height: 18),
+              _LanguageTile(
+                title: 'Italian',
+                subtitle: 'English → Italian',
+                color: const Color(0xFF10B981),
+                onTap: () => _startDeck(LanguageSection.italian),
               ),
             ],
           ),

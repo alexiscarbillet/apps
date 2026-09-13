@@ -2,586 +2,322 @@ import '../../models/question.dart';
 
 final List<Question> motherboardsComponentsQuestions = [
   Question(
-    questionText: 'Which hardware concept is most closely associated with CPU socket?',
+    questionText: 'What is the difference between ATX, Micro-ATX, and Mini-ITX motherboard form factors?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They only differ in color and branding',
+      'ATX is the largest with the most expansion slots; Micro-ATX is smaller with fewer slots; Mini-ITX is the smallest, typically with one PCIe slot',
+      'Mini-ITX is the largest and most expandable form factor',
+      'They differ only in the CPU sockets they support',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'CPU socket is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'ATX (305×244mm) offers 7 expansion slots and extensive connectivity. Micro-ATX (244×244mm) has 4 slots in a smaller package. Mini-ITX (170×170mm) is the smallest standard form factor with typically just 1 PCIe x16 slot, designed for compact builds.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with chipset?',
+    questionText: 'What determines which CPUs are compatible with a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The amount of RAM installed on the motherboard',
+      'The CPU socket type and chipset on the motherboard',
+      'The brand of power supply being used',
+      'The number of SATA ports available',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'chipset is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'CPU compatibility is determined by the physical socket (e.g., AM5, LGA 1700) which must match the CPU package, and the chipset, which must support the specific CPU generation. A BIOS update is sometimes also needed for newer CPUs on the same socket.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with VRM?',
+    questionText: 'What is the role of the PCH (Platform Controller Hub) on a modern motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It is the main processor that runs applications',
+      'It manages lower-speed I/O connections like SATA, USB, audio, and additional PCIe lanes while communicating with the CPU via a dedicated link',
+      'It converts AC power to DC power for the motherboard',
+      'It generates the video signal for the display output',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'VRM is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The PCH (Intel) or equivalent chipset (AMD) handles I/O functions that don\'t need the CPU\'s direct high-bandwidth connection: SATA ports, USB controllers, audio, network, and some PCIe slots. It connects to the CPU via DMI (Intel) or an Infinity Fabric link (AMD).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DIMM slot?',
+    questionText: 'How many phases does a typical mid-range motherboard VRM have, and why does phase count matter?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '1–2 phases; more phases are purely cosmetic',
+      '8–14 phases; more phases distribute the electrical load and heat, providing cleaner, more stable power to the CPU',
+      '50+ phases; fewer phases mean better efficiency',
+      'Phase count is only relevant for GPUs, not CPUs',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DIMM slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Mid-range boards typically have 8–14 VRM phases. Each phase supplies a portion of the total current, and they alternate rapidly. More phases mean each handles less current (less heat per component), provide smoother voltage with less ripple, and improve overall power delivery efficiency.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with BIOS chip?',
+    questionText: 'What is the difference between PCIe Gen 3, Gen 4, and Gen 5?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They differ only in physical slot size',
+      'Each generation roughly doubles the bandwidth per lane: Gen 3 = ~1 GB/s, Gen 4 = ~2 GB/s, Gen 5 = ~4 GB/s per lane',
+      'Gen 5 is slower but more power-efficient than Gen 3',
+      'They differ only in the maximum number of lanes supported',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'BIOS chip is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Each PCIe generation doubles the per-lane bandwidth: Gen 3 provides ~1 GB/s/lane, Gen 4 ~2 GB/s/lane, Gen 5 ~4 GB/s/lane. A Gen 5 x16 GPU slot provides ~64 GB/s of bandwidth. All generations are backward and forward compatible (at the lower speed).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with expansion slot?',
+    questionText: 'What is the M.2 "key" notch system (B-key, M-key, B+M-key)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A security feature requiring a physical key to access the slot',
+      'A physical notch system that ensures cards are inserted into compatible slots — M-key for NVMe, B-key for SATA, B+M-key for universal compatibility',
+      'A software encryption key stored in the M.2 device',
+      'A rating system for M.2 device quality',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'expansion slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'M.2 keys are physical notch patterns on the card\'s edge connector. M-key (single notch on the left) supports PCIe x4 (NVMe). B-key (single notch on the right) supports SATA or PCIe x2. B+M-key (both notches) fits in either type of slot, typically for SATA drives.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with M.2 slot?',
+    questionText: 'What does the 8-pin (or 4+4 pin) EPS12V connector on a motherboard provide?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Power for the case fans',
+      'Supplementary 12V power specifically for the CPU\'s VRM',
+      'Power for the PCIe expansion slots',
+      'A connection for front panel USB 3.0',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'M.2 slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The 8-pin EPS12V connector (often split as 4+4 pin) supplies additional 12V power directly to the CPU\'s voltage regulators. High-end boards may have two 8-pin connectors for CPUs with higher power demands (200W+), ensuring the VRM receives adequate power.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with heatsink?',
+    questionText: 'What is the purpose of the CMOS battery on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It provides backup power to run the CPU when the main power fails',
+      'It maintains the BIOS/UEFI settings and real-time clock when the system is powered off',
+      'It powers the RGB LED lighting on the motherboard',
+      'It charges the capacitors in the VRM circuit',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'heatsink is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The CMOS battery (typically a CR2032 coin cell) provides a tiny amount of power to the CMOS memory chip that stores BIOS/UEFI settings (boot order, time/date, overclocking profiles) and keeps the real-time clock running when the PC is unplugged.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with CMOS battery?',
+    questionText: 'What are VRM heatsinks for?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Cooling the RAM modules during heavy workloads',
+      'Dissipating heat from the VRM MOSFETs and chokes that power the CPU, preventing thermal throttling of power delivery',
+      'Cooling the chipset fan bearing',
+      'Providing aesthetic decoration on the motherboard',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'CMOS battery is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'VRM heatsinks are metal blocks (often aluminum) that sit atop the VRM MOSFETs and inductors. As these components convert and regulate power for the CPU, they generate significant heat — especially with high-power CPUs or overclocking. Adequate VRM cooling prevents power throttling.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with front-panel header?',
+    questionText: 'What is a POST diagnostic LED or debug code display on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A decorative LED strip for case aesthetics',
+      'LEDs or a two-digit display that indicate which hardware component is being tested during boot, helping diagnose failures',
+      'A display showing the current CPU temperature',
+      'An LED that shows the Wi-Fi signal strength',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'front-panel header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Many mid-range and high-end motherboards have four diagnostic LEDs (CPU, DRAM, VGA, BOOT) or a two-digit hex display that shows POST codes. If the system fails to boot, the lit LED or displayed code indicates which component failed its test (e.g., "DRAM" LED = memory issue).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with rear I/O?',
+    questionText: 'What is a BIOS flashback feature on some motherboards?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A feature that remembers previous BIOS settings for easy recovery',
+      'The ability to update the BIOS firmware via a USB stick without needing a CPU, RAM, or GPU installed',
+      'A way to revert to the factory default BIOS version',
+      'A feature that backs up the BIOS to the cloud',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'rear I/O is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'BIOS Flashback allows you to update the motherboard firmware using just a USB drive and the power supply — no CPU, RAM, or GPU required. This is invaluable when a new CPU isn\'t supported by the existing BIOS and you need to update before the first boot.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with audio header?',
+    questionText: 'What is the purpose of the I/O shield on the rear of a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To provide additional cooling for rear-panel ports',
+      'To seal the gap between the motherboard\'s rear ports and the case, blocking dust, reducing EMI, and providing proper grounding',
+      'To amplify the Wi-Fi antenna signal',
+      'To protect the ports from water damage',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'audio header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The I/O shield (or rear panel cover) is a metal plate that fits in the case\'s I/O cutout. It blocks dust, reduces electromagnetic interference (EMI), provides grounding for the ports, and gives a clean finish. Many modern boards have integrated (pre-attached) I/O shields.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with USB header?',
+    questionText: 'What is the difference between the audio codec and the audio amplifier on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They are the same component',
+      'The codec converts between digital and analog audio signals; the amplifier boosts the analog signal strength for headphones or speakers',
+      'The codec amplifies sound; the amplifier digitizes it',
+      'The codec only handles input (microphone); the amplifier only handles output (speakers)',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'USB header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The audio codec (like Realtek ALC1220) is a DAC/ADC chip that converts digital audio to analog output and analog input (microphone) to digital. The audio amplifier boosts the analog output to drive headphones, especially high-impedance audiophile headphones that need more power.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with fan header?',
+    questionText: 'What is the purpose of the Intel ME (Management Engine) or AMD PSP (Platform Security Processor)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They are the main CPUs that run your applications',
+      'They are independent microcontrollers embedded in the chipset that handle low-level security, remote management, and platform initialization',
+      'They manage the RGB lighting effects on the motherboard',
+      'They control the clock speed of the CPU and GPU',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'fan header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Intel ME and AMD PSP are small, independent processors embedded in the chipset that run their own firmware. They handle tasks like hardware-based security (TPM functionality, Secure Boot), remote management (Intel AMT for enterprise), and platform initialization before the main CPU starts.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with RGB header?',
+    questionText: 'What is a PCB (Printed Circuit Board) layer count, and why do high-end motherboards have more layers?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'More layers mean more RGB lighting zones',
+      'More layers provide additional ground and power planes for cleaner signals, better power delivery, and more complex high-speed trace routing',
+      'Layer count only affects the thickness of the board, not performance',
+      'Budget boards have more layers to reduce manufacturing cost',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'RGB header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'More PCB layers allow dedicated ground and power planes that reduce electromagnetic interference, provide cleaner signals for high-speed traces (like PCIe 5.0 and DDR5), and enable more complex routing. High-end boards may use 6–8+ layers vs. 4 for budget boards.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with debug LED?',
+    questionText: 'What does it mean when a motherboard has "WiFi 6E" support?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It has 6 ethernet ports for wired networking',
+      'It includes a built-in Wi-Fi 6E module supporting the 2.4 GHz, 5 GHz, and the newer 6 GHz frequency bands',
+      'It supports exactly 6 wireless devices simultaneously',
+      'It has 6 external antenna connectors',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'debug LED is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Wi-Fi 6E extends Wi-Fi 6 (802.11ax) into the 6 GHz frequency band. This provides much more available spectrum, less congestion, lower latency, and faster speeds. Motherboards with Wi-Fi 6E include a wireless module (usually Intel or MediaTek) and antenna connections.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with POST code?',
+    questionText: 'What is the purpose of the TPM (Trusted Platform Module)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To track the temperature of the processor and motherboard',
+      'A dedicated security chip that stores encryption keys, performs cryptographic operations, and ensures system integrity (required by Windows 11)',
+      'To provide additional processing power for AI workloads',
+      'To manage the system\'s thermal profiles and fan curves',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'POST code is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'TPM is a hardware-based security module (either a discrete chip or firmware-based fTPM in the CPU) that securely stores cryptographic keys, enables BitLocker drive encryption, supports Secure Boot verification, and provides a hardware root of trust. Windows 11 requires TPM 2.0.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with power button?',
+    questionText: 'What is the 24-pin ATX power connector used for?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Powering the CPU exclusively',
+      'Supplying the main power to the motherboard, providing all voltage rails (3.3V, 5V, 12V, and standby power)',
+      'Connecting the motherboard to the case\'s front panel',
+      'Providing power to the GPU',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'power button is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The 24-pin ATX connector is the main power cable from the PSU to the motherboard. It supplies +3.3V, +5V, +12V, -12V, and +5V standby power rails. Without this connector properly seated, the motherboard will not power on at all.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with reset switch?',
+    questionText: 'What does it mean when a motherboard supports "dual BIOS"?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It can run two operating systems simultaneously',
+      'It has two BIOS ROM chips — if the primary BIOS becomes corrupted, the system can boot from the backup chip',
+      'It supports both Intel and AMD processors',
+      'It has two separate sets of BIOS settings for different users',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'reset switch is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Dual BIOS motherboards contain two physical BIOS ROM chips. If a BIOS update fails or the primary chip becomes corrupted, the system automatically (or manually) switches to the backup chip to restore functionality, preventing a "bricked" motherboard.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with PCIe x16 slot?',
+    questionText: 'What is the function of the system clock generator on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It displays the time on the BIOS splash screen',
+      'It generates the base reference clock signal from which all other system clocks (CPU, memory, PCIe) are derived',
+      'It counts the total hours the system has been operational',
+      'It synchronizes the system clock with an internet time server',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'PCIe x16 slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The clock generator produces a stable base clock (BCLK, typically 100 MHz). CPU, memory, and PCIe bus frequencies are derived from this by applying multipliers. For example, a 5 GHz CPU uses BCLK × 50. Overclocking sometimes involves adjusting the BCLK.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with PCIe x1 slot?',
+    questionText: 'What is onboard Ethernet, and what speeds do modern motherboards typically support?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A removable network card in a PCIe slot; usually 100 Mbps',
+      'An integrated network controller on the motherboard; most boards support 1 Gbps (Gigabit) or 2.5 Gbps, with high-end boards offering 5 Gbps or 10 Gbps',
+      'A wireless-only connection built into all motherboards',
+      'An external USB Ethernet adapter included in the box',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'PCIe x1 slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Modern motherboards include an integrated Ethernet controller (often Intel I225/I226 or Realtek). Standard boards offer 1 Gbps; many mid-range boards now include 2.5 Gbps Ethernet, and high-end boards may feature 5 Gbps or 10 Gbps for demanding network workloads.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with memory trace?',
+    questionText: 'What is the purpose of ARGB (Addressable RGB) headers on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To connect additional power supply cables',
+      'To connect LED strips or fans where each individual LED can be controlled independently for custom lighting effects',
+      'To provide audio output for RGB-enabled speakers',
+      'To connect diagnostic LEDs for troubleshooting',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'memory trace is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'ARGB (Addressable RGB) headers provide data and power to LED strips and devices where each LED can be individually controlled. This enables complex effects like rainbow waves and color chasing. Standard RGB headers only control all LEDs as one group.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with ground plane?',
+    questionText: 'Why do some motherboards have reinforced PCIe slots with metal shielding?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To improve the aesthetics of the motherboard',
+      'To prevent heavy graphics cards from bending or breaking the slot, and to reduce electromagnetic interference',
+      'To increase the bandwidth of the PCIe connection',
+      'To make the GPU run cooler by conducting heat away',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'ground plane is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Modern graphics cards can weigh over 2 kg. Metal-reinforced PCIe slots add structural strength to prevent the slot from cracking under the GPU\'s weight (especially during transport). The shielding also helps reduce EMI for cleaner signal integrity at high speeds.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with capacitor?',
+    questionText: 'What is the internal USB 3.0 header on a motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A rear-panel USB port with extra shielding',
+      'A 19-pin connector that connects to the case\'s front-panel USB 3.0 ports via a cable from the case',
+      'A USB port designed exclusively for BIOS updates',
+      'A hub controller that adds 10 additional USB ports',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'capacitor is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The internal USB 3.0 header is a 19-pin (20-pin with key) connector on the motherboard that connects via a cable to the USB 3.0 ports on the front panel of the computer case. Each header supports two USB 3.0 ports at up to 5 Gbps.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with inductor?',
+    questionText: 'What is the purpose of the PCIe bifurcation feature found on some motherboards?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It increases the number of PCIe lanes available from the CPU',
+      'It splits a single physical PCIe slot into multiple logical connections — e.g., an x16 slot into two x8 or four x4 connections',
+      'It merges multiple PCIe slots into a single faster connection',
+      'It converts PCIe slots to accept SATA devices',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'inductor is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'PCIe bifurcation lets you split a physical PCIe x16 slot into smaller configurations (2×x8, 4×x4) at the BIOS level. This is useful for installing multiple NVMe SSDs via an adapter card in a single x16 slot, or using two GPUs in a slot designed for one.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with MOSFET?',
+    questionText: 'What does it mean when a motherboard lists "Intel LGA 1700" as its socket type?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The motherboard supports up to 1700 GB of RAM',
+      'The socket has 1700 contact points (Land Grid Array) and is designed for specific Intel CPU generations (12th/13th/14th Gen)',
+      'The motherboard supports 1700 different CPU models',
+      'The socket operates at 1700 MHz base clock speed',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'MOSFET is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'LGA 1700 means the socket uses a Land Grid Array with 1700 contact pads on the motherboard (pins on the socket, flat contacts on the CPU). It\'s Intel\'s socket for 12th, 13th, and 14th Gen Core processors (Alder Lake, Raptor Lake). Different CPU generations use different sockets.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with solder pad?',
+    questionText: 'What is a Q-Release or quick-release latch for M.2 SSDs on modern motherboards?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A software feature that allows quick formatting of the SSD',
+      'A tool-less mechanism that secures the M.2 SSD without requiring a tiny screw, making installation and removal easier',
+      'A feature that allows hot-swapping M.2 drives',
+      'A latch that releases all PCIe devices simultaneously',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'solder pad is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Q-Release (ASUS) and similar mechanisms replace the tiny M.2 mounting screw with a simple latch or clip. You insert the M.2 SSD at an angle, push it down, and the latch clicks to hold it in place — no screwdriver needed. Makes SSD installation much more convenient.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with standoff?',
+    questionText: 'What is the function of the M.2 heatsink found on many modern motherboards?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It keeps the M.2 SSD cold enough to prevent data corruption',
+      'It dissipates heat from NVMe SSDs to prevent thermal throttling, which can reduce SSD performance significantly',
+      'It provides structural support to prevent the M.2 slot from bending',
+      'It shields the M.2 SSD from electromagnetic interference',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'standoff is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'High-performance NVMe SSDs can reach 80°C+ under sustained loads, causing thermal throttling (reduced speeds). M.2 heatsinks (metal plates with thermal pads) absorb and dissipate this heat, keeping the drive cooler and maintaining consistent performance during large file transfers.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with backplate?',
+    questionText: 'What is the typical warranty period for a consumer motherboard?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '6 months',
+      '1 year',
+      '3 years',
+      '10 years',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'backplate is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with northbridge?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'northbridge is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with southbridge?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'southbridge is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with back panel?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'back panel is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with internal connector?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'internal connector is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with case fan port?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'case fan port is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with clock crystal?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'clock crystal is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with GPIO header?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'GPIO header is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with TPM module?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'TPM module is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with network port?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'network port is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with display output?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'display output is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with power connector?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'power connector is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with ATX board?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'ATX board is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with micro-ATX board?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'micro-ATX board is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with Mini-ITX board?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'Mini-ITX board is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with PCI slot?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'PCI slot is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with slot spacing?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'slot spacing is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with board layout?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'board layout is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with cable routing?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'cable routing is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with power switch?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'power switch is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with fan curve?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'fan curve is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with electrical short?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'electrical short is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with clock source?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'clock source is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with reset button?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'reset button is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with header pinout?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'header pinout is a core part of the Motherboards & Components subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 2,
+    explanation: 'Most consumer motherboards from major manufacturers (ASUS, MSI, Gigabyte, ASRock) come with a 3-year warranty. Some high-end or workstation boards may offer longer coverage. The warranty typically covers manufacturing defects but not damage from overclocking or improper installation.',
   ),
 ];

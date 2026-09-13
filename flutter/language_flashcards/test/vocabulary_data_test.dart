@@ -18,6 +18,14 @@ void main() {
       expect(words.any((entry) => entry.english == 'apple'), isTrue);
     });
 
+    test('italian section contains many English words', () {
+      final words = VocabularyRepository.entries(LanguageSection.italian);
+
+      expect(words.length, greaterThan(25));
+      expect(words.any((entry) => entry.english == 'hello'), isTrue);
+      expect(words.any((entry) => entry.english == 'apple'), isTrue);
+    });
+
     test('autocomplete suggestions match the typed English word', () {
       final suggestions = VocabularyRepository.suggestions(LanguageSection.russian, 'h');
 
@@ -30,6 +38,10 @@ void main() {
 
       expect(entry, isNotNull);
       expect(entry!.translation, 'привет');
+
+      final italianEntry = VocabularyRepository.findByEnglish('HELLO', LanguageSection.italian);
+      expect(italianEntry, isNotNull);
+      expect(italianEntry!.translation, 'ciao');
     });
 
     test('buildDeck creates a random ten-card flashcard set', () {
@@ -38,6 +50,11 @@ void main() {
       expect(deck.length, 10);
       expect(deck.every((card) => card.frontTitle.isNotEmpty), isTrue);
       expect(deck.every((card) => card.backTitle.isNotEmpty), isTrue);
+
+      final italianDeck = VocabularyRepository.buildDeck(LanguageSection.italian, count: 10);
+      expect(italianDeck.length, 10);
+      expect(italianDeck.every((card) => card.frontTitle.isNotEmpty), isTrue);
+      expect(italianDeck.every((card) => card.backTitle.isNotEmpty), isTrue);
     });
   });
 }

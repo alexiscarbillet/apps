@@ -2,586 +2,333 @@ import '../../models/question.dart';
 
 final List<Question> storageIoQuestions = [
   Question(
-    questionText: 'Which hardware concept is most closely associated with SSD?',
+    questionText: 'What is the fundamental difference between an SSD and an HDD?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'SSDs use more power than HDDs',
+      'SSDs store data on flash memory chips with no moving parts; HDDs store data on spinning magnetic platters with a read/write head',
+      'HDDs are always faster than SSDs for sequential reads',
+      'SSDs can only store text files while HDDs can store any file type',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SSD is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'An SSD (Solid State Drive) uses NAND flash memory chips and has no moving parts, making it faster, more durable, and silent. An HDD (Hard Disk Drive) stores data magnetically on spinning platters, accessed by a mechanical arm with a read/write head.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with HDD?',
+    questionText: 'What is NVMe?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A type of RAM used in high-performance servers',
+      'A storage protocol designed specifically for flash-based SSDs, communicating directly via PCIe for maximum performance',
+      'A network protocol for remote file access',
+      'A non-volatile version of main memory',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'HDD is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'NVMe (Non-Volatile Memory Express) is a modern storage protocol designed from the ground up for SSDs connected via PCIe. Unlike AHCI (designed for HDDs), NVMe supports deep command queues (64K queues × 64K commands each) and low-latency access, enabling SSDs to reach their full speed potential.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with NVMe?',
+    questionText: 'What is the maximum data transfer rate of SATA III?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '150 MB/s',
+      '300 MB/s',
+      '600 MB/s (6 Gbps)',
+      '1200 MB/s',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'NVMe is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 2,
+    explanation: 'SATA III has a maximum theoretical transfer rate of 6 Gbps (approximately 600 MB/s). After encoding overhead, real-world speeds top out around 550 MB/s — which is why high-performance SSDs use NVMe over PCIe instead.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with SATA?',
+    questionText: 'What is RAID 0?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A redundant backup system that mirrors all data to a second drive',
+      'A striping configuration that splits data across multiple drives for speed but offers zero redundancy',
+      'A single-drive configuration with no RAID at all',
+      'An error-correction mode that checks data integrity on every read',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SATA is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'RAID 0 (striping) distributes data evenly across two or more drives, nearly multiplying read/write speeds. However, it provides no redundancy — if any single drive fails, ALL data in the array is lost because each drive only holds fragments.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with M.2 slot?',
+    questionText: 'What is RAID 1?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Striping data across drives for maximum speed',
+      'Mirroring data across two drives so each contains an identical copy for redundancy',
+      'Using parity data distributed across three or more drives',
+      'Combining striping and mirroring across four drives',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'M.2 slot is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'RAID 1 (mirroring) writes identical data to two drives simultaneously. If one drive fails, the other has a complete copy. Read speeds can improve (reads from both drives), but write speeds don\'t increase, and you lose 50% of total capacity to redundancy.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with RAID 0?',
+    questionText: 'What is an M.2 slot?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A type of RAM slot for laptop memory',
+      'A compact form factor connector on the motherboard that can accept SSDs and other expansion cards',
+      'A slot specifically designed for Wi-Fi antennas',
+      'A miniature PCIe x1 slot for legacy expansion cards',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'RAID 0 is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'M.2 is a versatile form factor specification for small expansion cards plugged directly into the motherboard. Most commonly used for NVMe SSDs (using PCIe lanes) or SATA SSDs, M.2 slots can also host Wi-Fi/Bluetooth modules. The card connects via a keyed edge connector.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with RAID 1?',
+    questionText: 'What is the difference between M.2 NVMe and M.2 SATA SSDs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They are identical in performance, only the price differs',
+      'NVMe SSDs use PCIe lanes and are much faster (3,500–14,000+ MB/s); SATA SSDs use the SATA protocol and are limited to ~550 MB/s',
+      'SATA SSDs are faster because they use a more mature protocol',
+      'NVMe SSDs require a dedicated power cable while SATA SSDs don\'t',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'RAID 1 is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Although both fit in an M.2 slot, they use different protocols. M.2 NVMe drives communicate via PCIe lanes for speeds up to 14,000+ MB/s (PCIe 5.0 x4). M.2 SATA drives use the SATA protocol and are capped at ~550 MB/s. They use different M.2 key notches (M-key vs B+M-key).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with TRIM?',
+    questionText: 'What is NAND flash memory?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A type of volatile memory used in CPU caches',
+      'A non-volatile storage technology that uses floating-gate transistors to trap electrical charges representing data',
+      'A network-attached storage protocol',
+      'A special type of RAM that doesn\'t need refreshing',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'TRIM is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'NAND flash stores data by trapping electrons in floating-gate (or charge-trap) transistors. The presence or absence of charge represents 1s and 0s. It\'s non-volatile (retains data without power), which makes it the basis for SSDs, USB drives, and memory cards.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with drive bay?',
+    questionText: 'What is the difference between SLC, MLC, TLC, and QLC NAND?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They refer to different physical sizes of the memory chips',
+      'They indicate how many bits are stored per cell: 1, 2, 3, and 4 respectively — more bits per cell means higher capacity but lower endurance and speed',
+      'They are different manufacturers of NAND flash',
+      'They refer to different voltage levels used by the drives',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'drive bay is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'SLC stores 1 bit/cell (fastest, most durable, most expensive), MLC stores 2 bits/cell, TLC stores 3 bits/cell (best balance of cost and performance), and QLC stores 4 bits/cell (highest density, lowest endurance). More bits per cell increases capacity and lowers cost but reduces write speed and endurance.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with USB controller?',
+    questionText: 'What is "write amplification" in SSDs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'When data is written louder (with higher voltage) for better reliability',
+      'When the SSD must write more physical data than the logical data requested, due to garbage collection and wear leveling',
+      'When multiple SSDs are combined to amplify write speed',
+      'When the SSD amplifies the write command to fill all available cells',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'USB controller is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Write amplification occurs because NAND flash can only be erased in large blocks, not individual pages. When updating data, the SSD must read an entire block, modify the target pages, and rewrite the whole block elsewhere — resulting in more physical writes than the host requested.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with storage interface?',
+    questionText: 'What is TRIM and why is it important for SSDs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A command that physically trims unused memory cells to make the SSD smaller',
+      'An OS command that tells the SSD which data blocks are no longer in use, allowing the SSD to pre-erase them for better write performance',
+      'A benchmarking tool that tests SSD read/write speeds',
+      'A formatting command that wipes all data from the drive',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'storage interface is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'TRIM informs the SSD that specific data blocks are no longer needed by the OS. Without TRIM, the SSD doesn\'t know which blocks are "free" and must perform read-modify-write operations during garbage collection. TRIM allows proactive cleanup, maintaining write performance over time.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with PCIe slot?',
+    questionText: 'What is the purpose of wear leveling in an SSD?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To physically distribute weight evenly across the drive for balanced mounting',
+      'To distribute write operations evenly across all NAND cells to prevent any single cell from wearing out prematurely',
+      'To level the performance between fast and slow cells',
+      'To equalize the power consumption across all NAND chips',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'PCIe slot is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'NAND flash cells have a limited number of write cycles before they fail (typically 500–3,000 for TLC). Wear leveling ensures writes are spread evenly across all cells rather than concentrating on the same ones, maximizing the overall lifespan of the SSD.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with storage controller?',
+    questionText: 'What is Thunderbolt 4\'s maximum data throughput?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '10 Gbps',
+      '20 Gbps',
+      '40 Gbps',
+      '80 Gbps',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'storage controller is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 2,
+    explanation: 'Thunderbolt 4 provides 40 Gbps of bandwidth (the same as Thunderbolt 3). It uses USB-C connectors and can carry data, video (dual 4K or single 8K displays), and up to 100W of power delivery. Thunderbolt 5 doubles this to 80 Gbps bidirectional.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with read latency?',
+    questionText: 'What is the purpose of a USB hub?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To increase the power output of a single USB port',
+      'To expand one USB port into multiple ports, allowing several devices to connect through a single upstream port',
+      'To convert USB signals to Ethernet',
+      'To boost the data transfer speed of connected USB devices',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'read latency is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A USB hub takes one upstream USB connection and splits it into multiple downstream ports. All connected devices share the bandwidth of the single upstream connection. Powered hubs also provide additional power for devices that need more than the standard port supplies.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with write latency?',
+    questionText: 'What is the difference between USB-A and USB-C connectors?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'USB-A is faster than USB-C',
+      'USB-A is the traditional rectangular connector; USB-C is a smaller, reversible oval connector that supports higher speeds and power delivery',
+      'USB-C can only carry data while USB-A carries data and power',
+      'They are identical but from different manufacturers',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'write latency is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'USB-A is the classic rectangular connector that only fits one way. USB-C is a smaller, symmetrical oval connector that can be plugged in either orientation. USB-C supports USB 3.2, USB4, Thunderbolt, DisplayPort alt mode, and up to 240W power delivery — making it far more versatile.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with I/O queue?',
+    questionText: 'What is IOPS and why does it matter for storage?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Internet Operations Per Session — it measures network performance',
+      'Input/Output Operations Per Second — it measures how many read/write operations a storage device can perform per second',
+      'Integrated Operating Performance Score — a benchmark rating',
+      'Incremental Output Processing Speed — a CPU metric',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'I/O queue is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'IOPS measures the number of individual read or write operations a storage device can handle per second. It\'s critical for workloads with many small random accesses (databases, virtual machines). NVMe SSDs can achieve 500K–1M+ IOPS; HDDs typically manage only 75–200 IOPS.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with data path?',
+    questionText: 'What is DMA (Direct Memory Access)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A memory diagnostic tool that tests RAM directly',
+      'A technique that allows I/O devices to transfer data directly to/from RAM without involving the CPU for each byte',
+      'A method of directly accessing another computer\'s memory over a network',
+      'A type of memory exclusively used by the GPU',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'data path is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DMA allows hardware devices (like SSDs, network cards, and sound cards) to read from or write to main memory directly, without the CPU handling every byte. This frees the CPU to do other work while large data transfers occur in the background.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with controller firmware?',
+    questionText: 'What is an SSD controller responsible for?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Supplying power to the NAND flash chips',
+      'Managing all operations of the SSD: mapping logical to physical addresses, wear leveling, error correction, garbage collection, and interfacing with the host',
+      'Controlling the rotational speed of the storage media',
+      'Formatting the drive during manufacturing only',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'controller firmware is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The SSD controller is a specialized processor that runs the firmware managing the entire drive. It handles the Flash Translation Layer (mapping logical blocks to physical NAND locations), wear leveling, garbage collection, ECC, encryption, and communication with the host over NVMe or SATA.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with SAS?',
+    questionText: 'What is the purpose of a DRAM cache on an SSD?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To store the user\'s most recently accessed files permanently',
+      'To cache the Flash Translation Layer (FTL) mapping table and buffer writes for improved performance',
+      'To add extra storage capacity beyond the NAND flash',
+      'To provide volatile RAM that replaces the computer\'s main memory',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SAS is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Many high-performance SSDs include a DRAM cache chip that stores the FTL mapping table (which tracks where data is physically stored on the NAND). This allows instant address lookups instead of reading the map from slower NAND, significantly improving random read/write performance.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with SATA cable?',
+    questionText: 'What is the "SLC cache" found in many consumer TLC/QLC SSDs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Actual SLC NAND chips added to the drive',
+      'A portion of TLC/QLC NAND temporarily operated in SLC mode (1 bit per cell) to deliver faster burst write speeds',
+      'A software cache in the operating system',
+      'A separate L1/L2 cache chip on the SSD\'s PCB',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SATA cable is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'SLC caching uses a portion of the TLC/QLC NAND and writes to it in SLC mode (1 bit per cell instead of 3 or 4). This gives fast burst write speeds. Once the cache fills, writes slow to native TLC/QLC speeds as data must be written at full density.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with drive enclosure?',
+    questionText: 'What determines the sequential read/write speed of a PCIe 4.0 x4 NVMe SSD?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The rotational speed of the platters',
+      'The combined bandwidth of four PCIe 4.0 lanes (~8 GB/s theoretical max), limited by the NAND and controller capabilities',
+      'The amount of RAM installed in the system',
+      'The USB version used for the connection',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'drive enclosure is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A PCIe 4.0 x4 connection provides ~8 GB/s of theoretical bandwidth. In practice, top-tier PCIe 4.0 NVMe SSDs achieve ~7,000–7,400 MB/s sequential reads, limited by NAND speed, controller capability, and protocol overhead rather than the PCIe link itself.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with boot drive?',
+    questionText: 'What is a partition on a storage drive?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'A physical wall inside the drive separating the platters',
+      'A logically defined section of a storage device that functions as an independent unit with its own file system',
+      'A backup copy of the drive stored on a separate disk',
+      'A security barrier that encrypts part of the drive',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'boot drive is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A partition is a logical division of a physical storage device. Each partition can have its own file system, label, and drive letter. The partition table (MBR or GPT) stored at the beginning of the drive defines the layout of all partitions.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with hot swap?',
+    questionText: 'What is the advantage of GPT over MBR partition tables?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'GPT is faster at reading and writing data',
+      'GPT supports drives larger than 2 TB and up to 128 partitions, while MBR is limited to 2 TB and 4 primary partitions',
+      'GPT is compatible with older BIOS systems while MBR is not',
+      'GPT uses less storage space than MBR for the partition table',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'hot swap is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'GPT (GUID Partition Table) supports drives up to 9.4 ZB (zettabytes), allows up to 128 partitions by default, and stores backup copies of the partition table. MBR (Master Boot Record) is limited to 2 TB drives and only 4 primary partitions. GPT requires UEFI firmware.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with caching layer?',
+    questionText: 'What is a file system?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The physical folder structure visible in the computer case',
+      'A method of organizing, storing, and retrieving data on a storage device by managing files, directories, and metadata',
+      'A system of cabinets used to file paper documents',
+      'A database that tracks all software installed on the computer',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'caching layer is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A file system (like NTFS, ext4, APFS, or FAT32) defines how data is organized on a storage device — how files are named, stored, and retrieved, how directories work, how permissions are managed, and how free space is tracked.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with drive health?',
+    questionText: 'What is queue depth in storage terminology?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'How deep in the rack a server drive is installed',
+      'The number of pending I/O requests a storage device can accept and process simultaneously',
+      'The physical depth of the drive enclosure in millimeters',
+      'The number of folders nested inside each other',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'drive health is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Queue depth is the number of outstanding I/O operations the device can handle in parallel. NVMe supports up to 65,535 queues of 65,536 commands each, while AHCI (SATA) supports only 1 queue of 32 commands — a key reason NVMe drives excel at high-load random I/O.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with sector?',
+    questionText: 'What is latency in the context of storage devices?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The time it takes to install the drive in the system',
+      'The time delay between requesting data and receiving the first byte of that data',
+      'The maximum distance data can travel on a SATA cable',
+      'The time between manufacturing and sale of the drive',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'sector is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Storage latency is the time from issuing a read/write command to getting the first response. NVMe SSDs achieve ~10–20 microseconds for random reads; SATA SSDs ~100 microseconds; HDDs ~5–10 milliseconds (due to seeking the head and waiting for the platter to rotate).',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with filesystem?',
+    questionText: 'What does "hot-swapping" mean for storage drives?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Replacing a drive while it is overheating',
+      'Removing and inserting a drive while the system is running, without needing to shut down',
+      'Swapping data between an SSD and HDD for optimization',
+      'Exchanging drives between two different computers',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'filesystem is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Hot-swapping allows drives to be replaced or added without powering down the system. This is essential for servers using RAID arrays where uptime is critical — a failed drive in a RAID 1/5/6 array can be swapped out and rebuilt without any downtime.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with SMART?',
+    questionText: 'What is the typical lifespan metric for SSDs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Mean Time Between Colors (MTBC)',
+      'TBW (Terabytes Written) — the total amount of data that can be written before the NAND cells wear out',
+      'RPM (Revolutions Per Minute)',
+      'MTTR (Mean Time To Repair)',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'SMART is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'SSD endurance is measured in TBW (Terabytes Written) or DWPD (Drive Writes Per Day). A 1 TB consumer SSD might be rated for 600 TBW, meaning you could write 600 TB of data before the NAND is expected to wear out — far more than most users will ever write.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with wear leveling?',
+    questionText: 'What is the advantage of DisplayPort over HDMI for high-refresh-rate gaming monitors?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'DisplayPort cables are thinner and more flexible',
+      'DisplayPort supports higher resolutions and refresh rates with a single cable, and includes adaptive sync (FreeSync/G-Sync) without licensing fees',
+      'HDMI always provides better color accuracy',
+      'DisplayPort can only carry video, not audio',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'wear leveling is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'DisplayPort 2.1 supports up to 80 Gbps bandwidth, enabling 4K@240Hz or 8K@60Hz with a single cable. It natively supports variable refresh rate (Adaptive-Sync) without licensing fees. HDMI 2.1 is competitive at 48 Gbps but has licensing requirements for VRR.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with bad block?',
+    questionText: 'What is SMART monitoring for storage drives?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'An AI system that predicts what files you\'ll need next',
+      'A built-in diagnostic system that tracks drive health indicators like temperature, error rates, power-on hours, and reallocated sectors',
+      'A smart power management mode that reduces energy consumption',
+      'A networking feature for remote drive access',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'bad block is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with block size?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'block size is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with file system journal?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'file system journal is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with serial ATA?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'serial ATA is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with NAND flash?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'NAND flash is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with read throughput?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'read throughput is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with write throughput?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'write throughput is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with host bus?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'host bus is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with device bus?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'device bus is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with duty cycle?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'duty cycle is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with endurance?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'endurance is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with thermal throttling?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'thermal throttling is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with storage benchmark?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'storage benchmark is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with restore point?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'restore point is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with backup policy?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'backup policy is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with portable drive?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'portable drive is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with network attached storage?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'network attached storage is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with external enclosure?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'external enclosure is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with port multiplier?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'port multiplier is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with bus reset?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'bus reset is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with DMA transfer?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'DMA transfer is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with I/O scheduler?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'I/O scheduler is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with data cache?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'data cache is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with swap file?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'swap file is a core part of the Storage & I/O subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'S.M.A.R.T. (Self-Monitoring, Analysis and Reporting Technology) is firmware built into drives that continuously monitors health parameters. Key attributes include reallocated sector count, power-on hours, temperature, and uncorrectable error count — warning of impending drive failure.',
   ),
 ];

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import '../models/flashcard.dart';
 import '../models/vocabulary_entry.dart';
+import 'italian_vocabulary.dart';
 import 'russian_vocabulary.dart';
 import 'spanish_vocabulary.dart';
 
@@ -9,6 +10,7 @@ class VocabularyRepository {
   static final Map<LanguageSection, List<VocabularyEntry>> _entries = {
     LanguageSection.russian: _buildEntries(russianVocabulary),
     LanguageSection.spanish: _buildEntries(spanishVocabulary),
+    LanguageSection.italian: _buildEntries(italianVocabulary),
   };
 
   static List<VocabularyEntry> _buildEntries(Map<String, String> dictionary) {

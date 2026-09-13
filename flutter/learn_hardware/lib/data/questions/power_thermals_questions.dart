@@ -2,531 +2,322 @@ import '../../models/question.dart';
 
 final List<Question> powerThermalsQuestions = [
   Question(
-    questionText: 'Which hardware concept is most closely associated with PSU?',
+    questionText: 'What does the 80 PLUS certification on a PSU indicate?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The PSU can deliver over 80 watts of power',
+      'The PSU converts at least 80% of AC input power to DC output power (at 20%, 50%, and 100% load), wasting less energy as heat',
+      'The PSU weighs at least 80 grams more than uncertified units',
+      'The PSU has at least 80 available connectors',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'PSU is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: '80 PLUS certification means the PSU is at least 80% efficient at converting AC to DC across various load levels. Higher tiers (Bronze: 82–85%, Gold: 87–90%, Platinum: 89–92%, Titanium: 90–96%) waste progressively less energy as heat and reduce electricity costs.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with 80 PLUS?',
+    questionText: 'What is the difference between 80 PLUS Gold and 80 PLUS Platinum efficiency?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Gold uses gold-plated connectors; Platinum uses platinum-plated ones',
+      'Gold achieves ~87–90% efficiency at typical loads; Platinum achieves ~89–92%, wasting less power as heat',
+      'Platinum supports more watts; Gold supports fewer',
+      'There is no real difference; it\'s just marketing',
     ],
-    correctAnswerIndex: 0,
-    explanation: '80 PLUS is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'At 50% load (peak efficiency): Gold is ~90% efficient, Platinum is ~92% efficient. For a 850W system drawing 500W, Gold wastes ~56W as heat; Platinum wastes ~43W. Over years of use, the electricity savings can be significant, and less waste heat means quieter cooling.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with thermal throttling?',
+    questionText: 'What does "modular" mean when describing a PSU?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The PSU can be split into separate modules for different voltage rails',
+      'The PSU has detachable cables — you only connect the cables you need, reducing clutter and improving airflow',
+      'The PSU firmware can be updated modularly',
+      'The PSU fan can be replaced with different modules',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'thermal throttling is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A fully modular PSU has all cables detachable from the PSU housing. Semi-modular PSUs have the essential cables (24-pin, CPU) hardwired with the rest detachable. This lets you use only the cables needed, reducing cable clutter and improving case airflow.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with heat sink?',
+    questionText: 'What is the typical operating voltage that the CPU receives from the VRM?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '12V directly from the PSU',
+      'Approximately 0.8V–1.4V, stepped down by the VRM from the 12V rail',
+      '5V from the SATA power connector',
+      '3.3V from the 24-pin ATX connector',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'heat sink is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Modern CPUs operate at very low voltages, typically between 0.8V and 1.4V depending on load and clock speed. The VRM converts the 12V from the PSU down to this precise voltage. Even small deviations can cause instability or increased power waste.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with thermal paste?',
+    questionText: 'What is "thermal paste" (thermal compound) and why is it necessary?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'An adhesive that permanently glues the heatsink to the CPU',
+      'A thermally conductive paste applied between the CPU and heatsink to fill microscopic air gaps, improving heat transfer',
+      'A paste that generates heat to warm up the CPU faster during cold starts',
+      'A waterproofing sealant that protects the CPU from liquid cooling leaks',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'thermal paste is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Despite looking smooth, CPU and heatsink surfaces have microscopic imperfections that trap air (a poor thermal conductor). Thermal paste fills these gaps with a material that conducts heat 30–100× better than air, dramatically improving thermal transfer between the CPU and its cooler.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with TDP?',
+    questionText: 'What is the main advantage of an AIO (All-In-One) liquid cooler over a tower air cooler?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'AIO coolers are always quieter than air coolers',
+      'AIO coolers use a liquid coolant loop with a radiator to move heat away from the CPU, often allowing lower temperatures on high-power CPUs while being more compact near the socket',
+      'AIO coolers are always cheaper than air coolers',
+      'AIO coolers don\'t require any fans at all',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'TDP is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'AIO liquid coolers pump coolant through a block on the CPU, transferring heat to a radiator mounted on the case. The radiator\'s larger surface area (120mm–360mm) can dissipate heat very effectively. They leave more clearance around the socket for tall RAM and are often better for very high TDP CPUs.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with case fan?',
+    questionText: 'What is "thermal throttling" and when does it occur?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'When the system physically shuts down due to excessive heat',
+      'When the CPU or GPU automatically reduces its clock speed and voltage to lower heat output when approaching maximum safe temperature',
+      'When thermal paste dries out and needs replacement',
+      'When fans speed up to maximum RPM',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'case fan is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Thermal throttling is a protective mechanism. When the CPU reaches its Tjunction max (typically 90–105°C), it automatically reduces clock speed, voltage, or both to generate less heat. This prevents damage but results in reduced performance — indicating the cooling solution is insufficient for the workload.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with airflow path?',
+    questionText: 'What does Tj(max) represent for a CPU?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The recommended operating temperature for best performance',
+      'The maximum safe junction temperature — the point at which the CPU begins throttling or shutting down to prevent permanent damage',
+      'The average temperature of the CPU across all cores',
+      'The temperature at which thermal paste becomes ineffective',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'airflow path is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Tj(max) (maximum junction temperature) is the highest temperature the CPU silicon is designed to tolerate. For Intel CPUs this is typically 100°C; for AMD Ryzen it\'s typically 95°C. At this temperature, the CPU aggressively throttles. Exceeding it triggers emergency shutdown.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with fan curve?',
+    questionText: 'What is the purpose of a fan curve in BIOS or software?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To display a graph of fan sales over time',
+      'To define the relationship between temperature and fan speed — making fans spin faster as temperatures rise and slower when cool',
+      'To limit the total number of fans in the system',
+      'To test fans for manufacturing defects',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'fan curve is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A fan curve maps temperature readings to fan speed percentages. At low temperatures, fans run slowly (or stop) for silence. As temperatures increase, fans ramp up proportionally. Users can customize curves in BIOS or software to balance noise and cooling for their preferences.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with UPS?',
+    questionText: 'What is the difference between PWM and DC fan control?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'PWM fans are digital; DC fans are analog',
+      'PWM sends a high-frequency pulse signal to control speed precisely (4-pin); DC control varies the voltage supplied to the fan (3-pin)',
+      'DC control is more precise than PWM',
+      'PWM can only control speed up to 50%; DC can reach 100%',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'UPS is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'PWM (Pulse Width Modulation) fans have a 4th pin that receives a 25 kHz pulse signal — the wider the pulse, the faster the fan. This allows precise speed control even at very low RPMs. DC control reduces the voltage (e.g., from 12V to 7V) to slow the fan, but has a higher minimum speed.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with voltage rail?',
+    questionText: 'What is a reasonable idle CPU temperature for a desktop system with adequate cooling?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      '0–10°C',
+      '25–40°C',
+      '70–80°C',
+      '90–100°C',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'voltage rail is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A well-cooled desktop CPU typically idles at 25–40°C (depending on ambient temperature and cooler quality). Under sustained full load, 60–80°C is normal for air cooling; 50–70°C for liquid cooling. Temperatures consistently above 85°C under load suggest cooling improvements are needed.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with AC input?',
+    questionText: 'What happens if a computer runs with no CPU cooler installed?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The CPU runs fine at slightly reduced speeds',
+      'The CPU will reach Tj(max) within seconds and either throttle to near-zero performance or trigger an emergency thermal shutdown',
+      'Nothing happens because CPUs don\'t generate much heat at idle',
+      'The motherboard VRM will compensate by reducing voltage automatically',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'AC input is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Modern CPUs can generate 65–250+ watts of heat. Without a cooler, the CPU temperature skyrockets to its maximum (95–105°C) within seconds. Thermal protection will immediately throttle the CPU drastically or shut the system down completely to prevent permanent damage.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with DC output?',
+    questionText: 'What is the function of a heat pipe in a CPU cooler?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It pumps liquid coolant using an electric motor',
+      'It uses a sealed copper tube with a small amount of fluid that evaporates at the hot end and condenses at the cool end, rapidly transferring heat',
+      'It is a hollow tube that directs airflow toward the CPU',
+      'It is a pipe that drains excess thermal paste during installation',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'DC output is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A heat pipe is a sealed copper tube containing a small amount of working fluid. At the CPU end, heat evaporates the fluid; the vapor travels to the cooler fins where it condenses, releasing heat. The liquid then wicks back via capillary action — providing extremely efficient heat transfer.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with power efficiency?',
+    questionText: 'What is power delivery efficiency, and why does it matter?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'It only matters for server systems, not desktops',
+      'The percentage of input power that is delivered as usable output — higher efficiency means less wasted energy and less heat generated',
+      'The speed at which the PSU delivers power to components',
+      'The ability of the PSU to deliver power to multiple devices simultaneously',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'power efficiency is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'If a PSU is 90% efficient and your system draws 500W, the PSU pulls ~556W from the wall, wasting ~56W as heat. At only 80% efficiency, it pulls ~625W, wasting ~125W. Higher efficiency reduces electricity costs, produces less heat, and often means quieter operation.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with cooling loop?',
+    questionText: 'What is the 12VHPWR (12V High Power) connector used for?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Powering the motherboard\'s main 24-pin connection',
+      'Delivering up to 600W of power to high-end graphics cards like NVIDIA RTX 40-series via a compact 16-pin connector',
+      'Providing 12V power to case fans',
+      'Connecting the CPU\'s EPS power cable',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'cooling loop is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The 12VHPWR (and its successor 12V-2×6) is a compact 16-pin power connector that can deliver up to 600W to power-hungry GPUs. It replaces the need for multiple 8-pin PCIe power connectors. Proper seating is critical — loose connections have caused melting issues.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with liquid cooler?',
+    questionText: 'What is case airflow, and what is the ideal configuration?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Airflow only matters for liquid-cooled systems',
+      'A front-to-back or bottom-to-top pattern with intake fans at the front/bottom and exhaust fans at the rear/top creates positive pressure and efficient heat removal',
+      'All fans should be set to exhaust for maximum cooling',
+      'The case should be completely sealed for best temperatures',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'liquid cooler is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Optimal airflow moves cool air in from the front/bottom (intake) and expels hot air out the rear/top (exhaust), following heat\'s natural rise. Slightly more intake than exhaust creates positive pressure, which reduces dust buildup by forcing air out through filtered intakes.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with radiator?',
+    questionText: 'What does "positive pressure" mean in case airflow?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The fans create dangerously high air pressure that can damage components',
+      'More air is being pushed into the case than exhausted, causing excess air to exit through gaps — reducing dust ingress through unfiltered openings',
+      'All fans are running at maximum speed',
+      'The case has no exhaust fans installed',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'radiator is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Positive pressure means intake airflow exceeds exhaust. Excess air exits through any gaps in the case. Since the main intake is through dust filters, this significantly reduces dust inside the case compared to negative pressure, where unfiltered air is sucked in through every crack.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with pump?',
+    questionText: 'What is the purpose of a vapor chamber in high-end CPU or GPU coolers?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'To store liquid nitrogen for extreme overclocking',
+      'A flat, two-dimensional heat pipe that spreads heat evenly across a large surface area before transferring it to fins or a radiator',
+      'A chamber that produces cooling vapor sprayed onto components',
+      'A sealed compartment that contains compressed gas for cooling',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'pump is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'A vapor chamber works like a heat pipe but in a flat plate form. Fluid inside evaporates at hot spots, spreads across the chamber, and condenses across the cooler side, spreading heat evenly. This is more effective than heat pipes for large heat sources like high-TDP CPUs and GPUs.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with fan speed?',
+    questionText: 'What is "coil whine" and what component usually causes it?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The sound of a dying hard drive motor',
+      'A high-pitched noise caused by vibrations in inductors (chokes) on the GPU or motherboard under electrical load',
+      'The sound of fan bearings wearing out',
+      'A warning alarm from the PSU indicating overload',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'fan speed is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Coil whine is a high-pitched buzzing or squealing caused by the physical vibration of inductors (wire-wound coils) in the VRM circuits of GPUs, motherboards, or PSUs when they oscillate under certain electrical loads. It\'s annoying but generally harmless and not a defect.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with hot spot?',
+    questionText: 'How do you properly calculate what wattage PSU you need?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Always buy the highest wattage PSU available for future-proofing',
+      'Add up the TDP/power draw of the CPU and GPU, then add ~100–200W for other components and headroom, aiming for 50–80% PSU load for optimal efficiency',
+      'Multiply the number of fans by 100W',
+      'Use the same wattage as your CPU\'s TDP alone',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'hot spot is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Sum the CPU TDP + GPU TDP + ~100W for drives, fans, RAM, and motherboard. Add 100–200W of headroom for efficiency and transient spikes. PSUs are most efficient at 50–80% load. For a system with a 125W CPU and 300W GPU, a 750–850W PSU is typically appropriate.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with ambient temperature?',
+    questionText: 'What are transient power spikes, and why do they matter for PSU selection?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Spikes in the AC power from the wall that the PSU must filter',
+      'Brief, sudden surges in power demand (often from GPUs) that can exceed the component\'s rated TDP for milliseconds, potentially triggering PSU over-power protection shutdowns',
+      'Gradual increases in power draw during system warm-up',
+      'Power spikes caused by lightning strikes',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'ambient temperature is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Modern GPUs (especially NVIDIA RTX 30/40 series) can produce transient power spikes of 2–3× their rated TDP for microseconds to milliseconds. A 300W GPU might spike to 600W+. If the PSU\'s OPP trips, the system shuts down — which is why manufacturers recommend larger PSUs than TDP alone suggests.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with thermal load?',
+    questionText: 'What is undervolting, and what is its purpose?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Running the CPU or GPU at a lower voltage than stock to reduce power consumption and heat while maintaining the same clock speed',
+      'Reducing the voltage to damage the CPU for warranty replacement',
+      'Lowering the voltage to the RAM to increase its speed',
+      'Using an underpowered PSU to save electricity',
     ],
     correctAnswerIndex: 0,
-    explanation: 'thermal load is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    explanation: 'Undervolting reduces the voltage supplied to the CPU or GPU while maintaining the same clock speed (or close to it). Since power scales roughly with voltage squared (P ∝ V²), even a small voltage reduction can significantly lower heat and power draw — often 10–30W — with no performance loss.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with overclocking?',
+    questionText: 'What is overclocking?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Setting the system clock ahead for daylight saving time',
+      'Running a CPU, GPU, or RAM at speeds higher than the manufacturer\'s default specifications for increased performance',
+      'Installing a faster clock generator chip on the motherboard',
+      'Using software to display more decimal places on clock speed readings',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'overclocking is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Overclocking pushes hardware beyond its rated specifications — increasing CPU/GPU clock speed, adjusting memory timings, or raising voltage for stability. It provides free performance but increases heat, power draw, and can reduce component lifespan. It typically voids manufacturer warranties.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with power draw?',
+    questionText: 'What is the main risk of overclocking?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'The computer will run too fast for the monitor to display',
+      'Increased heat and voltage can cause system instability, crashes, reduced component lifespan, or in extreme cases, hardware damage',
+      'The operating system will not boot at non-standard speeds',
+      'Network speeds will become unstable',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'power draw is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Higher clock speeds require more voltage, which increases heat output significantly (power ∝ voltage² × frequency). Insufficient cooling leads to throttling or crashes. Excessive voltage accelerates electromigration, degrading the silicon over time. Proper cooling and stability testing are essential.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with wattage?',
+    questionText: 'What is the role of thermal pads (as opposed to thermal paste)?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'They replace the need for any heatsink at all',
+      'They are soft, thermally conductive pads used between components of varying heights and their heatsinks — common for VRM components and M.2 SSDs',
+      'They are adhesive pads that hold fans to the case',
+      'They are insulating pads that prevent heat transfer',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'wattage is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Thermal pads are pre-formed sheets of soft, thermally conductive material. Unlike paste, they can bridge larger gaps between components and heatsinks, making them ideal for VRM MOSFETs (varying heights), M.2 SSDs, and other components where a compressible, consistent-thickness interface is needed.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with voltage droop?',
+    questionText: 'What protection features should a quality PSU include?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Only an on/off switch and a power cable',
+      'OVP (Over Voltage), UVP (Under Voltage), OCP (Over Current), OPP (Over Power), SCP (Short Circuit), and OTP (Over Temperature) protection',
+      'Only a fuse for short circuit protection',
+      'Software-based protection that requires a special driver',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'voltage droop is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Quality PSUs include multiple hardware protection circuits: OVP prevents excessive voltage; UVP detects drops; OCP limits per-rail current; OPP caps total output; SCP instantly cuts power on short circuits; OTP protects against overheating. These prevent damage to both the PSU and connected components.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with current limit?',
+    questionText: 'What is the difference between single-rail and multi-rail PSU designs?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Single-rail PSUs can only power one component',
+      'Single-rail delivers all 12V power through one circuit with a single OCP limit; multi-rail splits 12V into separate circuits with individual current limits for added safety',
+      'Multi-rail PSUs are always more powerful than single-rail',
+      'The terms refer to the number of physical cables, not the electrical design',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'current limit is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Single-rail PSUs combine all 12V output into one high-amp circuit — simpler but a short on one cable can draw massive current before OPP trips. Multi-rail PSUs split 12V into separate circuits, each with its own OCP. Multi-rail is safer; single-rail is simpler for high-draw GPUs.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with circuit breaker?',
+    questionText: 'What is the purpose of liquid metal thermal compound compared to standard thermal paste?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Liquid metal is cheaper and easier to apply',
+      'Liquid metal (gallium-based alloy) offers significantly higher thermal conductivity (~70+ W/mK vs ~5–12 W/mK for paste) but is electrically conductive and can damage aluminum heatsinks',
+      'Liquid metal lasts forever and never needs replacement',
+      'Liquid metal is only used in industrial applications, never in PCs',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'circuit breaker is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'Liquid metal (like Thermal Grizzly Conductonaut) has ~73 W/mK thermal conductivity vs ~12 W/mK for high-end paste. It can reduce temperatures by 5–15°C. However, it\'s electrically conductive (can short circuits if spilled), corrodes aluminum, and is harder to apply safely.',
   ),
   Question(
-    questionText: 'Which hardware concept is most closely associated with surge protection?',
+    questionText: 'What is the relationship between voltage and power consumption in a CPU?',
     options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
+      'Power increases linearly with voltage',
+      'Dynamic power consumption scales with the square of the voltage (P ∝ V² × f), so small voltage increases cause disproportionately large power increases',
+      'Voltage has no effect on power consumption',
+      'Higher voltage always decreases power consumption through improved efficiency',
     ],
-    correctAnswerIndex: 0,
-    explanation: 'surge protection is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with bus bar?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'bus bar is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with electrical noise?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'electrical noise is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with grounding?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'grounding is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with fan balance?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'fan balance is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with dust filter?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'dust filter is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with thermal sensor?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'thermal sensor is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with PWM control?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'PWM control is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with noise profile?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'noise profile is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with heat spreader?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'heat spreader is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with cooling budget?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'cooling budget is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with load line calibration?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'load line calibration is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with temperature target?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'temperature target is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with hard shutdown?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'hard shutdown is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with safe operating temperature?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'safe operating temperature is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with power redundancy?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'power redundancy is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with power connector?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'power connector is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with capacitor bank?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'capacitor bank is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with voltage tolerance?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'voltage tolerance is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
-  ),
-  Question(
-    questionText: 'Which hardware concept is most closely associated with thermal paste spread?',
-    options: [
-      'The primary hardware concept in this topic.',
-      'A display-only setting.',
-      'A network-only feature.',
-      'A software-only abstraction.'
-    ],
-    correctAnswerIndex: 0,
-    explanation: 'thermal paste spread is a core part of the Power & Thermals subject area, and understanding it is essential for hardware literacy.',
+    correctAnswerIndex: 1,
+    explanation: 'The dynamic power formula is approximately P = C × V² × f (where C is capacitance, V is voltage, f is frequency). Because voltage is squared, a 10% voltage increase results in a ~21% power increase. This is why undervolting is so effective, and why overclocking with voltage increases quickly becomes power-hungry.',
   ),
 ];
