@@ -24,24 +24,21 @@ class CognitiveProfileModel {
   });
 
   factory CognitiveProfileModel.initial() {
+    final emptyDomains = {
+      for (final type in CognitiveDomainType.values) type: 0.0,
+    };
+
     return CognitiveProfileModel(
       userName: 'Brain Athlete',
       age: 42,
-      streakDays: 5,
-      totalTrainingMinutes: 240,
-      cognitiveReserveIndex: 78.5,
-      domainMastery: {
-        CognitiveDomainType.crossModal: 74.0,
-        CognitiveDomainType.spatialManipulation: 82.0,
-        CognitiveDomainType.workingMemory: 70.0,
-        CognitiveDomainType.taskSwitching: 85.0,
-        CognitiveDomainType.divergentThinking: 78.0,
-        CognitiveDomainType.motorPlasticity: 68.0,
-      },
-      dailyCompletedExercises: ['dual_n_back', 'divergent_associates'],
+      streakDays: 0,
+      totalTrainingMinutes: 0,
+      cognitiveReserveIndex: 0.0,
+      domainMastery: emptyDomains,
+      dailyCompletedExercises: const [],
       lastActiveDate: DateTime.now(),
       personalWhyMotivation:
-          'Proactively building synaptic density & cognitive reserve against familial neurodegeneration.',
+          'Start training and build your cognitive reserve from your own sessions.',
     );
   }
 

@@ -124,10 +124,10 @@ class BrainCareController extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _profile = await _repository.getProfile();
     _sessions = await _repository.getSessions();
     _lifestyleLogs = await _repository.getLifestyleLogs();
     _stories = await _repository.getStories();
+    _profile = await _repository.syncProfileFromUsage();
 
     _checkStreak();
 
@@ -153,7 +153,7 @@ class BrainCareController extends ChangeNotifier {
 
   Future<void> recordCompletedSession(ExerciseSessionModel session) async {
     await _repository.addSession(session);
-    _profile = await _repository.getProfile();
+    _profile = await _repository.syncProfileFromUsage();
     _sessions = await _repository.getSessions();
     notifyListeners();
   }

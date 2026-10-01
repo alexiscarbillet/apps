@@ -24,10 +24,16 @@ class LifestyleBiomarkerModel {
   double get lifestyleLongevityScore {
     double score = 0;
     // Sleep (target 7-9h, deep > 15%)
-    if (sleepHours >= 7 && sleepHours <= 9) score += 20;
-    else if (sleepHours >= 6) score += 12;
-    if (deepSleepPercentage >= 18) score += 10;
-    else if (deepSleepPercentage >= 12) score += 6;
+    if (sleepHours >= 7 && sleepHours <= 9) {
+      score += 20;
+    } else if (sleepHours >= 6) {
+      score += 12;
+    }
+    if (deepSleepPercentage >= 18) {
+      score += 10;
+    } else if (deepSleepPercentage >= 12) {
+      score += 6;
+    }
 
     // MIND Diet (target >= 10/15)
     score += (mindDietScore / 15.0) * 25.0;
@@ -40,8 +46,11 @@ class LifestyleBiomarkerModel {
     }
 
     // Novel skill (target 15+ mins)
-    if (novelSkillMinutes >= 15) score += 15;
-    else score += (novelSkillMinutes / 15.0) * 15;
+    if (novelSkillMinutes >= 15) {
+      score += 15;
+    } else {
+      score += (novelSkillMinutes / 15.0) * 15;
+    }
 
     // Social & Stress
     score += (socialConnectionRating / 5.0) * 5;

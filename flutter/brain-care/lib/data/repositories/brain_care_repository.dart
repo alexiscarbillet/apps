@@ -18,26 +18,64 @@ class BrainCareRepository {
 
   Future<List<ExerciseSessionModel>> getSessions() => _storage.loadSessions();
 
+  Future<CognitiveProfileModel> syncProfileFromUsage() async {
+    final profile = await _storage.loadProfile();
+    final sessions = await _storage.loadSessions();
+
+    final updatedMastery = {
+      for (final domain in CognitiveDomainType.values) domain: 0.0,
+    };
+
+    for (final session in sessions) {
+      final current = updatedMastery[session.domain] ?? 0.0;
+      final next = (current * 0.7 + session.scorePercent * 0.3).clamp(0.0, 100.0);
+      updatedMastery[session.domain] = double.parse(next.toStringAsFixed(1));
+    }
+
+    final avgMastery = updatedMastery.values.isEmpty
+        ? 0.0
+        : updatedMastery.values.reduce((a, b) => a + b) /
+            updatedMastery.length;
+    final totalMinutes = sessions.fold<int>(
+      0,
+      (sum, session) => sum + (session.durationSeconds ~/ 60),
+    );
+    final dailyList = sessions.map((e) => e.exerciseId).toSet().toList();
+    final latestTimestamp = sessions.isNotEmpty
+        ? sessions.first.timestamp
+        : profile.lastActiveDate;
+
+    final updatedProfile = profile.copyWith(
+      domainMastery: updatedMastery,
+      cognitiveReserveIndex: double.parse(avgMastery.toStringAsFixed(1)),
+      totalTrainingMinutes: totalMinutes,
+      dailyCompletedExercises: dailyList,
+      lastActiveDate: latestTimestamp,
+    );
+
+    await _storage.saveProfile(updatedProfile);
+    return updatedProfile;
+  }
+
   Future<void> addSession(ExerciseSessionModel session) async {
     final list = await _storage.loadSessions();
     list.insert(0, session);
     await _storage.saveSessions(list);
 
-    // Update profile domain mastery & CRI
     final profile = await _storage.loadProfile();
     final updatedMastery = Map<CognitiveDomainType, double>.from(
       profile.domainMastery,
     );
 
-    final currentDomainScore = updatedMastery[session.domain] ?? 70.0;
-    // Weighted moving average
-    final newScore = (currentDomainScore * 0.85 + session.scorePercent * 0.15)
-        .clamp(10.0, 100.0);
+    final currentDomainScore = updatedMastery[session.domain] ?? 0.0;
+    final newScore = (currentDomainScore * 0.7 + session.scorePercent * 0.3)
+        .clamp(0.0, 100.0);
     updatedMastery[session.domain] = double.parse(newScore.toStringAsFixed(1));
 
-    // Calculate CRI
-    final avgMastery =
-        updatedMastery.values.reduce((a, b) => a + b) / updatedMastery.length;
+    final avgMastery = updatedMastery.values.isEmpty
+        ? 0.0
+        : updatedMastery.values.reduce((a, b) => a + b) /
+            updatedMastery.length;
     final totalMins = profile.totalTrainingMinutes + (session.durationSeconds ~/ 60);
 
     final dailyList = List<String>.from(profile.dailyCompletedExercises);

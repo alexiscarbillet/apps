@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../core/constants/cognitive_domains.dart';
 import '../../core/theme/app_colors.dart';
 import '../../logic/brain_care_controller.dart';
 import '../widgets/cognitive_radar_chart.dart';
@@ -11,10 +10,7 @@ import 'exercises/divergent_associates_screen.dart';
 import 'exercises/dual_n_back_screen.dart';
 import 'exercises/mental_rotation_screen.dart';
 import 'exercises/motor_drawing_screen.dart';
-import 'exercises/story_studio_screen.dart';
 import 'exercises/task_switching_screen.dart';
-import 'lifestyle_biomarkers_screen.dart';
-import 'neuromodulation_lounge_screen.dart';
 
 class HomeDashboardScreen extends StatefulWidget {
   final BrainCareController controller;
@@ -82,8 +78,6 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final profile = widget.controller.profile;
-    final todayBiomarker = widget.controller.todayBiomarkers;
-    final lifestyleScore = todayBiomarker.lifestyleLongevityScore;
 
     return Scaffold(
       body: SafeArea(
@@ -344,52 +338,6 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                           ),
                         ),
 
-                        const SizedBox(height: 20),
-
-                        // Quick Access Cards Row
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildQuickAccess(
-                                icon:
-                                    Icons.graphic_eq_rounded,
-                                title: 'Neuro Lounge',
-                                subtitle: '40 Hz Gamma Pulse',
-                                color: AppColors.amberGold,
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        const NeuromodulationLoungeScreen(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _buildQuickAccess(
-                                icon: Icons
-                                    .monitor_heart_rounded,
-                                title: 'Lifestyle Log',
-                                subtitle:
-                                    'Score: ${lifestyleScore.toStringAsFixed(0)}/100',
-                                color:
-                                    AppColors.emeraldSynapse,
-                                onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        LifestyleBiomarkersScreen(
-                                      controller:
-                                          widget.controller,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
                         const SizedBox(height: 24),
 
                         // Daily Protocol Header
@@ -465,194 +413,12 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                           );
                         }),
 
-                        // Story Studio Special Card
-                        InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) =>
-                                  StoryStudioScreen(
-                                brainCareController:
-                                    widget.controller,
-                              ),
-                            ),
-                          ),
-                          borderRadius:
-                              BorderRadius.circular(16),
-                          child: Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  AppColors.electricPurple
-                                      .withValues(alpha: 0.15),
-                                  AppColors.surface,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius:
-                                  BorderRadius.circular(16),
-                              border: Border.all(
-                                color: AppColors.electricPurple
-                                    .withValues(alpha: 0.4),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 46,
-                                  height: 46,
-                                  decoration: BoxDecoration(
-                                    color: AppColors
-                                        .electricPurple
-                                        .withValues(
-                                            alpha: 0.15),
-                                    borderRadius:
-                                        BorderRadius.circular(
-                                            12),
-                                  ),
-                                  child: const Icon(
-                                    Icons
-                                        .auto_stories_rounded,
-                                    color: AppColors
-                                        .electricPurple,
-                                    size: 24,
-                                  ),
-                                ),
-                                const SizedBox(width: 14),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment
-                                            .start,
-                                    children: [
-                                      Container(
-                                        padding:
-                                            const EdgeInsets
-                                                .symmetric(
-                                                horizontal:
-                                                    6,
-                                                vertical:
-                                                    2),
-                                        decoration:
-                                            BoxDecoration(
-                                          color: AppColors
-                                              .electricPurple
-                                              .withValues(
-                                                  alpha:
-                                                      0.12),
-                                          borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                      4),
-                                        ),
-                                        child: const Text(
-                                          'BONUS STUDIO',
-                                          style: TextStyle(
-                                            fontSize: 9,
-                                            fontWeight:
-                                                FontWeight
-                                                    .w700,
-                                            color: AppColors
-                                                .electricPurple,
-                                            letterSpacing:
-                                                0.5,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                          height: 4),
-                                      Text(
-                                        'Improvisational Constraint Storytelling',
-                                        style: Theme.of(
-                                                context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              fontWeight:
-                                                  FontWeight
-                                                      .w600,
-                                            ),
-                                      ),
-                                      Text(
-                                        'Dynamic mid-sentence constraints & injections',
-                                        style: Theme.of(
-                                                context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons
-                                      .chevron_right_rounded,
-                                  color: AppColors
-                                      .electricPurple,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-
                         const SizedBox(height: 32),
                       ]),
                     ),
                   ),
                 ],
               ),
-      ),
-    );
-  }
-
-  Widget _buildQuickAccess({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.borderSubtle),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(icon, color: color, size: 22),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: AppColors.textPrimary,
-              ),
-            ),
-            Text(
-              subtitle,
-              style: TextStyle(
-                fontSize: 12,
-                color: AppColors.textSecondary,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
