@@ -18,30 +18,46 @@ void main() {
   });
 
   group('Puzzle Logic & Controllers', () {
+    test('PDF puzzle library contains every numbered problem by section', () {
+      expect(PuzzleDatabase.allPuzzles, hasLength(5334));
+      expect(PuzzleDatabase.allPuzzles.first.id, 'polgar_0001');
+      expect(PuzzleDatabase.allPuzzles.last.id, 'polgar_5334');
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.mateIn1), hasLength(306));
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.mateIn2), hasLength(3412));
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.mateIn3), hasLength(744));
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.miniatureGames), hasLength(600));
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.endgame), hasLength(144));
+      expect(PuzzleDatabase.getPuzzlesByTheme(PuzzleTheme.polgarCombinations), hasLength(128));
+      expect(
+        PuzzleDatabase.allPuzzles.map((puzzle) => puzzle.id).toSet(),
+        hasLength(5334),
+      );
+    });
+
     test('PuzzleController correctly solves a Mate in 1 puzzle', () {
-      final puzzle = PuzzleDatabase.getPuzzleById('m1_01')!;
+      final puzzle = PuzzleDatabase.getPuzzleById('polgar_0001')!;
       final controller = PuzzleController(puzzle);
 
       expect(controller.status, PuzzleSolveStatus.ready);
       expect(controller.puzzle.theme, PuzzleTheme.mateIn1);
 
-      // Play correct move f3f7
-      final from = const Square(5, 2); // f3
-      final to = const Square(5, 6);   // f7
+      // Play correct move f6g7
+      final from = const Square(5, 5); // f6
+      final to = const Square(6, 6); // g7
       final success = controller.tryPlayerMove(from, to);
 
       expect(success, isTrue);
       expect(controller.status, PuzzleSolveStatus.solved);
-      expect(LocalStorage.isPuzzleSolved('m1_01'), isTrue);
+      expect(LocalStorage.isPuzzleSolved('polgar_0001'), isTrue);
     });
 
     test('PuzzleController handles incorrect move and retry', () {
-      final puzzle = PuzzleDatabase.getPuzzleById('m1_01')!;
+      final puzzle = PuzzleDatabase.getPuzzleById('polgar_0001')!;
       final controller = PuzzleController(puzzle);
 
       // Play incorrect move e1e2
       final from = const Square(4, 0); // e1
-      final to = const Square(4, 1);   // e2
+      final to = const Square(4, 1); // e2
       final success = controller.tryPlayerMove(from, to);
 
       expect(success, isFalse);
@@ -53,38 +69,43 @@ void main() {
     });
 
     test('PuzzleController hint system gives source then target square', () {
-      final puzzle = PuzzleDatabase.getPuzzleById('m1_01')!;
+      final puzzle = PuzzleDatabase.getPuzzleById('polgar_0001')!;
       final controller = PuzzleController(puzzle);
 
       // Request Hint 1
       controller.requestHint();
-      expect(controller.hintSourceSquare, const Square(5, 2)); // f3
+      expect(controller.hintSourceSquare, const Square(5, 5)); // f6
       expect(controller.hintTargetSquare, isNull);
       expect(controller.hintsUsed, 1);
 
       // Request Hint 2
       controller.requestHint();
-      expect(controller.hintTargetSquare, const Square(5, 6)); // f7
+      expect(controller.hintTargetSquare, const Square(6, 6)); // g7
       expect(controller.hintsUsed, 2);
     });
 
-    test('DailyPuzzleController loads 5 daily puzzles and tracks completion', () async {
-      final dailyController = DailyPuzzleController();
+    test(
+      'DailyPuzzleController loads 5 daily puzzles and tracks completion',
+      () async {
+        final dailyController = DailyPuzzleController();
 
-      expect(dailyController.dailyPuzzles.length, 5);
-      expect(dailyController.currentIndex, 0);
-      expect(dailyController.completedCount, 0);
+        expect(dailyController.dailyPuzzles.length, 5);
+        expect(dailyController.currentIndex, 0);
+        expect(dailyController.completedCount, 0);
 
-      await dailyController.markCurrentCompleted();
-      expect(dailyController.completedCount, 1);
-      expect(dailyController.completedIndices.contains(0), isTrue);
+        await dailyController.markCurrentCompleted();
+        expect(dailyController.completedCount, 1);
+        expect(dailyController.completedIndices.contains(0), isTrue);
 
-      dailyController.nextPuzzle();
-      expect(dailyController.currentIndex, 1);
-    });
+        dailyController.nextPuzzle();
+        expect(dailyController.currentIndex, 1);
+      },
+    );
 
     test('RandomPuzzleGenerator creates valid puzzle rush queues and filtered puzzles', () {
-      final randomPuzzle = RandomPuzzleGenerator.getRandomPuzzle(theme: PuzzleTheme.mateIn1);
+      final randomPuzzle = RandomPuzzleGenerator.getRandomPuzzle(
+        theme: PuzzleTheme.mateIn1,
+      );
       expect(randomPuzzle.theme, PuzzleTheme.mateIn1);
 
       final rushQueue = RandomPuzzleGenerator.generatePuzzleRushQueue();
@@ -92,7 +113,9 @@ void main() {
     });
 
     test('PuzzleRushController handles strikes and game over', () {
-      final rushController = PuzzleRushController(mode: PuzzleRushMode.survival3Strikes);
+      final rushController = PuzzleRushController(
+        mode: PuzzleRushMode.survival3Strikes,
+      );
 
       expect(rushController.strikes, 0);
       expect(rushController.isGameOver, isFalse);
@@ -110,12 +133,10 @@ void main() {
   });
 
   group('UI & Screen Widgets', () {
-    testWidgets('HomeScreen renders Daily 5 Hero Card and game modes', (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomeScreen(),
-        ),
-      );
+    testWidgets('HomeScreen renders Daily 5 Hero Card and game modes', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
       await tester.pumpAndSettle();
 
       expect(find.text('Chess Tactics Pro'), findsOneWidget);

@@ -1,13 +1,16 @@
 import '../../core/chess/chess_models.dart';
 
 enum PuzzleTheme {
-  mateIn1('Mate in 1', '👑', 'One-move tactical knockout blow'),
-  mateIn2('Mate in 2', '⚔️', 'Forced checkmate in 2 moves'),
-  fork('Fork & Double Attack', '🍴', 'Attack two enemy pieces simultaneously'),
-  pin('Pin & Skewer', '📌', 'Immobilize or exploit aligned pieces'),
-  discoveredAttack('Discovered Attack', '⚡', 'Unmask a devastating ambush'),
-  endgame('Endgame Mastery', '🏰', 'Precision technique in kings & pawns'),
-  masterpiece('Grandmaster Classic', '🌟', 'Historic brilliancy by chess legends');
+  mateIn1('Mate in 1', '👑', 'Find a forced checkmate in one move'),
+  mateIn2('Mate in 2', '⚔️', 'Find a forced checkmate in two moves'),
+  mateIn3('Mate in 3', '♞', 'Find a forced checkmate in three moves'),
+  miniatureGames('Miniature Games', '♜', 'Tactical moments from short games'),
+  endgame('Simple Endgames', '♔', 'Winning and drawing endgame studies'),
+  polgarCombinations(
+    'Game Combinations',
+    '♛',
+    'Tactical combinations from tournament games',
+  );
 
   final String title;
   final String icon;
