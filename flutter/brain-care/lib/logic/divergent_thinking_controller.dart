@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 class RemoteAssociatesTriad {
@@ -29,7 +30,7 @@ class DivergentThinkingController extends ChangeNotifier {
   bool? _isSolved;
   String _userAnswer = '';
 
-  final List<RemoteAssociatesTriad> _triads = const [
+  static const List<RemoteAssociatesTriad> _triads = [
     RemoteAssociatesTriad(
       word1: 'Paperclip',
       word2: 'Cloud',
@@ -80,17 +81,68 @@ class DivergentThinkingController extends ChangeNotifier {
       explanation:
           'Honeydew, honeycomb, and honeybee all link to "Honey".',
     ),
+    RemoteAssociatesTriad(
+      word1: 'Book',
+      word2: 'Tennis',
+      word3: 'Night',
+      solution: 'Club',
+      acceptableAlternatives: [],
+      hint: 'A group, venue, or organization people can join.',
+      explanation:
+          'Book club, tennis club, and nightclub all use the same linking word.',
+    ),
+    RemoteAssociatesTriad(
+      word1: 'Tooth',
+      word2: 'Hair',
+      word3: 'Paint',
+      solution: 'Brush',
+      acceptableAlternatives: ['Brushes'],
+      hint: 'A tool used for cleaning, grooming, or applying color.',
+      explanation:
+          'Toothbrush, hairbrush, and paintbrush all share the same tool.',
+    ),
+    RemoteAssociatesTriad(
+      word1: 'Foot',
+      word2: 'Base',
+      word3: 'Basket',
+      solution: 'Ball',
+      acceptableAlternatives: ['Balls'],
+      hint: 'A round object used in three familiar sports.',
+      explanation:
+          'Football, baseball, and basketball all use a ball.',
+    ),
+    RemoteAssociatesTriad(
+      word1: 'Playing',
+      word2: 'Credit',
+      word3: 'Greeting',
+      solution: 'Card',
+      acceptableAlternatives: ['Cards'],
+      hint: 'A small flat item used in games, payments, or messages.',
+      explanation:
+          'Playing card, credit card, and greeting card share the anchor word.',
+    ),
+    RemoteAssociatesTriad(
+      word1: 'Tea',
+      word2: 'Coffee',
+      word3: 'Soup',
+      solution: 'Cup',
+      acceptableAlternatives: ['Cups'],
+      hint: 'A small container for a drink or serving.',
+      explanation:
+          'Teacup, coffee cup, and a cup of soup all share the same container.',
+    ),
   ];
+  List<RemoteAssociatesTriad> _sessionTriads = [];
 
   int get currentIndex => _currentIndex;
   int get score => _score;
-  int get totalTriads => _triads.length;
+  int get totalTriads => _sessionTriads.length;
   bool get isPlaying => _isPlaying;
   bool get isFinished => _isFinished;
   bool get showHint => _showHint;
   bool? get isSolved => _isSolved;
   String get userAnswer => _userAnswer;
-  RemoteAssociatesTriad get currentTriad => _triads[_currentIndex];
+  RemoteAssociatesTriad get currentTriad => _sessionTriads[_currentIndex];
 
   double get scorePercent =>
       totalTriads == 0 ? 0 : (_score / totalTriads * 100);
@@ -103,6 +155,8 @@ class DivergentThinkingController extends ChangeNotifier {
     _showHint = false;
     _isSolved = null;
     _userAnswer = '';
+    _sessionTriads = List<RemoteAssociatesTriad>.from(_triads)
+      ..shuffle(Random());
     notifyListeners();
   }
 
@@ -128,7 +182,7 @@ class DivergentThinkingController extends ChangeNotifier {
   }
 
   void nextTriad() {
-    if (_currentIndex + 1 < _triads.length) {
+    if (_currentIndex + 1 < _sessionTriads.length) {
       _currentIndex++;
       _showHint = false;
       _isSolved = null;

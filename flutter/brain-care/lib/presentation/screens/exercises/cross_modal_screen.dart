@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../core/constants/cognitive_domains.dart';
 import '../../../core/theme/app_colors.dart';
@@ -44,7 +45,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
   bool _isFinished = false;
   int? _selectedAnswer;
 
-  final List<CrossModalTask> _tasks = const [
+  static const List<CrossModalTask> _tasks = [
     CrossModalTask(
       title: 'High-Frequency Shimmer & Tactile Binding',
       frequencyHz: 42.0,
@@ -93,9 +94,81 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
       neuroExplanation:
           'Intermediate beta frequencies with sharp envelope attacks recruit motor prep areas (SMA) and evoke energetic thermal imagery.',
     ),
+    CrossModalTask(
+      title: 'Steady Green Pulse & Gentle Momentum',
+      frequencyHz: 8.0,
+      primaryColor: AppColors.emeraldSynapse,
+      sensoryPrompt:
+          'Follow the even green pulse. Which scene best fits its measured pace and soft visual weight?',
+      candidateSensoryMappings: [
+        'A quiet forest path after a light rain',
+        'A brass band rushing through a parade',
+        'A bright flash followed by a sharp crack',
+        'A crowded market at its busiest hour',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'A steady, moderate rhythm can suggest a calm and predictable scene; consider the waveform’s pace and color together.',
+    ),
+    CrossModalTask(
+      title: 'Bright Violet Flutter & Airy Motion',
+      frequencyHz: 28.0,
+      primaryColor: AppColors.vividViolet,
+      sensoryPrompt:
+          'Notice the quick violet flutter. Which texture and movement feel closest to this light, lively pattern?',
+      candidateSensoryMappings: [
+        'A heavy wool blanket settling on a bed',
+        'Leaves skittering in a brisk breeze',
+        'Slow waves pressing against a stone pier',
+        'A thick clay pot resting on a shelf',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The rapid, light visual rhythm pairs naturally with a quick and airy movement rather than a heavy or slow one.',
+    ),
+    CrossModalTask(
+      title: 'Slow Cyan Drift & Cool Stillness',
+      frequencyHz: 5.0,
+      primaryColor: AppColors.electricCyan,
+      sensoryPrompt:
+          'Watch the slow cyan drift. Which imagined texture best matches its cool, spacious quality?',
+      candidateSensoryMappings: [
+        'Hot coals snapping in a metal tray',
+        'A smooth cool stone beneath clear water',
+        'A rough brush scraping across dry wood',
+        'A sharp citrus peel being twisted',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'A slow and spacious wave can be associated with a cool, smooth texture; use your own sensory impression as a guide.',
+    ),
   ];
+  List<CrossModalTask> _sessionTasks = [];
 
   void _start() {
+    final random = Random();
+    _sessionTasks = _tasks
+        .map((task) {
+          final options = task.candidateSensoryMappings
+              .asMap()
+              .entries
+              .toList()
+            ..shuffle(random);
+          return CrossModalTask(
+            title: task.title,
+            frequencyHz: task.frequencyHz,
+            primaryColor: task.primaryColor,
+            sensoryPrompt: task.sensoryPrompt,
+            candidateSensoryMappings:
+                options.map((option) => option.value).toList(),
+            correctIndex: options
+                .indexWhere((option) => option.key == task.correctIndex),
+            neuroExplanation: task.neuroExplanation,
+          );
+        })
+        .toList()
+      ..shuffle(random);
+
     setState(() {
       _currentIndex = 0;
       _score = 0;
@@ -109,14 +182,14 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
     if (_selectedAnswer != null) return;
     setState(() {
       _selectedAnswer = index;
-      if (index == _tasks[_currentIndex].correctIndex) {
+      if (index == _sessionTasks[_currentIndex].correctIndex) {
         _score++;
       }
     });
   }
 
   void _next() {
-    if (_currentIndex + 1 < _tasks.length) {
+    if (_currentIndex + 1 < _sessionTasks.length) {
       setState(() {
         _currentIndex++;
         _selectedAnswer = null;
@@ -131,7 +204,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
   }
 
   void _record() {
-    final pct = (_score / _tasks.length * 100);
+    final pct = (_score / _sessionTasks.length * 100);
     final session = ExerciseSessionModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       exerciseId: 'cross_modal',
@@ -141,7 +214,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
       durationSeconds: 180,
       scorePercent: pct,
       noveltyPointsGained: (pct * 1.5).round(),
-      metadata: {'score': _score, 'total': _tasks.length},
+      metadata: {'score': _score, 'total': _sessionTasks.length},
     );
     widget.brainCareController.recordCompletedSession(session);
   }
@@ -218,7 +291,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
   }
 
   Widget _buildActiveScreen() {
-    final current = _tasks[_currentIndex];
+    final current = _sessionTasks[_currentIndex];
 
     return SingleChildScrollView(
       child: Column(
@@ -228,13 +301,13 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Task ${_currentIndex + 1} of ${_tasks.length}',
+                'Task ${_currentIndex + 1} of ${_sessionTasks.length}',
                 style: TextStyle(
                   color: current.primaryColor,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              Text('Score: $_score / ${_tasks.length}'),
+              Text('Score: $_score / ${_sessionTasks.length}'),
             ],
           ),
           const SizedBox(height: 12),
@@ -383,7 +456,9 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 14),
               ),
               child: Text(
-                _currentIndex + 1 < _tasks.length ? 'Next Sensory Task' : 'Complete',
+                _currentIndex + 1 < _sessionTasks.length
+                    ? 'Next Sensory Task'
+                    : 'Complete',
               ),
             ),
           ],
@@ -393,7 +468,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
   }
 
   Widget _buildFinishedScreen() {
-    final pct = (_score / _tasks.length * 100);
+    final pct = (_score / _sessionTasks.length * 100);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -405,7 +480,7 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
               style: Theme.of(context).textTheme.displaySmall),
           const SizedBox(height: 8),
           Text(
-            'Score: ${pct.toStringAsFixed(0)}% ($_score/${_tasks.length})',
+            'Score: ${pct.toStringAsFixed(0)}% ($_score/${_sessionTasks.length})',
             style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: AppColors.electricCyan,
                   fontWeight: FontWeight.w700,

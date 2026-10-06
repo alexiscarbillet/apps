@@ -32,6 +32,14 @@ class StoryStudioController extends ChangeNotifier {
     'A lighthouse keeper notices an unusual green beacon shining from underwater...',
     'An archivist discovers a book that writes itself as people walk past...',
     'A traveler buys an antique compass that only points toward memories...',
+    'A city bus makes one stop that does not appear on any map...',
+    'A gardener finds a tiny door growing in the trunk of an old tree...',
+    'Every photograph in a seaside hotel changes after midnight...',
+    'A radio host receives a call from a voice that knows tomorrow...',
+    'A chef opens a recipe book with one blank page that smells like rain...',
+    'A mountain trail leads to a quiet town where nobody casts a shadow...',
+    'A museum visitor recognizes their own handwriting on an ancient artifact...',
+    'A rainstorm begins falling upward over a crowded train station...',
   ];
 
   static const List<String> randomInjections = [
@@ -43,6 +51,18 @@ class StoryStudioController extends ChangeNotifier {
     'An ancient papyrus map',
     'A miniature prism crystal',
     'A cup of black obsidian tea',
+    'A wind-up fox with one glass eye',
+    'A postcard addressed in disappearing ink',
+    'A pocket-sized jar of thunder',
+    'A velvet glove stitched with tiny stars',
+    'A paper boat that is always dry',
+    'A cracked compass made of green stone',
+    'A music box playing a familiar lullaby',
+    'A bundle of keys tied with red thread',
+    'A snow globe showing a different season',
+    'A brass bell that rings without moving',
+    'A seed wrapped in a page from a diary',
+    'A candle that casts two shadows',
   ];
 
   static const List<String> dynamicRules = [
@@ -51,8 +71,14 @@ class StoryStudioController extends ChangeNotifier {
     'Sensory Shift: Describe the sound and tactile temperature of the scene',
     'Syntax Constraint: Write your next 3 sentences using exactly 7 words each',
     'Tonal Shift: Bring in a sense of cosmic awe and wonder',
+    'Perspective Shift: Retell the next moment from an object’s point of view',
+    'Dialogue Prompt: Let two characters disagree without naming the subject',
+    'Sensory Shift: Include a vivid smell and a surprising taste',
+    'Tonal Shift: Make the next moment tender and unexpectedly hopeful',
+    'Syntax Constraint: Begin the next three sentences with different verbs',
   ];
 
+  String? _lastPrompt;
   bool get isActive => _isActive;
   bool get isFinished => _isFinished;
   int get secondsRemaining => _secondsRemaining;
@@ -81,8 +107,12 @@ class StoryStudioController extends ChangeNotifier {
     _constraintsLog.clear();
 
     final rand = Random();
-    _currentPrompt = prompts[rand.nextInt(prompts.length)];
-    _activeConstraint = dynamicRules[0];
+    final availablePrompts =
+        prompts.where((prompt) => prompt != _lastPrompt).toList();
+    _currentPrompt =
+        availablePrompts[rand.nextInt(availablePrompts.length)];
+    _lastPrompt = _currentPrompt;
+    _activeConstraint = dynamicRules[rand.nextInt(dynamicRules.length)];
     _constraintsLog.add(_activeConstraint);
 
     _sessionTimer?.cancel();
@@ -107,12 +137,15 @@ class StoryStudioController extends ChangeNotifier {
 
   void _triggerMidSentenceInjection() {
     final rand = Random();
-    final newObj = randomInjections[rand.nextInt(randomInjections.length)];
-    final newRule = dynamicRules[rand.nextInt(dynamicRules.length)];
+    final availableObjects = randomInjections
+        .where((object) => !_injectedObjects.contains(object))
+        .toList();
+    final newObj = availableObjects[rand.nextInt(availableObjects.length)];
+    final availableRules =
+        dynamicRules.where((rule) => rule != _activeConstraint).toList();
+    final newRule = availableRules[rand.nextInt(availableRules.length)];
 
-    if (!_injectedObjects.contains(newObj)) {
-      _injectedObjects.add(newObj);
-    }
+    _injectedObjects.add(newObj);
     _activeConstraint = newRule;
     if (!_constraintsLog.contains(newRule)) {
       _constraintsLog.add(newRule);

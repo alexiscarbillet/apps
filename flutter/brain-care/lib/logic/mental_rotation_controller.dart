@@ -68,7 +68,7 @@ class MentalRotationController extends ChangeNotifier {
   int? _selectedAnswerIndex;
   bool? _isCurrentAnswerCorrect;
 
-  final List<SpatialPuzzleQuestion> _questions = [
+  final List<SpatialPuzzleQuestion> _questionBank = [
     SpatialPuzzleQuestion(
       title: 'L-Branch 3D Isometric Polycube',
       originalShape: const [
@@ -185,15 +185,16 @@ class MentalRotationController extends ChangeNotifier {
           'Candidate A maintains chiral chirality across all Cartesian spatial coordinate transformations.',
     ),
   ];
+  List<SpatialPuzzleQuestion> _sessionQuestions = [];
 
   int get currentIndex => _currentIndex;
   int get score => _score;
-  int get totalQuestions => _questions.length;
+  int get totalQuestions => _sessionQuestions.length;
   bool get isPlaying => _isPlaying;
   bool get isFinished => _isFinished;
   int? get selectedAnswerIndex => _selectedAnswerIndex;
   bool? get isCurrentAnswerCorrect => _isCurrentAnswerCorrect;
-  SpatialPuzzleQuestion get currentQuestion => _questions[_currentIndex];
+  SpatialPuzzleQuestion get currentQuestion => _sessionQuestions[_currentIndex];
 
   double get scorePercent =>
       totalQuestions == 0 ? 0 : (_score / totalQuestions * 100);
@@ -205,7 +206,41 @@ class MentalRotationController extends ChangeNotifier {
     _isFinished = false;
     _selectedAnswerIndex = null;
     _isCurrentAnswerCorrect = null;
+    final random = Random();
+    _sessionQuestions = _questionBank
+        .map((question) => _randomizeQuestion(question, random))
+        .toList()
+      ..shuffle(random);
     notifyListeners();
+  }
+
+  SpatialPuzzleQuestion _randomizeQuestion(
+    SpatialPuzzleQuestion question,
+    Random random,
+  ) {
+    final rotation = random.nextInt(4);
+    final candidates = question.candidates
+        .asMap()
+        .entries
+        .map(
+          (entry) => MapEntry(
+            entry.key,
+            entry.value.map((point) => point.rotateZ(rotation)).toList(),
+          ),
+        )
+        .toList()
+      ..shuffle(random);
+
+    return SpatialPuzzleQuestion(
+      title: question.title,
+      originalShape: question.originalShape
+          .map((point) => point.rotateZ(rotation))
+          .toList(),
+      candidates: candidates.map((entry) => entry.value).toList(),
+      correctIndex:
+          candidates.indexWhere((entry) => entry.key == question.correctIndex),
+      rationale: question.rationale,
+    );
   }
 
   void selectCandidate(int index) {
@@ -218,7 +253,7 @@ class MentalRotationController extends ChangeNotifier {
   }
 
   void nextQuestion() {
-    if (_currentIndex + 1 < _questions.length) {
+    if (_currentIndex + 1 < _sessionQuestions.length) {
       _currentIndex++;
       _selectedAnswerIndex = null;
       _isCurrentAnswerCorrect = null;
