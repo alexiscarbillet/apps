@@ -21,6 +21,9 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
   bool _showCoordinates = true;
   bool _isFlipped = false;
 
+  // Whether the currently-displayed puzzle is in review-only mode
+  bool _isReviewMode = false;
+
   @override
   void initState() {
     super.initState();
@@ -31,32 +34,62 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
     _dailyController.addListener(_onDailyStateChanged);
 
     _puzzleController = PuzzleController(_dailyController.currentPuzzle);
-    _puzzleController.addListener(_onPuzzleSolved);
+    _puzzleController.addListener(_onPuzzleStateChanged);
 
     _isFlipped = _dailyController.currentPuzzle.playerColor.name == 'black';
+    _enterReviewModeIfCompleted();
   }
 
   @override
   void dispose() {
     _dailyController.removeListener(_onDailyStateChanged);
-    _puzzleController.removeListener(_onPuzzleSolved);
+    _puzzleController.removeListener(_onPuzzleStateChanged);
     _dailyController.dispose();
     _puzzleController.dispose();
     super.dispose();
   }
 
-  void _onDailyStateChanged() {
-    if (_puzzleController.puzzle.id != _dailyController.currentPuzzle.id) {
-      _puzzleController.loadPuzzle(_dailyController.currentPuzzle);
-      setState(() {
-        _isFlipped = _dailyController.currentPuzzle.playerColor.name == 'black';
+  /// If the current puzzle is already completed, jump straight to the final
+  /// position so the user can review the board without re-solving.
+  void _enterReviewModeIfCompleted() {
+    final alreadyDone =
+        _dailyController.completedIndices.contains(_dailyController.currentIndex);
+    if (alreadyDone) {
+      _isReviewMode = true;
+      // jumpToEnd is synchronous – safe to call in initState / after load
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _puzzleController.jumpToEnd();
       });
+    } else {
+      _isReviewMode = false;
+    }
+  }
+
+  void _onDailyStateChanged() {
+    final puzzleChanged =
+        _puzzleController.puzzle.id != _dailyController.currentPuzzle.id;
+    if (puzzleChanged) {
+      _puzzleController.loadPuzzle(_dailyController.currentPuzzle);
+      _isFlipped = _dailyController.currentPuzzle.playerColor.name == 'black';
+    }
+    // Check review mode whenever the current index changes
+    final alreadyDone =
+        _dailyController.completedIndices.contains(_dailyController.currentIndex);
+    if (alreadyDone) {
+      _isReviewMode = true;
+      if (puzzleChanged) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _puzzleController.jumpToEnd();
+        });
+      }
+    } else {
+      _isReviewMode = false;
     }
     setState(() {});
   }
 
-  void _onPuzzleSolved() {
-    if (_puzzleController.status == PuzzleSolveStatus.solved) {
+  void _onPuzzleStateChanged() {
+    if (_puzzleController.status == PuzzleSolveStatus.solved && !_isReviewMode) {
       _dailyController.markCurrentCompleted();
 
       showDialog(
@@ -268,8 +301,36 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
               ),
             ),
 
-            // Status message
-            if (_puzzleController.status == PuzzleSolveStatus.wrongMove)
+            // Review mode banner OR wrong-move message
+            if (_isReviewMode)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F766E).withValues(alpha: 0.25),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0xFF0F766E)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.visibility, color: Color(0xFF2DD4BF), size: 16),
+                      SizedBox(width: 6),
+                      Text(
+                        'Review Mode – Solved ✓  (final position)',
+                        style: TextStyle(
+                          color: Color(0xFF2DD4BF),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            else if (_puzzleController.status == PuzzleSolveStatus.wrongMove)
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text(
@@ -281,42 +342,72 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
                 ),
               ),
 
-            // Bottom Actions Bar (Hint, Retry, Auto-play, Next)
+            // Bottom Actions Bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: const BoxDecoration(
                 color: Color(0xFF1E293B),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildActionButton(
-                    icon: Icons.lightbulb_outline,
-                    label: 'Hint',
-                    color: AppTheme.accentCyan,
-                    onTap: () => _puzzleController.requestHint(),
-                  ),
-                  _buildActionButton(
-                    icon: Icons.refresh,
-                    label: 'Reset',
-                    color: Colors.white70,
-                    onTap: () => _puzzleController.resetPuzzle(),
-                  ),
-                  _buildActionButton(
-                    icon: Icons.play_arrow,
-                    label: 'Solve',
-                    color: AppTheme.accentPurple,
-                    onTap: () => _puzzleController.autoPlaySolution(),
-                  ),
-                  _buildActionButton(
-                    icon: Icons.skip_next,
-                    label: 'Next',
-                    color: AppTheme.accentGold,
-                    onTap: () => _dailyController.nextPuzzle(),
-                  ),
-                ],
-              ),
+              child: _isReviewMode
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildActionButton(
+                          icon: Icons.restart_alt,
+                          label: 'Back to Start',
+                          color: Colors.white70,
+                          onTap: () {
+                            _puzzleController.resetPuzzle();
+                            setState(() => _isReviewMode = false);
+                          },
+                        ),
+                        _buildActionButton(
+                          icon: Icons.flip_camera_android,
+                          label: 'Flip',
+                          color: AppTheme.accentCyan,
+                          onTap: () => setState(() => _isFlipped = !_isFlipped),
+                        ),
+                        _buildActionButton(
+                          icon: Icons.fast_forward,
+                          label: 'Final Pos.',
+                          color: AppTheme.accentGold,
+                          onTap: () {
+                            setState(() => _isReviewMode = true);
+                            _puzzleController.jumpToEnd();
+                          },
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _buildActionButton(
+                          icon: Icons.lightbulb_outline,
+                          label: 'Hint',
+                          color: AppTheme.accentCyan,
+                          onTap: () => _puzzleController.requestHint(),
+                        ),
+                        _buildActionButton(
+                          icon: Icons.refresh,
+                          label: 'Reset',
+                          color: Colors.white70,
+                          onTap: () => _puzzleController.resetPuzzle(),
+                        ),
+                        _buildActionButton(
+                          icon: Icons.play_arrow,
+                          label: 'Solve',
+                          color: AppTheme.accentPurple,
+                          onTap: () => _puzzleController.autoPlaySolution(),
+                        ),
+                        _buildActionButton(
+                          icon: Icons.skip_next,
+                          label: 'Next',
+                          color: AppTheme.accentGold,
+                          onTap: () => _dailyController.nextPuzzle(),
+                        ),
+                      ],
+                    ),
             ),
           ],
         ),
@@ -347,3 +438,4 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
     );
   }
 }
+

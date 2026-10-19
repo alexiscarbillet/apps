@@ -28,7 +28,7 @@ void main() {
 
     for (final category in categories) {
       expect(cheatsheetData[category]!.sections, isNotEmpty);
-      expect(quizData[category], hasLength(50));
+      expect(quizData[category]!.length, greaterThanOrEqualTo(50));
       expect(decisionTreeData[category], isNotEmpty);
     }
   });

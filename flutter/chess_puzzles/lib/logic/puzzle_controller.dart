@@ -243,6 +243,31 @@ class PuzzleController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Instantly advances the board to the final position of all puzzle moves.
+  /// Used for review mode on already-completed puzzles.
+  void jumpToEnd() {
+    _engine = ChessEngine(_puzzle.fen);
+    _moveIndex = 0;
+    _selectedSquare = null;
+    _selectedSquareLegalMoves = [];
+    _lastMove = null;
+    _hintSourceSquare = null;
+    _hintTargetSquare = null;
+    _isAutoPlaying = false;
+
+    for (final uci in _puzzle.moves) {
+      final move = _engine.parseUci(uci);
+      if (move != null) {
+        _engine.makeMove(move);
+        _lastMove = move;
+        _moveIndex++;
+      }
+    }
+
+    _status = PuzzleSolveStatus.solved;
+    notifyListeners();
+  }
+
   Future<void> autoPlaySolution() async {
     _isAutoPlaying = true;
     notifyListeners();
