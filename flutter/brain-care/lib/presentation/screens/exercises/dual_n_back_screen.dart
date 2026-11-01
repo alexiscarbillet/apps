@@ -44,7 +44,15 @@ class _DualNBackScreenState extends State<DualNBackScreen> {
       durationSeconds: 180,
       scorePercent: _controller.accuracyScore,
       noveltyPointsGained: (_controller.accuracyScore * 1.5).round(),
-      metadata: {'n_level': _controller.nLevel},
+      metadata: {
+        'n_level': _controller.nLevel,
+        'position_hits': _controller.positionHits,
+        'position_misses': _controller.positionMisses,
+        'position_false_alarms': _controller.positionFalseAlarms,
+        'audio_hits': _controller.audioHits,
+        'audio_misses': _controller.audioMisses,
+        'audio_false_alarms': _controller.audioFalseAlarms,
+      },
     );
     widget.brainCareController.recordCompletedSession(session);
   }

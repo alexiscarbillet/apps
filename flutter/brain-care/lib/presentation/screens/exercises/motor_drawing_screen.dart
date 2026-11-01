@@ -4,6 +4,11 @@ import '../../../core/theme/app_colors.dart';
 import '../../../data/models/exercise_session_model.dart';
 import '../../../logic/brain_care_controller.dart';
 import '../../widgets/mirror_drawing_canvas.dart';
+import '../../../logic/exercise_selection.dart';
+
+class MotorDrawingChallengeBank {
+  static const List<String> templates = MirrorDrawingCanvas.templateShapes;
+}
 
 class MotorDrawingScreen extends StatefulWidget {
   final BrainCareController brainCareController;
@@ -19,12 +24,25 @@ class MotorDrawingScreen extends StatefulWidget {
 
 class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
   double _symmetryScore = 0;
-  bool _isSessionActive = false;
   bool _isSaved = false;
+  int _currentTemplateIndex = 0;
+  late final List<String> _sessionTemplates;
+  final List<double> _completedScores = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _sessionTemplates = selectFiveRandom(MotorDrawingChallengeBank.templates);
+  }
 
   void _recordSession() {
     if (_isSaved) return;
-    _isSaved = true;
+    setState(() {
+      _isSaved = true;
+    });
+    final averageScore =
+        _completedScores.reduce((total, score) => total + score) /
+        _completedScores.length;
 
     final session = ExerciseSessionModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -33,9 +51,12 @@ class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
       domain: CognitiveDomainType.motorPlasticity,
       timestamp: DateTime.now(),
       durationSeconds: 240,
-      scorePercent: _symmetryScore > 0 ? _symmetryScore : 85.0,
-      noveltyPointsGained: 140,
-      metadata: {'symmetry_score': _symmetryScore},
+      scorePercent: averageScore,
+      noveltyPointsGained: (averageScore * 1.4).round(),
+      metadata: {
+        'symmetry_score': averageScore,
+        'templates_completed': _completedScores.length,
+      },
     );
 
     widget.brainCareController.recordCompletedSession(session);
@@ -45,6 +66,20 @@ class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
         backgroundColor: AppColors.emeraldSynapse,
       ),
     );
+  }
+
+  void _advanceTemplate() {
+    if (_symmetryScore <= 0 || _isSaved) return;
+    _completedScores.add(_symmetryScore);
+    if (_currentTemplateIndex == _sessionTemplates.length - 1) {
+      _recordSession();
+      return;
+    }
+
+    setState(() {
+      _currentTemplateIndex++;
+      _symmetryScore = 0;
+    });
   }
 
   @override
@@ -84,6 +119,17 @@ class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                              'Pattern ${_currentTemplateIndex + 1} of ${_sessionTemplates.length}: ${_sessionTemplates[_currentTemplateIndex]}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                    color: AppColors.vividViolet,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
                             'Hold device & draw with NON-DOMINANT HAND',
                             style: Theme.of(context)
                                 .textTheme
@@ -110,11 +156,11 @@ class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
               // Interactive Drawing Canvas
               Expanded(
                 child: MirrorDrawingCanvas(
-                  templateShape: 'Butterfly',
+                  key: ValueKey(_sessionTemplates[_currentTemplateIndex]),
+                  templateShape: _sessionTemplates[_currentTemplateIndex],
                   onSymmetryScoreCalculated: (score) {
                     setState(() {
                       _symmetryScore = score;
-                      _isSessionActive = true;
                     });
                   },
                 ),
@@ -154,9 +200,21 @@ class _MotorDrawingScreenState extends State<MotorDrawingScreen> {
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton.icon(
-                    onPressed: _symmetryScore > 0 ? _recordSession : null,
-                    icon: const Icon(Icons.check_rounded),
-                    label: Text(_isSaved ? 'Saved!' : 'Complete Workout'),
+                    onPressed: _symmetryScore > 0 && !_isSaved
+                        ? _advanceTemplate
+                        : null,
+                    icon: Icon(
+                      _currentTemplateIndex == _sessionTemplates.length - 1
+                          ? Icons.check_rounded
+                          : Icons.arrow_forward_rounded,
+                    ),
+                    label: Text(
+                      _isSaved
+                          ? 'Saved!'
+                          : _currentTemplateIndex == _sessionTemplates.length - 1
+                          ? 'Complete Workout'
+                          : 'Next Pattern',
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.deepIndigo,
                       padding: const EdgeInsets.symmetric(

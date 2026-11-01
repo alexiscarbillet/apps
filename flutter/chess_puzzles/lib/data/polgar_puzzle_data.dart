@@ -10240,7 +10240,8 @@ const List<ChessPuzzle> polgarPuzzles = [
     moves: ["h4h5", "a6a5", "h5h7"],
     theme: PuzzleTheme.mateIn2,
     rating: 1250,
-    explanation: "Main line: Qxh5 a5 Qh7#",
+    explanation:
+        "Qxh5 removes the h-pawn and clears the queen's route. After ...a5, Qh7 is checkmate: the queen is protected by the knight on g5, and Black's own pieces leave the king with no escape.",
     playerColor: PieceColor.white,
   ),
   ChessPuzzle(
@@ -57389,7 +57390,8 @@ const List<ChessPuzzle> polgarPuzzles = [
     ],
     theme: PuzzleTheme.miniatureGames,
     rating: 1750,
-    explanation: "Main line: Bxh2+ Kxh2 Rh6+ Kg1 Ng3 Qd1 Qh4 Qc2 Nh1",
+    explanation:
+        "Black sacrifices the bishop on h2 to draw the king away, then uses ...Rh6+ and ...Ng3 to drive it back toward the corner. The final ...Nh1 threatens ...Qh2#: moving the queen clears the h-file for the rook on h6 to protect it. The puzzle stops at this mating threat, before checkmate is played.",
     playerColor: PieceColor.black,
   ),
   ChessPuzzle(

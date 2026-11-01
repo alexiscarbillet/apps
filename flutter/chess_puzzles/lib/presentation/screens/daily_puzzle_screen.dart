@@ -97,6 +97,7 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
         barrierDismissible: false,
         builder: (ctx) => VictoryDialog(
           puzzle: _puzzleController.puzzle,
+          gameState: _puzzleController.engine.getGameState(),
           mistakes: _puzzleController.mistakesCount,
           hintsUsed: _puzzleController.hintsUsed,
           onNext: () {
@@ -196,8 +197,11 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
                   final isDone = _dailyController.completedIndices.contains(index);
 
                   Color dotColor = const Color(0xFF334155);
-                  if (isDone) dotColor = AppTheme.accentEmerald;
-                  else if (isCurrent) dotColor = AppTheme.accentGold;
+                  if (isDone) {
+                    dotColor = AppTheme.accentEmerald;
+                  } else if (isCurrent) {
+                    dotColor = AppTheme.accentGold;
+                  }
 
                   return Expanded(
                     child: GestureDetector(
@@ -438,4 +442,3 @@ class _DailyPuzzleScreenState extends State<DailyPuzzleScreen> {
     );
   }
 }
-

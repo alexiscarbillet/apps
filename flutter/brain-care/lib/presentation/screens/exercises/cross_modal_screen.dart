@@ -4,6 +4,7 @@ import '../../../core/constants/cognitive_domains.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../data/models/exercise_session_model.dart';
 import '../../../logic/brain_care_controller.dart';
+import '../../../logic/exercise_selection.dart';
 import '../../widgets/waveform_visualizer.dart';
 
 class CrossModalTask {
@@ -26,26 +27,8 @@ class CrossModalTask {
   });
 }
 
-class CrossModalScreen extends StatefulWidget {
-  final BrainCareController brainCareController;
-
-  const CrossModalScreen({
-    super.key,
-    required this.brainCareController,
-  });
-
-  @override
-  State<CrossModalScreen> createState() => _CrossModalScreenState();
-}
-
-class _CrossModalScreenState extends State<CrossModalScreen> {
-  int _currentIndex = 0;
-  int _score = 0;
-  bool _isPlaying = false;
-  bool _isFinished = false;
-  int? _selectedAnswer;
-
-  static const List<CrossModalTask> _tasks = [
+class CrossModalTaskBank {
+  static const List<CrossModalTask> tasks = [
     CrossModalTask(
       title: 'High-Frequency Shimmer & Tactile Binding',
       frequencyHz: 42.0,
@@ -142,12 +125,257 @@ class _CrossModalScreenState extends State<CrossModalScreen> {
       neuroExplanation:
           'A slow and spacious wave can be associated with a cool, smooth texture; use your own sensory impression as a guide.',
     ),
+    CrossModalTask(
+      title: 'Amber Spark & Warmth',
+      frequencyHz: 31.0,
+      primaryColor: AppColors.amberGold,
+      sensoryPrompt:
+          'Which imagined sound fits this bright, quick amber flicker?',
+      candidateSensoryMappings: [
+        'A soft whisper through thick curtains',
+        'Tiny sparks snapping beside a fire',
+        'A slow foghorn across a lake',
+        'A pebble sinking into mud',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The quick flicker pairs naturally with a brief, crisp sound.',
+    ),
+    CrossModalTask(
+      title: 'Emerald Ripple & Soft Motion',
+      frequencyHz: 9.0,
+      primaryColor: AppColors.emeraldSynapse,
+      sensoryPrompt:
+          'Which surface would you imagine moving with this gentle green rhythm?',
+      candidateSensoryMappings: [
+        'A still pond with small ripples',
+        'A metal sheet in a storm',
+        'A racing engine on a track',
+        'A dry branch snapping sharply',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The gentle repeating rhythm evokes small, measured ripples.',
+    ),
+    CrossModalTask(
+      title: 'Coral Beat & Soft Texture',
+      frequencyHz: 12.0,
+      primaryColor: AppColors.coralPulse,
+      sensoryPrompt:
+          'Which tactile impression best fits this measured coral beat?',
+      candidateSensoryMappings: [
+        'A smooth knitted scarf',
+        'Jagged gravel underfoot',
+        'A freezing metal railing',
+        'A rough file across stone',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The regular beat suggests a soft, even texture.',
+    ),
+    CrossModalTask(
+      title: 'Cyan Flash & Crisp Sound',
+      frequencyHz: 48.0,
+      primaryColor: AppColors.electricCyan,
+      sensoryPrompt:
+          'Which sound best matches this rapid cyan shimmer?',
+      candidateSensoryMappings: [
+        'A crisp glass chime',
+        'A low drum heard from far away',
+        'A slow wooden creak',
+        'A soft breeze through grass',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'A rapid shimmer is easy to associate with a bright, crisp chime.',
+    ),
+    CrossModalTask(
+      title: 'Violet Current & Cool Depth',
+      frequencyHz: 6.0,
+      primaryColor: AppColors.vividViolet,
+      sensoryPrompt:
+          'Which imagined place matches this slow violet current?',
+      candidateSensoryMappings: [
+        'A crowded dance floor',
+        'A cool, deep underwater cavern',
+        'A sunlit field full of insects',
+        'A sizzling pan on a stove',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The slow movement suggests depth and stillness.',
+    ),
+    CrossModalTask(
+      title: 'Golden Rhythm & Gentle Heat',
+      frequencyHz: 18.0,
+      primaryColor: AppColors.amberGold,
+      sensoryPrompt:
+          'Which scene fits this steady golden rhythm?',
+      candidateSensoryMappings: [
+        'A quiet candle warming a room',
+        'A sudden hailstorm',
+        'A cold wind across a bare ridge',
+        'A sharp alarm in a station',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'A steady rhythm can suggest a gentle, sustained warmth.',
+    ),
+    CrossModalTask(
+      title: 'Green Pulse & Rainfall',
+      frequencyHz: 10.0,
+      primaryColor: AppColors.emeraldSynapse,
+      sensoryPrompt:
+          'Which sound fits this soft, repeating green pulse?',
+      candidateSensoryMappings: [
+        'A waterfall crashing onto rocks',
+        'Light rain tapping on leaves',
+        'A trumpet fanfare',
+        'A single door slamming',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The regular, soft pulse suggests a gentle repeating sound.',
+    ),
+    CrossModalTask(
+      title: 'Coral Wave & Citrus Brightness',
+      frequencyHz: 24.0,
+      primaryColor: AppColors.coralPulse,
+      sensoryPrompt:
+          'Which flavor and sensation fit this bright coral wave?',
+      candidateSensoryMappings: [
+        'Bitter dark cocoa and a heavy finish',
+        'A tart orange with a lively sparkle',
+        'Plain water and a cool stillness',
+        'Smoky tea and a slow drift',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The bright color and lively wave can suggest a tart, energetic flavor.',
+    ),
+    CrossModalTask(
+      title: 'Deep Cyan Hum & Spacious Calm',
+      frequencyHz: 2.5,
+      primaryColor: AppColors.electricCyan,
+      sensoryPrompt:
+          'Which sound best matches this very slow cyan wave?',
+      candidateSensoryMappings: [
+        'A low, distant bell',
+        'A rapid series of clicks',
+        'A bright whistle',
+        'A sharp hand clap',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The very slow wave suggests a low, spacious sound.',
+    ),
+    CrossModalTask(
+      title: 'Violet Hush & Softness',
+      frequencyHz: 7.0,
+      primaryColor: AppColors.vividViolet,
+      sensoryPrompt:
+          'Which texture fits this quiet, gently shifting violet pattern?',
+      candidateSensoryMappings: [
+        'Soft felt beneath your fingertips',
+        'A sharp thorn',
+        'A rough concrete wall',
+        'Crackling dry leaves',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'A quiet, gently shifting pattern suggests a soft tactile impression.',
+    ),
+    CrossModalTask(
+      title: 'Amber Crackle & Bright Heat',
+      frequencyHz: 36.0,
+      primaryColor: AppColors.amberGold,
+      sensoryPrompt:
+          'Which sound and temperature fit this lively amber pattern?',
+      candidateSensoryMappings: [
+        'A warm fire gently crackling',
+        'A cold stream barely moving',
+        'A silent snowy field',
+        'A slow ship horn',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The lively, bright pattern suggests warmth and small crackling sounds.',
+    ),
+    CrossModalTask(
+      title: 'Emerald Flow & Cool Smoothness',
+      frequencyHz: 11.0,
+      primaryColor: AppColors.emeraldSynapse,
+      sensoryPrompt:
+          'Which surface fits this smooth, steady emerald flow?',
+      candidateSensoryMappings: [
+        'A rough brick wall',
+        'A polished stone in a cool stream',
+        'A dry, crumbling leaf',
+        'A hot iron grate',
+      ],
+      correctIndex: 1,
+      neuroExplanation:
+          'The smooth movement suggests a cool, polished surface.',
+    ),
+    CrossModalTask(
+      title: 'Coral Flutter & Breezy Motion',
+      frequencyHz: 29.0,
+      primaryColor: AppColors.coralPulse,
+      sensoryPrompt:
+          'Which scene best fits this quick, fluttering coral motion?',
+      candidateSensoryMappings: [
+        'A kite dancing in a gusty breeze',
+        'A slow glacier moving downhill',
+        'A heavy stone resting on sand',
+        'A still room at midnight',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The quick flutter suggests a light object moving in a breeze.',
+    ),
+    CrossModalTask(
+      title: 'Cyan Rhythm & Open Air',
+      frequencyHz: 21.0,
+      primaryColor: AppColors.electricCyan,
+      sensoryPrompt:
+          'Which sensation best matches this clear, even cyan rhythm?',
+      candidateSensoryMappings: [
+        'A fresh breeze through an open window',
+        'A dense fog pressing close',
+        'A rough scrape on a hard surface',
+        'A loud crash in a narrow room',
+      ],
+      correctIndex: 0,
+      neuroExplanation:
+          'The clear, even rhythm suggests a light and open sensation.',
+    ),
   ];
+}
+
+class CrossModalScreen extends StatefulWidget {
+  final BrainCareController brainCareController;
+
+  const CrossModalScreen({
+    super.key,
+    required this.brainCareController,
+  });
+
+  @override
+  State<CrossModalScreen> createState() => _CrossModalScreenState();
+}
+
+class _CrossModalScreenState extends State<CrossModalScreen> {
+  int _currentIndex = 0;
+  int _score = 0;
+  bool _isPlaying = false;
+  bool _isFinished = false;
+  int? _selectedAnswer;
+
   List<CrossModalTask> _sessionTasks = [];
 
   void _start() {
     final random = Random();
-    _sessionTasks = _tasks
+    _sessionTasks = selectFiveRandom(CrossModalTaskBank.tasks, random: random)
         .map((task) {
           final options = task.candidateSensoryMappings
               .asMap()

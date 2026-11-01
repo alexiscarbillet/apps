@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../core/constants/cognitive_domains.dart';
 import '../models/cognitive_profile_model.dart';
 import '../models/exercise_session_model.dart';
 import '../models/lifestyle_biomarker_model.dart';

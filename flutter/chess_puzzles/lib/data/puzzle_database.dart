@@ -1,4 +1,3 @@
-import '../../core/chess/chess_models.dart';
 import 'models/puzzle_model.dart';
 import 'polgar_puzzle_data.dart';
 

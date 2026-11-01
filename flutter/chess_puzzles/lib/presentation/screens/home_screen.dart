@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final dailyStreak = LocalStorage.getDailyStreak();
-    final longestStreak = LocalStorage.getLongestStreak();
     final dailyCompleted = LocalStorage.getDailyCompletedIndices().length;
     final isDailyDone = LocalStorage.isDailyCompletedToday();
     final solvedCount = LocalStorage.getSolvedPuzzles().length;

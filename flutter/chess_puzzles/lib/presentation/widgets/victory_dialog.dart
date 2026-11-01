@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../core/chess/chess_models.dart';
 import '../../data/models/puzzle_model.dart';
 import '../../core/theme/app_theme.dart';
 
 class VictoryDialog extends StatelessWidget {
   final ChessPuzzle puzzle;
+  final GameState gameState;
   final int mistakes;
   final int hintsUsed;
   final VoidCallback onNext;
@@ -12,6 +14,7 @@ class VictoryDialog extends StatelessWidget {
   const VictoryDialog({
     super.key,
     required this.puzzle,
+    required this.gameState,
     required this.mistakes,
     required this.hintsUsed,
     required this.onNext,
@@ -21,6 +24,13 @@ class VictoryDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final perfectSolve = (mistakes == 0 && hintsUsed == 0);
+    final outcomeDescription = switch (gameState) {
+      GameState.checkmate => 'The final move is checkmate.',
+      GameState.check => 'The final move leaves the king in check.',
+      GameState.stalemate => 'The final position is stalemate.',
+      GameState.draw => 'The final position is drawn.',
+      GameState.inProgress => 'The line ends before checkmate.',
+    };
 
     return Dialog(
       backgroundColor: const Color(0xFF1E293B),
@@ -53,12 +63,22 @@ class VictoryDialog extends StatelessWidget {
             const SizedBox(height: 16),
 
             Text(
-              perfectSolve ? 'Flawless Victory!' : 'Puzzle Solved!',
+              gameState == GameState.checkmate
+                  ? 'Checkmate!'
+                  : perfectSolve
+                  ? 'Flawless Victory!'
+                  : 'Puzzle Solved!',
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              outcomeDescription,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 13, color: Colors.white70),
             ),
             const SizedBox(height: 6),
             Text(

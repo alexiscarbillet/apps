@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
+import 'exercise_selection.dart';
 
 class DualNBackTrial {
   final int positionIndex; // 0 to 8 on 3x3 grid
@@ -16,12 +17,13 @@ class DualNBackTrial {
 
 class DualNBackController extends ChangeNotifier {
   int _nLevel = 2;
-  int _totalTrials = 20;
+  final int _totalTrials = exercisesPerSession;
   int _currentTrialIndex = -1;
   bool _isPlaying = false;
   bool _isFinished = false;
 
   final List<DualNBackTrial> _history = [];
+  List<DualNBackTrial> _selectedStimuli = [];
   Timer? _trialTimer;
 
   bool _userPositionMatchClaimed = false;
@@ -37,6 +39,14 @@ class DualNBackController extends ChangeNotifier {
 
   static const List<String> letters = ['A', 'C', 'H', 'K', 'L', 'O', 'Q', 'R', 'T'];
   static const List<String> colors = ['Cyan', 'Violet', 'Emerald', 'Amber', 'Coral'];
+  static final List<DualNBackTrial> stimulusBank = List.generate(
+    20,
+    (index) => DualNBackTrial(
+      positionIndex: index % 9,
+      letter: letters[(index * 2) % letters.length],
+      colorName: colors[index % colors.length],
+    ),
+  );
 
   int get nLevel => _nLevel;
   int get totalTrials => _totalTrials;
@@ -50,6 +60,14 @@ class DualNBackController extends ChangeNotifier {
 
   bool get userPositionMatchClaimed => _userPositionMatchClaimed;
   bool get userAudioMatchClaimed => _userAudioMatchClaimed;
+  int get positionHits => _positionHits;
+  int get positionMisses => _positionMisses;
+  int get positionFalseAlarms => _positionFalseAlarms;
+  int get audioHits => _audioHits;
+  int get audioMisses => _audioMisses;
+  int get audioFalseAlarms => _audioFalseAlarms;
+  List<DualNBackTrial> get selectedStimuli =>
+      List.unmodifiable(_selectedStimuli);
 
   double get accuracyScore {
     final totalSignals = (_history.length - _nLevel).clamp(1, 999);
@@ -78,6 +96,7 @@ class DualNBackController extends ChangeNotifier {
     _audioFalseAlarms = 0;
     _audioMisses = 0;
 
+    _selectedStimuli = selectFiveRandom(stimulusBank);
     _generateTrialsSequence();
     _nextTrial();
   }
@@ -86,11 +105,12 @@ class DualNBackController extends ChangeNotifier {
     final rand = Random();
     for (int i = 0; i < _totalTrials; i++) {
       // 30% chance to match N-back for position
+      final stimulus = _selectedStimuli[rand.nextInt(_selectedStimuli.length)];
       int pos;
       if (i >= _nLevel && rand.nextDouble() < 0.35) {
         pos = _history[i - _nLevel].positionIndex;
       } else {
-        pos = rand.nextInt(9);
+        pos = stimulus.positionIndex;
       }
 
       // 30% chance to match N-back for letter
@@ -98,14 +118,13 @@ class DualNBackController extends ChangeNotifier {
       if (i >= _nLevel && rand.nextDouble() < 0.35) {
         let = _history[i - _nLevel].letter;
       } else {
-        let = letters[rand.nextInt(letters.length)];
+        let = stimulus.letter;
       }
 
-      final col = colors[rand.nextInt(colors.length)];
       _history.add(DualNBackTrial(
         positionIndex: pos,
         letter: let,
-        colorName: col,
+        colorName: stimulus.colorName,
       ));
     }
   }

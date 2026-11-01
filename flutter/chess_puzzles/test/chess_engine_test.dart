@@ -57,9 +57,9 @@ void main() {
       // White can castle kingside
       const fen = 'r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1';
       final engine = ChessEngine(fen);
-      final moveO_O = engine.parseUci('e1g1');
-      expect(moveO_O, isNotNull);
-      expect(engine.makeMove(moveO_O!), isTrue);
+      final moveoO = engine.parseUci('e1g1');
+      expect(moveoO, isNotNull);
+      expect(engine.makeMove(moveoO!), isTrue);
 
       expect(engine.getPiece(const Square(6, 0))?.type, PieceType.king);
       expect(engine.getPiece(const Square(5, 0))?.type, PieceType.rook);

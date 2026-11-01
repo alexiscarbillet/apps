@@ -61,6 +61,7 @@ class _PuzzlePlayerScreenState extends State<PuzzlePlayerScreen> {
         barrierDismissible: false,
         builder: (ctx) => VictoryDialog(
           puzzle: _controller.puzzle,
+          gameState: _controller.engine.getGameState(),
           mistakes: _controller.mistakesCount,
           hintsUsed: _controller.hintsUsed,
           onNext: () => _playNext(),

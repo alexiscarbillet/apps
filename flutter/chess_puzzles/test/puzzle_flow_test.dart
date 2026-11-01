@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:chess_puzzles/core/storage/local_storage.dart';
 import 'package:chess_puzzles/core/chess/chess_models.dart';
+import 'package:chess_puzzles/core/chess/chess_engine.dart';
 import 'package:chess_puzzles/data/models/puzzle_model.dart';
 import 'package:chess_puzzles/data/puzzle_database.dart';
 import 'package:chess_puzzles/data/random_puzzle_generator.dart';
@@ -18,6 +19,26 @@ void main() {
   });
 
   group('Puzzle Logic & Controllers', () {
+    test('Problem 931 solution ends in checkmate', () {
+      final puzzle = PuzzleDatabase.getPuzzleById('polgar_0931')!;
+      final engine = ChessEngine(puzzle.fen);
+      for (final uci in puzzle.moves) {
+        engine.makeMove(engine.parseUci(uci)!);
+      }
+
+      expect(engine.getGameState(), GameState.checkmate);
+    });
+
+    test('Problem 4969 solution demonstrates a winning attack, not mate', () {
+      final puzzle = PuzzleDatabase.getPuzzleById('polgar_4969')!;
+      final engine = ChessEngine(puzzle.fen);
+      for (final uci in puzzle.moves) {
+        engine.makeMove(engine.parseUci(uci)!);
+      }
+
+      expect(engine.getGameState(), GameState.inProgress);
+    });
+
     test('PDF puzzle library contains every numbered problem by section', () {
       expect(PuzzleDatabase.allPuzzles, hasLength(5334));
       expect(PuzzleDatabase.allPuzzles.first.id, 'polgar_0001');

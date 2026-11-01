@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+
 import '../../core/theme/app_colors.dart';
 
 class StrokePoint {
@@ -8,13 +11,36 @@ class StrokePoint {
 }
 
 class MirrorDrawingCanvas extends StatefulWidget {
+  static const List<String> templateShapes = [
+    'Mirror Pattern 01',
+    'Mirror Pattern 02',
+    'Mirror Pattern 03',
+    'Mirror Pattern 04',
+    'Mirror Pattern 05',
+    'Mirror Pattern 06',
+    'Mirror Pattern 07',
+    'Mirror Pattern 08',
+    'Mirror Pattern 09',
+    'Mirror Pattern 10',
+    'Mirror Pattern 11',
+    'Mirror Pattern 12',
+    'Mirror Pattern 13',
+    'Mirror Pattern 14',
+    'Mirror Pattern 15',
+    'Mirror Pattern 16',
+    'Mirror Pattern 17',
+    'Mirror Pattern 18',
+    'Mirror Pattern 19',
+    'Mirror Pattern 20',
+  ];
+
   final ValueChanged<double>? onSymmetryScoreCalculated;
-  final String templateShape; // 'Heart', 'Infinity', 'Butterfly', 'Star'
+  final String templateShape;
 
   const MirrorDrawingCanvas({
     super.key,
     this.onSymmetryScoreCalculated,
-    this.templateShape = 'Butterfly',
+    this.templateShape = 'Mirror Pattern 01',
   });
 
   @override
@@ -54,6 +80,7 @@ class _MirrorDrawingCanvasState extends State<MirrorDrawingCanvas> {
       _leftStrokes.clear();
       _currentStroke = null;
     });
+    widget.onSymmetryScoreCalculated?.call(0);
   }
 
   void _calculateScore() {
@@ -96,7 +123,10 @@ class _MirrorDrawingCanvasState extends State<MirrorDrawingCanvas> {
               right: 12,
               child: IconButton(
                 onPressed: _clearCanvas,
-                icon: const Icon(Icons.refresh_rounded, color: AppColors.textSecondary),
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                  color: AppColors.textSecondary,
+                ),
                 tooltip: 'Clear Canvas',
                 style: IconButton.styleFrom(
                   backgroundColor: AppColors.surfaceElevated,
@@ -107,7 +137,10 @@ class _MirrorDrawingCanvasState extends State<MirrorDrawingCanvas> {
               bottom: 12,
               left: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.surfaceElevated.withValues(alpha: 0.9),
                   borderRadius: BorderRadius.circular(8),
@@ -116,15 +149,18 @@ class _MirrorDrawingCanvasState extends State<MirrorDrawingCanvas> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.touch_app_rounded,
-                        size: 14, color: AppColors.electricCyan),
+                    const Icon(
+                      Icons.touch_app_rounded,
+                      size: 14,
+                      color: AppColors.electricCyan,
+                    ),
                     const SizedBox(width: 6),
                     Text(
                       'Draw with Non-Dominant Hand',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.electricCyan,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        color: AppColors.electricCyan,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ],
                 ),
@@ -141,10 +177,7 @@ class _MirrorCanvasPainter extends CustomPainter {
   final List<List<StrokePoint>> strokes;
   final String template;
 
-  _MirrorCanvasPainter({
-    required this.strokes,
-    required this.template,
-  });
+  _MirrorCanvasPainter({required this.strokes, required this.template});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -211,21 +244,47 @@ class _MirrorCanvasPainter extends CustomPainter {
       ..strokeWidth = 1.2;
 
     final centerY = size.height / 2;
-    // Butterfly / Wings guide
-    final leftWing = Path()
-      ..moveTo(midX, centerY - 60)
-      ..cubicTo(midX - 90, centerY - 90, midX - 120, centerY + 10, midX, centerY + 60)
-      ..moveTo(midX, centerY - 10)
-      ..cubicTo(midX - 70, centerY + 20, midX - 80, centerY + 80, midX, centerY + 80);
+    final templateIndex = MirrorDrawingCanvas.templateShapes.indexOf(template);
+    final shapeIndex = templateIndex < 0 ? 0 : templateIndex;
+    final halfWidth = size.width * (0.22 + (shapeIndex % 4) * 0.035);
+    final top = centerY - size.height * 0.3;
+    final height = size.height * 0.6;
+    final leftPath = Path();
+    final rightPath = Path();
 
-    final rightWing = Path()
-      ..moveTo(midX, centerY - 60)
-      ..cubicTo(midX + 90, centerY - 90, midX + 120, centerY + 10, midX, centerY + 60)
-      ..moveTo(midX, centerY - 10)
-      ..cubicTo(midX + 70, centerY + 20, midX + 80, centerY + 80, midX, centerY + 80);
+    for (var step = 0; step <= 40; step++) {
+      final progress = step / 40;
+      final y = top + height * progress;
+      final leftX = _templateEdgeX(progress, shapeIndex, halfWidth, midX);
+      if (step == 0) {
+        leftPath.moveTo(leftX, y);
+        rightPath.moveTo(2 * midX - leftX, y);
+      } else {
+        leftPath.lineTo(leftX, y);
+        rightPath.lineTo(2 * midX - leftX, y);
+      }
+    }
 
-    canvas.drawPath(leftWing, guidePaint);
-    canvas.drawPath(rightWing, guidePaint);
+    canvas.drawPath(leftPath, guidePaint);
+    canvas.drawPath(rightPath, guidePaint);
+  }
+
+  double _templateEdgeX(
+    double progress,
+    int shapeIndex,
+    double halfWidth,
+    double midX,
+  ) {
+    final taper = sin(pi * progress);
+    final lobeCount = 2 + shapeIndex;
+    final lobes = 0.4 + 0.6 * (0.5 + 0.5 * cos(2 * pi * lobeCount * progress));
+    final profile = switch (shapeIndex % 4) {
+      0 => taper * lobes,
+      1 => taper * (progress < 0.5 ? 1 - progress : progress),
+      2 => taper * (0.35 + 0.65 * (0.5 + 0.5 * sin(pi * lobeCount * progress))),
+      _ => taper * (0.55 + 0.45 * progress),
+    };
+    return midX - halfWidth * profile;
   }
 
   @override

@@ -159,14 +159,12 @@ class _ChessBoardWidgetState extends State<ChessBoardWidget> with SingleTickerPr
     final isHintTarget = widget.controller.hintTargetSquare == square;
 
     // Check if legal move destination
-    final legalMove = widget.controller.selectedSquareLegalMoves.firstWhere(
-      (m) => m.to == square,
-      orElse: () => const ChessMove(from: Square(0, 0), to: Square(0, 0)),
-    );
     final isLegalDestination = widget.controller.selectedSquareLegalMoves.any((m) => m.to == square);
 
     // In-check king glow
-    final isKingInCheck = widget.controller.engine.getGameState() == GameState.check &&
+    final gameState = widget.controller.engine.getGameState();
+    final isKingInCheck =
+        (gameState == GameState.check || gameState == GameState.checkmate) &&
         piece?.type == PieceType.king &&
         piece?.color == widget.controller.engine.turn;
 

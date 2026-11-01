@@ -1,5 +1,8 @@
 import 'dart:math';
+
 import 'package:flutter/foundation.dart';
+
+import 'exercise_selection.dart';
 
 class VoxelPoint {
   final int x;
@@ -68,10 +71,11 @@ class MentalRotationController extends ChangeNotifier {
   int? _selectedAnswerIndex;
   bool? _isCurrentAnswerCorrect;
 
-  final List<SpatialPuzzleQuestion> _questionBank = [
+  static const int bankSize = 20;
+  static const List<SpatialPuzzleQuestion> _seedQuestions = [
     SpatialPuzzleQuestion(
       title: 'L-Branch 3D Isometric Polycube',
-      originalShape: const [
+      originalShape: [
         VoxelPoint(0, 0, 0),
         VoxelPoint(1, 0, 0),
         VoxelPoint(2, 0, 0),
@@ -79,24 +83,21 @@ class MentalRotationController extends ChangeNotifier {
         VoxelPoint(2, 1, 1),
       ],
       candidates: [
-        // Candidate 0: Rotated around Z by 90 deg + Y by 90 deg (Valid rotation)
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(0, 1, 0),
           VoxelPoint(0, 2, 0),
           VoxelPoint(1, 2, 0),
           VoxelPoint(1, 2, 1),
         ],
-        // Candidate 1: Inverted / chiral mirror (Invalid)
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(1, 0, 0),
           VoxelPoint(2, 0, 0),
           VoxelPoint(2, -1, 0),
           VoxelPoint(2, -1, -1),
         ],
-        // Candidate 2: Missing arm (Invalid)
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(1, 0, 0),
           VoxelPoint(1, 1, 0),
@@ -104,12 +105,11 @@ class MentalRotationController extends ChangeNotifier {
         ],
       ],
       correctIndex: 0,
-      rationale:
-          'Candidate A represents a pure 90° clockwise planar yaw followed by isometric pitch.',
+      rationale: 'Candidate A represents a pure 90° clockwise planar yaw followed by isometric pitch.',
     ),
     SpatialPuzzleQuestion(
       title: 'T-Cubic Helical Step',
-      originalShape: const [
+      originalShape: [
         VoxelPoint(0, 0, 0),
         VoxelPoint(0, 1, 0),
         VoxelPoint(0, 2, 0),
@@ -118,16 +118,14 @@ class MentalRotationController extends ChangeNotifier {
         VoxelPoint(0, 2, 1),
       ],
       candidates: [
-        // Candidate 0: Mirrored
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(0, 1, 0),
           VoxelPoint(0, 2, 0),
           VoxelPoint(-1, 1, 0),
           VoxelPoint(0, 2, -1),
         ],
-        // Candidate 1: 180° Rotated (Valid)
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(0, -1, 0),
           VoxelPoint(0, -2, 0),
@@ -135,8 +133,7 @@ class MentalRotationController extends ChangeNotifier {
           VoxelPoint(1, -1, 0),
           VoxelPoint(0, -2, -1),
         ],
-        // Candidate 2: Truncated
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(1, 0, 0),
           VoxelPoint(0, 1, 0),
@@ -144,12 +141,11 @@ class MentalRotationController extends ChangeNotifier {
         ],
       ],
       correctIndex: 1,
-      rationale:
-          'Candidate B preserves all 6 voxels in exact topological orientation after a 180° inversion.',
+      rationale: 'Candidate B preserves all 6 voxels in exact topological orientation after a 180° inversion.',
     ),
     SpatialPuzzleQuestion(
       title: 'Staircase Z-Chiral Matrix',
-      originalShape: const [
+      originalShape: [
         VoxelPoint(0, 0, 0),
         VoxelPoint(1, 0, 0),
         VoxelPoint(1, 1, 0),
@@ -157,23 +153,20 @@ class MentalRotationController extends ChangeNotifier {
         VoxelPoint(2, 1, 1),
       ],
       candidates: [
-        // Candidate 0: Valid 90° Z rotation
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(0, 1, 0),
           VoxelPoint(-1, 1, 0),
           VoxelPoint(-1, 1, 1),
           VoxelPoint(-1, 2, 1),
         ],
-        // Candidate 1: Missing bottom step
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(1, 0, 0),
           VoxelPoint(1, 1, 1),
           VoxelPoint(2, 1, 1),
         ],
-        // Candidate 2: Chiral inversion
-        const [
+        [
           VoxelPoint(0, 0, 0),
           VoxelPoint(-1, 0, 0),
           VoxelPoint(-1, 1, 0),
@@ -181,8 +174,14 @@ class MentalRotationController extends ChangeNotifier {
         ],
       ],
       correctIndex: 0,
-      rationale:
-          'Candidate A maintains chiral chirality across all Cartesian spatial coordinate transformations.',
+      rationale: 'Candidate A maintains chiral chirality across all Cartesian spatial coordinate transformations.',
+    ),
+  ];
+  static final List<SpatialPuzzleQuestion> questionBank = [
+    ..._seedQuestions,
+    ...List.generate(
+      bankSize - _seedQuestions.length,
+      (index) => _buildQuestion(index + _seedQuestions.length),
     ),
   ];
   List<SpatialPuzzleQuestion> _sessionQuestions = [];
@@ -190,6 +189,7 @@ class MentalRotationController extends ChangeNotifier {
   int get currentIndex => _currentIndex;
   int get score => _score;
   int get totalQuestions => _sessionQuestions.length;
+  int get questionBankSize => questionBank.length;
   bool get isPlaying => _isPlaying;
   bool get isFinished => _isFinished;
   int? get selectedAnswerIndex => _selectedAnswerIndex;
@@ -207,11 +207,46 @@ class MentalRotationController extends ChangeNotifier {
     _selectedAnswerIndex = null;
     _isCurrentAnswerCorrect = null;
     final random = Random();
-    _sessionQuestions = _questionBank
+    _sessionQuestions = selectFiveRandom(questionBank)
         .map((question) => _randomizeQuestion(question, random))
-        .toList()
-      ..shuffle(random);
+        .toList();
     notifyListeners();
+  }
+
+  static SpatialPuzzleQuestion _buildQuestion(int index) {
+    var x = 0;
+    var y = 0;
+    var z = 0;
+    var pattern = index;
+    final shape = <VoxelPoint>[const VoxelPoint(0, 0, 0)];
+    for (var step = 0; step < 6; step++) {
+      switch (pattern % 3) {
+        case 0:
+          x++;
+        case 1:
+          y++;
+        case 2:
+          z++;
+      }
+      pattern ~/= 3;
+      shape.add(VoxelPoint(x, y, z));
+    }
+
+    final displaced = List<VoxelPoint>.from(shape);
+    final last = displaced.removeLast();
+    displaced.add(VoxelPoint(last.x + 2, last.y, last.z));
+
+    return SpatialPuzzleQuestion(
+      title: 'Voxel Walk ${index + 1}',
+      originalShape: shape,
+      candidates: [
+        shape.map((point) => point.rotateX(1)).toList(),
+        shape.take(shape.length - 1).toList(),
+        displaced,
+      ],
+      correctIndex: 0,
+      rationale: 'The rotated option preserves all seven connected cubes. The other options either remove a cube or move one out of the connected shape.',
+    );
   }
 
   SpatialPuzzleQuestion _randomizeQuestion(
@@ -219,17 +254,18 @@ class MentalRotationController extends ChangeNotifier {
     Random random,
   ) {
     final rotation = random.nextInt(4);
-    final candidates = question.candidates
-        .asMap()
-        .entries
-        .map(
-          (entry) => MapEntry(
-            entry.key,
-            entry.value.map((point) => point.rotateZ(rotation)).toList(),
-          ),
-        )
-        .toList()
-      ..shuffle(random);
+    final candidates =
+        question.candidates
+            .asMap()
+            .entries
+            .map(
+              (entry) => MapEntry(
+                entry.key,
+                entry.value.map((point) => point.rotateZ(rotation)).toList(),
+              ),
+            )
+            .toList()
+          ..shuffle(random);
 
     return SpatialPuzzleQuestion(
       title: question.title,
@@ -237,8 +273,9 @@ class MentalRotationController extends ChangeNotifier {
           .map((point) => point.rotateZ(rotation))
           .toList(),
       candidates: candidates.map((entry) => entry.value).toList(),
-      correctIndex:
-          candidates.indexWhere((entry) => entry.key == question.correctIndex),
+      correctIndex: candidates.indexWhere(
+        (entry) => entry.key == question.correctIndex,
+      ),
       rationale: question.rationale,
     );
   }

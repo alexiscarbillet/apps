@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
+import 'exercise_selection.dart';
 
 enum SortingRule {
   color, // Match target color
@@ -27,7 +28,7 @@ class TaskSwitchingController extends ChangeNotifier {
   int _score = 0;
   int _streak = 0;
   int _roundsPlayed = 0;
-  final int _maxRounds = 18;
+  final int _maxRounds = exercisesPerSession;
   bool _isPlaying = false;
   bool _isFinished = false;
 
@@ -35,6 +36,7 @@ class TaskSwitchingController extends ChangeNotifier {
   List<TaskSwitchingCard> _targetBuckets = [];
   DateTime? _roundStartTime;
   final List<int> _reactionTimesMs = [];
+  List<TaskSwitchingCard> _sessionStimuli = [];
 
   static const List<String> availableShapes = ['Circle', 'Square', 'Triangle', 'Star'];
   static const Map<String, Color> availableColors = {
@@ -53,6 +55,20 @@ class TaskSwitchingController extends ChangeNotifier {
   bool get isFinished => _isFinished;
   TaskSwitchingCard? get currentStimulus => _currentStimulus;
   List<TaskSwitchingCard> get targetBuckets => _targetBuckets;
+  List<TaskSwitchingCard> get selectedStimuli =>
+      List.unmodifiable(_sessionStimuli);
+
+  static final List<TaskSwitchingCard> stimulusBank = [
+    for (final shape in availableShapes)
+      for (final colorEntry in availableColors.entries)
+        for (var count = 1; count <= 4; count++)
+          TaskSwitchingCard(
+            shape: shape,
+            color: colorEntry.value,
+            colorName: colorEntry.key,
+            count: count,
+          ),
+  ];
 
   double get averageLatencyMs => _reactionTimesMs.isEmpty
       ? 0
@@ -68,6 +84,7 @@ class TaskSwitchingController extends ChangeNotifier {
     _reactionTimesMs.clear();
     _isPlaying = true;
     _isFinished = false;
+    _sessionStimuli = selectFiveRandom(stimulusBank);
 
     _setupTargetBuckets();
     _nextRound();
@@ -116,17 +133,7 @@ class TaskSwitchingController extends ChangeNotifier {
       _activeRule = available[rand.nextInt(available.length)];
     }
 
-    // Generate random stimulus
-    final shape = availableShapes[rand.nextInt(availableShapes.length)];
-    final colorEntry = availableColors.entries.toList()[rand.nextInt(availableColors.length)];
-    final count = rand.nextInt(4) + 1;
-
-    _currentStimulus = TaskSwitchingCard(
-      shape: shape,
-      color: colorEntry.value,
-      colorName: colorEntry.key,
-      count: count,
-    );
+    _currentStimulus = _sessionStimuli[_roundsPlayed];
 
     _roundStartTime = DateTime.now();
     notifyListeners();
